@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark Theme - SiliconeCalculator Style -->
+    <color name="foreground_color">#5B5F6A</color>
+    <color name="background_color">#2A2E39</color>
+    <color name="popup_background_color">#333D49</color>
+    <color name="history_background_color">#333D49</color>
+    <color name="text_color">#ECECEC</color>
+    <color name="text_second_color">#CFD3DE</color>
+    <color name="text_third_color">#A0A8BB</color>
+    <color name="text_symbol_color">#FFFFFF</color>
+    <color name="text_category_color">#A0A8BB</color>
+    <color name="button_color">#474D5B</color>
+    <color name="button_symbol_color">#C25A11</color>
+    <color name="button_parentheses_color">#5B5F6A</color>
+    <color name="button_percent_color">#5B5F6A</color>
+    <color name="button_clear_color">#5B5F6A</color>
+    <color name="button_equals_color">#C25A11</color>
+    <color name="button_ripple_color">#A0A8BB</color>
+    <color name="switch_primary_color">#5B5F6A</color>
+    <color name="switch_on_primary_color">#333D49</color>
+    <color name="switch_surface_variant_color">#5B5F6A</color>
+</resources>

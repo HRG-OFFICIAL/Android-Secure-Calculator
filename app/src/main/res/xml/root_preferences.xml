@@ -1,0 +1,212 @@
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:title="@string/settings_category_general"
+        app:color="?attr/text_color">
+        <!--app:iconSpaceReserved="false"-->
+
+        <Preference
+            android:id="@+id/settings_select_app_language"
+            app:key="android_calculator.APP_LANGUAGE"
+            app:selectable="true"
+            app:enabled="true"
+            app:title="@string/settings_general_language"
+            app:summary="APP LANGUAGE"
+            app:icon="@drawable/language" />
+
+        <Preference
+            android:id="@+id/settings_select_app_theme"
+            app:key="android_calculator.APP_THEME_SELECTOR"
+            app:selectable="true"
+            app:enabled="true"
+            app:title="@string/settings_general_theme"
+            app:summary="APP THEME"
+            app:icon="@drawable/theme" />
+
+        <Preference
+            android:id="@+id/settings_select_numbering_system"
+            app:key="android_calculator.NUMBERING_SYSTEM"
+            app:selectable="true"
+            app:enabled="true"
+            app:title="Numbering System"
+            app:summary="APP THEME"
+            app:icon="@drawable/numbering_system" />
+
+        <SwitchPreferenceCompat
+            app:key="android_calculator.KEY_VIBRATION_STATUS"
+            app:title="@string/settings_general_vibration"
+            app:summary="@string/settings_general_vibration_desc"
+            app:useSimpleSummaryProvider="true"
+            app:icon="@drawable/vibrate"
+            app:singleLineTitle="false"
+            app:defaultValue="true"
+            app:widgetLayout="@drawable/material_switch" />
+
+        <SwitchPreferenceCompat
+            app:key="android_calculator.RADIANS_INSTEAD_OF_DEGREES_BY_DEFAULT"
+            app:title="@string/settings_general_radians"
+            app:summary="@string/settings_general_radians_desc"
+            app:useSimpleSummaryProvider="true"
+            app:icon="@drawable/thermostat"
+            app:singleLineTitle="false"
+            app:defaultValue="false"
+            app:widgetLayout="@drawable/material_switch" />
+
+        <Preference
+            android:id="@+id/settings_select_scientificMode_system"
+            app:key="android_calculator.SCIENTIFIC_MODE_ENABLED_BY_DEFAULT"
+            app:selectable="true"
+            app:enabled="true"
+            app:title="@string/settings_general_scientific_mode"
+            app:summary="@string/settings_general_scientific_mode_desc"
+            app:icon="@drawable/science" />
+
+
+        <SwitchPreferenceCompat
+            app:key="android_calculator.SPLIT_PARENTHESIS_BUTTON"
+            app:title="@string/settings_general_split_parenthesis_button"
+            app:summary="@string/settings_general_split_parenthesis_button_desc"
+            app:useSimpleSummaryProvider="true"
+            app:icon="@drawable/swap"
+            app:singleLineTitle="false"
+            app:defaultValue="false"
+            app:widgetLayout="@drawable/material_switch" />
+
+        <SwitchPreferenceCompat
+            app:key="android_calculator.ADD_MODULO_BUTTON"
+            app:title="@string/settings_general_add_modulo"
+            app:summary="@string/settings_general_add_modulo_desc"
+            app:useSimpleSummaryProvider="true"
+            app:icon="@drawable/hashtag"
+            app:singleLineTitle="false"
+            app:defaultValue="true"
+            app:widgetLayout="@drawable/material_switch" />
+
+        <SwitchPreferenceCompat
+            app:key="android_calculator.KEY_SHOW_ON_LOCK_SCREEN"
+            app:title="@string/show_on_lock_screen"
+            app:summary="@string/keep_the_calculator_visible_on_your_lock_screen_for_quick_and_easy_access_disable_to_hide_it_when_your_screen_is_locked"
+            app:useSimpleSummaryProvider="true"
+            app:icon="@drawable/lock"
+            app:singleLineTitle="false"
+            app:defaultValue="true"
+            app:widgetLayout="@drawable/material_switch" />
+
+
+        <!-- <ListPreference
+            app:key="reply"
+            app:title="@string/reply_title"
+            app:entries="@array/reply_entries"
+            app:entryValues="@array/reply_values"
+            app:defaultValue="reply"
+            app:useSimpleSummaryProvider="true"/> -->
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="@string/settings_category_formatting"
+        app:color="?attr/text_color">
+
+        <ListPreference
+            app:key="android_calculator.NUMBER_PRECISION"
+            app:title="@string/settings_formatting_precision"
+            app:entries="@array/number_precision_entries"
+            app:entryValues="@array/number_precision_values"
+            app:defaultValue="10"
+            app:useSimpleSummaryProvider="true"
+            app:singleLineTitle="false"
+            app:icon="@drawable/precision" />
+
+        <SwitchPreferenceCompat
+            app:key="android_calculator.WRITE_NUMBER_INTO_SCIENTIC_NOTATION"
+            app:title="@string/settings_formatting_scientific_notation"
+            app:summary="@string/settings_formatting_scientific_notation_desc"
+            app:useSimpleSummaryProvider="true"
+            app:singleLineTitle="false"
+            app:defaultValue="false"
+            app:icon="@drawable/scientific_notation"
+            app:widgetLayout="@drawable/material_switch" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="@string/settings_category_history"
+        app:color="?attr/text_color">
+
+        <ListPreference
+            app:key="android_calculator.HISTORY_SIZE"
+            app:title="@string/settings_history_size"
+            app:entries="@array/history_size_entries"
+            app:entryValues="@array/history_size_values"
+            app:defaultValue="50"
+            app:useSimpleSummaryProvider="true"
+            app:singleLineTitle="false"
+            app:icon="@drawable/history" />
+
+        <SwitchPreferenceCompat
+            app:key="android_calculator.DELETE_HISTORY_ELEMENT_ON_SWIPE"
+            app:title="@string/settings_delete_history_element_on_swipe"
+            app:summary="@string/settings_delete_history_element_on_swipe_desc"
+            app:useSimpleSummaryProvider="true"
+            app:singleLineTitle="false"
+            app:defaultValue="true"
+            app:icon="@drawable/swipe_left"
+            app:widgetLayout="@drawable/material_switch" />
+
+        <SwitchPreferenceCompat
+            app:key="android_calculator.AUTO_SAVE_CALCULATION_WITHOUT_EQUAL_BUTTON"
+            app:title="@string/settings_auto_save_calculation_without_equal_button"
+            app:summary="@string/settings_auto_save_calculation_without_equal_button_desc"
+            app:useSimpleSummaryProvider="true"
+            app:singleLineTitle="false"
+            app:defaultValue="true"
+            app:icon="@drawable/auto"
+            app:widgetLayout="@drawable/material_switch" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="@string/settings_category_advanced"
+        app:color="?attr/text_color">
+
+        <SwitchPreferenceCompat
+            app:key="android_calculator.LONG_CLICK_TO_COPY_VALUE"
+            app:title="@string/settings_advanced_long_click_copy"
+            app:summary="@string/settings_advanced_long_click_copy_desc"
+            app:useSimpleSummaryProvider="true"
+            app:singleLineTitle="false"
+            app:defaultValue="true"
+            app:icon="@drawable/click"
+            app:widgetLayout="@drawable/material_switch" />
+
+        <SwitchPreferenceCompat
+            app:key="android_calculator.PREVENT_PHONE_FROM_SLEEPING"
+            app:title="@string/settings_advanced_prevent_sleep"
+            app:summary="@string/settings_advanced_prevent_sleep_desc"
+            app:useSimpleSummaryProvider="true"
+            app:icon="@drawable/bedtime"
+            app:singleLineTitle="false"
+            app:defaultValue="false"
+            app:widgetLayout="@drawable/material_switch" />
+
+    </PreferenceCategory>
+
+    <!--<PreferenceCategory
+        app:title="@string/sync_header">
+
+        <SwitchPreferenceCompat
+            app:key="sync"
+            app:title="@string/sync_title"/>
+
+        <SwitchPreferenceCompat
+            app:key="attachment"
+            app:title="@string/attachment_title"
+            app:summaryOn="@string/attachment_summary_on"
+            app:summaryOff="@string/attachment_summary_off"
+            app:dependency="sync"/>
+
+    </PreferenceCategory> -->
+
+</PreferenceScreen>

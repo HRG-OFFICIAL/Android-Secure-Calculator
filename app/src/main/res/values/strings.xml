@@ -1,0 +1,214 @@
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation"
+    >
+    <string name="app_name_display">Android Calculator</string>
+
+    <!-- Numbers -->
+    <string name="zero" translatable="false">0</string>
+    <string name="one" translatable="false">1</string>
+    <string name="two" translatable="false">2</string>
+    <string name="three" translatable="false">3</string>
+    <string name="four" translatable="false">4</string>
+    <string name="five" translatable="false">5</string>
+    <string name="six" translatable="false">6</string>
+    <string name="seven" translatable="false">7</string>
+    <string name="eight" translatable="false">8</string>
+    <string name="nine" translatable="false">9</string>
+
+    <!-- Symbols -->
+    <string name="clear" translatable="false">AC</string>
+    <string name="leftParenthesis" translatable="false">(</string>
+    <string name="rightParenthesis" translatable="false">)</string>
+    <string name="parentheses" translatable="false">(‎ ‎ )</string>
+
+    <string name="percent" translatable="false">%</string>
+    <string name="divide" translatable="false">÷</string>
+    <string name="multiply" translatable="false">×</string>
+    <string name="subtract" translatable="false">−</string>
+    <string name="add" translatable="false">+</string>
+    <string name="equals" translatable="false">=</string>
+
+    <string name="square" translatable="false">√</string>
+    <string name="squareInv" translatable="false">x²</string>
+    <string name="squareInvModuloVersion" translatable="false">#</string>
+    <string name="pi" translatable="false">π</string>
+    <string name="factorial" translatable="false">!</string>
+
+    <string name="degree" translatable="false">DEG</string>
+    <string name="radian" translatable="false">RAD</string>
+    <string name="invert" translatable="false">INV</string>
+
+    <string name="sine" translatable="false">sin</string>
+    <string name="sineInv" translatable="false">sin⁻¹</string>
+    <string name="cosine" translatable="false">cos</string>
+    <string name="cosineInv" translatable="false">cos⁻¹</string>
+    <string name="tangent" translatable="false">tan</string>
+    <string name="tangentInv" translatable="false">tan⁻¹</string>
+    <string name="e" translatable="false">e</string>
+    <string name="naturalLogarithm" translatable="false">ln</string>
+    <string name="naturalLogarithmInv" translatable="false">e^</string>
+    <string name="logarithm" translatable="false">log</string>
+    <string name="logarithmInv" translatable="false">10^</string>
+    <string name="logtwo" translatable="false">log₂</string>
+    <string name="logtwoInv" translatable="false">2^</string>
+
+    <!-- Symbols -->
+    <string name="squareDesc">square</string>
+    <string name="piDesc">pi</string>
+    <string name="exponentDesc">exponent</string>
+    <string name="factorialDesc">factorial</string>
+    <string name="scientificModeSwitchDesc">scientific mode switch</string>
+    <string name="degreeDesc">degree</string>
+    <string name="sineDesc">sine</string>
+    <string name="cosineDesc">cosine</string>
+    <string name="tangentDesc">tangent</string>
+    <string name="invertDesc">invert</string>
+    <string name="eDesc">e</string>
+    <string name="naturalLogarithmDesc">natural logarithm</string>
+    <string name="logarithmDesc">logarithm</string>
+    <string name="log2Desc">base 2 logarithm</string>
+    <string name="clearDesc">clear</string>
+    <string name="parenthesesDesc">parentheses</string>
+    <string name="percentDesc">percent</string>
+    <string name="backspaceDesc">back space</string>
+    <string name="pointDesc">point</string>
+
+    <!-- App menu -->
+    <string name="menu_clear_history">Clear history</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_about">About</string>
+
+    <!-- Settings menu -->
+    <string name="settings_category_general">GENERAL</string>
+    <string name="settings_category_formatting">FORMATTING</string>
+    <string name="settings_category_history">HISTORY</string>
+    <string name="settings_category_advanced">ADVANCED</string>
+
+    <string name="settings_general_language">Language</string>
+
+    <string name="settings_general_theme">Theme</string>
+
+    <string name="settings_general_vibration">Vibration</string>
+    <string name="settings_general_vibration_desc">Vibrate when a button is pressed</string>
+
+    <string name="settings_general_radians">Radians</string>
+    <string name="settings_general_radians_desc">Use radians instead of degrees by default</string>
+
+    <string name="settings_general_scientific_mode">Scientific mode</string>
+    <string name="settings_general_scientific_mode_desc">Activate scientific mode</string>
+    <string name="settings_general_scientific_mode_deactivate_desc">DeActivate scientific mode</string>
+    <string name="settings_general_scientific_mode_hide_desc">Hide scientific mode</string>
+
+    <string name="settings_general_split_parenthesis_button">Split the parentheses button into two buttons</string>
+    <string name="settings_general_split_parenthesis_button_desc">Remove the \"AC\" button to split the parentheses button into two buttons</string>
+
+    <string name="settings_general_add_modulo">Add a modulo button</string>
+    <string name="settings_general_add_modulo_desc">Replace the \"X²\" button with a modulo button (available when the \"INV\" button is pressed)</string>
+
+    <string name="settings_formatting_precision">Number of decimal places</string>
+
+    <string name="settings_formatting_scientific_notation">Number into scientific notation</string>
+    <string name="settings_formatting_scientific_notation_desc">Convert all results to scientific notation</string>
+
+    <string name="settings_history_size">Results saved in history</string>
+
+    <string name="settings_delete_history_element_on_swipe">Allow selective history deletion</string>
+    <string name="settings_delete_history_element_on_swipe_desc">Delete specific history element on swipe</string>
+
+    <string name="settings_advanced_long_click_copy">Long press to copy value</string>
+    <string name="settings_advanced_long_click_copy_desc">Long press copies the text of the item instead of selecting it</string>
+
+    <string name="settings_advanced_prevent_sleep">Keep device awake</string>
+    <string name="settings_advanced_prevent_sleep_desc">Prevent device from sleeping while the app is in the foreground</string>
+
+    <!-- About page -->
+    <string name="about_category_help">HELP US</string>
+    <string name="about_category_social">SOCIAL</string>
+    <string name="about_category_info">APP INFO</string>
+
+    <string name="about_help_donate">Donate</string>
+    <string name="about_dialog_donation_title">Support Us</string>
+    <string name="about_help_translate">Translate</string>
+    <string name="about_help_rate">Rate this app</string>
+
+    <string name="about_social_discord" translatable="false">Discord</string>
+    <string name="about_social_github" translatable="false">GitHub</string>
+
+    <string name="about_other_license">License GPL 3.0</string>
+    <string name="about_other_privacy_policy">Privacy policy</string>
+    <string name="about_other_version">Version</string>
+
+    <string name="about_easter_egg">Thanks for using OpenCalc ❤️</string>
+    <string name="about_made_in_france">Made with ❤️ in France</string>
+
+    <!-- Theme choices -->
+    <string name="theme_material_you" translatable="false">Material You</string>
+    <string name="theme_system">System</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_amoled">Amoled</string>
+
+    <!-- Error messages -->
+    <string name="division_by_0">Can\'t divide by 0</string>
+    <string name="domain_error">Domain error</string>
+    <string name="syntax_error">Syntax error</string>
+    <string name="value_too_large">Value too large</string>
+
+    <!-- Clipboard labels -->
+    <string name="copied_result">Copied result</string>
+    <string name="copied_history_calculation">Copied history calculation</string>
+    <string name="copied_history_result">Copied history result</string>
+
+    <!-- Others -->
+    <string name="value_copied">Copied</string>
+    <string name="infinity">Infinity</string>
+    <string name="title_activity_settings" translatable="false">SettingsActivity</string>
+    <string name="require_real_number">Real number required</string>
+    <string name="settings_auto_save_calculation_without_equal_button">Automatically save calculations</string>
+    <string name="settings_auto_save_calculation_without_equal_button_desc">Automatically save calculations in history without needing to click the equal button</string>
+    <string name="menu_donate">Support us</string>
+    <string name="about_dialog_donation_close">Close</string>
+    <string name="no_history_available">No History Available</string>
+    <string name="show_on_lock_screen">Show on Lock Screen</string>
+    <string name="keep_the_calculator_visible_on_your_lock_screen_for_quick_and_easy_access_disable_to_hide_it_when_your_screen_is_locked">Keep the calculator visible on your lock screen for quick and easy access. Disable to hide it when your screen is locked.</string>
+    
+    <!-- Missing strings for compilation -->
+    <string name="donate_paypal">Donate via PayPal</string>
+    <string name="donate_bitcoin">Donate Bitcoin</string>
+    <string name="cancel">Cancel</string>
+    <string name="error_opening_url">Error opening URL</string>
+    <string name="bitcoin_address_copied">Bitcoin address copied</string>
+    <string name="theme_title">Choose Theme</string>
+    <string name="theme_default">Default</string>
+    <string name="app_name">Android Calculator</string>
+    <string name="donate_title">Support Development</string>
+    <string name="donate_message">Help support the development of Android Calculator</string>
+    <string name="number_precision">Number Precision</string>
+    <string name="history_size">History Size</string>
+    <string name="numbering_system">Numbering System</string>
+    <string name="numbering_system_none">None</string>
+    <string name="numbering_system_indian">Indian</string>
+    <string name="numbering_system_european">European</string>
+    <string name="scientific_mode">Scientific Mode</string>
+    <string name="scientific_mode_off">Off</string>
+    <string name="scientific_mode_on">On</string>
+    <string name="scientific_mode_always">Always</string>
+    <string name="copied_to_clipboard">Copied to clipboard</string>
+    <string name="is_infinity">Infinity</string>
+    
+    <!-- Missing strings for Themes.kt -->
+    <string name="style_system">System</string>
+    <string name="style_light">Light</string>
+    <string name="style_dark">Dark</string>
+    <string name="style_title">Select Theme</string>
+    
+    <!-- Missing strings for AboutActivity.kt -->
+    <string name="version_info">Version Information</string>
+    <string name="license">License</string>
+    <string name="license_text">This app is licensed under GPL 3.0</string>
+    <string name="ok">OK</string>
+    <string name="share_text">Share this app</string>
+    <string name="share_app">Check out Android Calculator!</string>
+    
+</resources>

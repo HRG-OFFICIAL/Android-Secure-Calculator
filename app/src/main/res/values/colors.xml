@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="app_icon_background_color">#4684E3</color>
+
+    <color name="calculation_error_color">#F44B3F</color>
+
+    <!-- Light Theme - SiliconeCalculator Style -->
+    <color name="foreground_color">#CFD3DE</color>
+    <color name="background_color">#ECECEC</color>
+    <color name="popup_background_color">#ECECEC</color>
+    <color name="history_background_color">#ECECEC</color>
+    <color name="text_color">#333D49</color>
+    <color name="text_second_color">#474D5B</color>
+    <color name="text_third_color">#5B5F6A</color>
+    <color name="text_symbol_color">#FFFFFF</color>
+    <color name="text_category_color">#474D5B</color>
+    <color name="button_color">#CFD3DE</color>
+    <color name="button_symbol_color">#C05F1C</color>
+    <color name="button_parentheses_color">#A0A8BB</color>
+    <color name="button_percent_color">#A0A8BB</color>
+    <color name="button_clear_color">#A0A8BB</color>
+    <color name="button_equals_color">#C05F1C</color>
+    <color name="button_ripple_color">#A0A8BB</color>
+    <color name="switch_primary_color">#A0A8BB</color>
+    <color name="switch_on_primary_color">#ECECEC</color>
+    <color name="switch_surface_variant_color">#5B5F6A</color>
+
+    <!-- AMOLED Theme - SiliconeCalculator Style -->
+    <color name="amoled_foreground_color">#2A2E39</color>
+    <color name="amoled_background_color">#2A2E39</color>
+    <color name="amoled_popup_background_color">#333D49</color>
+    <color name="amoled_history_background_color">#2A2E39</color>
+    <color name="amoled_text_color">#ECECEC</color>
+    <color name="amoled_text_second_color">#CFD3DE</color>
+    <color name="amoled_text_third_color">#A0A8BB</color>
+    <color name="amoled_text_symbol_color">#FFFFFF</color>
+    <color name="amoled_text_category_color">#CFD3DE</color>
+    <color name="amoled_button_color">#5B5F6A</color>
+    <color name="amoled_button_symbol_color">#C25A11</color>
+    <color name="amoled_button_parentheses_color">#474D5B</color>
+    <color name="amoled_button_percent_color">#474D5B</color>
+    <color name="amoled_button_clear_color">#474D5B</color>
+    <color name="amoled_button_equals_color">#C25A11</color>
+    <color name="amoled_button_ripple_color">#A0A8BB</color>
+    <color name="amoled_separator_color">#ECECEC</color>
+    <color name="amoled_switch_primary_color">#ECECEC</color>
+    <color name="amoled_switch_on_primary_color">#5B5F6A</color>
+</resources>
