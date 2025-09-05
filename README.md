@@ -33,7 +33,6 @@ A modern, feature-rich calculator application for Android devices with a clean i
 ### Light Theme
 <p align="center">
   <img src="app/src/main/res/drawable/screenshots/Screenshot_20250905_235435.png" alt="Light Mode Portrait" width="250">
-  <img src="app/src/main/res/drawable/screenshots/Screenshot_20250905_235606.png" alt="Light Mode Landscape" width="300">
 </p>
 
 ### Dark Theme
