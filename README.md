@@ -28,6 +28,21 @@ A modern, feature-rich calculator application for Android devices with a clean i
 - **History Management**: JSON-based calculation history with configurable storage limits
 - **Preference System**: Comprehensive settings with automatic migration support
 
+## 📸 Screenshots
+
+### Light Theme
+![Light Mode Portrait](app/src/main/res/drawable/screenshots/Screenshot_20250905_235435.png)
+![Light Mode Landscape](app/src/main/res/drawable/screenshots/Screenshot_20250905_235606.png)
+
+### Dark Theme
+![Dark Mode Portrait](app/src/main/res/drawable/screenshots/Screenshot_20250906_000106.png)
+![Dark Mode Settings](app/src/main/res/drawable/screenshots/Screenshot_20250906_000121.png)
+
+### Scientific Mode
+![Scientific Mode](app/src/main/res/drawable/screenshots/Screenshot_20250906_000718.png)
+![History View](app/src/main/res/drawable/screenshots/Screenshot_20250906_000742.png)
+![Advanced Calculations](app/src/main/res/drawable/screenshots/Screenshot_20250906_001533.png)
+
 ## 🚀 Getting Started
 
 ### Prerequisites

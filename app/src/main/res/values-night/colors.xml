@@ -5,8 +5,8 @@
     <color name="background_color">#2A2E39</color>
     <color name="popup_background_color">#333D49</color>
     <color name="history_background_color">#333D49</color>
-    <color name="text_color">#000000</color>
-    <color name="text_second_color">#CFD3DE</color>
+    <color name="text_color">#FFFFFF</color>
+    <color name="text_second_color">#000000</color>
     <color name="text_third_color">#A0A8BB</color>
     <color name="text_symbol_color">#FFFFFF</color>
     <color name="text_category_color">#A0A8BB</color>

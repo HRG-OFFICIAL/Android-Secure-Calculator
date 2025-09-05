@@ -1065,6 +1065,12 @@ class MainActivity : AppCompatActivity() {
         checkEmptyHistoryForNoHistoryLabel()
     }
 
+    fun openDonation(menuItem: MenuItem) {
+        // Add donation functionality here or remove from menu
+        // For now, just show a toast message
+        android.widget.Toast.makeText(this, "Donation feature not implemented", android.widget.Toast.LENGTH_SHORT).show()
+    }
+
     private fun keyVibration(view: View) {
         if (MyPreferences(this).vibrationMode) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {

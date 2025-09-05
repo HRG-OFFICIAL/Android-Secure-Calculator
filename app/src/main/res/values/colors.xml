@@ -30,7 +30,7 @@
     <color name="amoled_background_color">#2A2E39</color>
     <color name="amoled_popup_background_color">#333D49</color>
     <color name="amoled_history_background_color">#2A2E39</color>
-    <color name="amoled_text_color">#ECECEC</color>
+    <color name="amoled_text_color">#FFFFFF</color>
     <color name="amoled_text_second_color">#CFD3DE</color>
     <color name="amoled_text_third_color">#A0A8BB</color>
     <color name="amoled_text_symbol_color">#FFFFFF</color>

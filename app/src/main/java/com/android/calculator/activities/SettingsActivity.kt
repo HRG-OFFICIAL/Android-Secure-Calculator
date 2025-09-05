@@ -22,14 +22,21 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Apply theme BEFORE calling super.onCreate
+        Themes(this).applyDayNightOverride()
+        val theme = Themes(this).getTheme()
+        setTheme(theme)
+        
         super.onCreate(savedInstanceState)
-
-        // Apply theme
-        Themes.applyTheme(this)
         setContentView(R.layout.settings_activity)
 
         // Set up toolbar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        
+        // Set up custom back button
+        findViewById<android.widget.ImageView>(R.id.settings_back_button)?.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
 
         if (savedInstanceState == null) {
             supportFragmentManager
