@@ -31,17 +31,23 @@ A modern, feature-rich calculator application for Android devices with a clean i
 ## 📸 Screenshots
 
 ### Light Theme
-![Light Mode Portrait](app/src/main/res/drawable/screenshots/Screenshot_20250905_235435.png)
-![Light Mode Landscape](app/src/main/res/drawable/screenshots/Screenshot_20250905_235606.png)
+<p align="center">
+  <img src="app/src/main/res/drawable/screenshots/Screenshot_20250905_235435.png" alt="Light Mode Portrait" width="250">
+  <img src="app/src/main/res/drawable/screenshots/Screenshot_20250905_235606.png" alt="Light Mode Landscape" width="400">
+</p>
 
 ### Dark Theme
-![Dark Mode Portrait](app/src/main/res/drawable/screenshots/Screenshot_20250906_000106.png)
-![Dark Mode Settings](app/src/main/res/drawable/screenshots/Screenshot_20250906_000121.png)
+<p align="center">
+  <img src="app/src/main/res/drawable/screenshots/Screenshot_20250906_000106.png" alt="Dark Mode Portrait" width="250">
+  <img src="app/src/main/res/drawable/screenshots/Screenshot_20250906_000121.png" alt="Dark Mode Settings" width="250">
+</p>
 
-### Scientific Mode
-![Scientific Mode](app/src/main/res/drawable/screenshots/Screenshot_20250906_000718.png)
-![History View](app/src/main/res/drawable/screenshots/Screenshot_20250906_000742.png)
-![Advanced Calculations](app/src/main/res/drawable/screenshots/Screenshot_20250906_001533.png)
+### Scientific Mode & Features
+<p align="center">
+  <img src="app/src/main/res/drawable/screenshots/Screenshot_20250906_000718.png" alt="Scientific Mode" width="250">
+  <img src="app/src/main/res/drawable/screenshots/Screenshot_20250906_000742.png" alt="History View" width="250">
+  <img src="app/src/main/res/drawable/screenshots/Screenshot_20250906_001533.png" alt="Advanced Calculations" width="250">
+</p>
 
 ## 🚀 Getting Started
 
