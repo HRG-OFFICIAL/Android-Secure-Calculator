@@ -1,222 +1,417 @@
 package com.android.calculator.calculator
 
+import android.os.Build
 import java.math.BigDecimal
+import java.math.BigInteger
 import java.math.MathContext
 import java.math.RoundingMode
 import kotlin.math.PI
+import kotlin.math.abs
+import kotlin.math.acos
+import kotlin.math.asin
+import kotlin.math.atan
 import kotlin.math.cos
+import kotlin.math.exp
 import kotlin.math.ln
 import kotlin.math.log10
+import kotlin.math.log2
 import kotlin.math.pow
+import kotlin.math.round
 import kotlin.math.sin
 import kotlin.math.sqrt
 import kotlin.math.tan
 
-var division_by_0 = "division_by_0"
-var domain_error = "domain_error"
-var syntax_error = "syntax_error"
-var is_infinity = "is_infinity"
-var require_real_number = "require_real_number"
+var division_by_0 = false
+var domain_error = false
+var syntax_error = false
+var is_infinity = false
+var require_real_number = false
 
 class Calculator(
-    private val precision: Int = 10
-) {
-    private val mathContext = MathContext(precision, RoundingMode.HALF_UP)
+        private val numberPrecisionDecimal: Int
+    ) {
 
-    fun evaluate(expression: String, isDegreeMode: Boolean = true): BigDecimal {
-        try {
-            val cleanExpression = preprocessExpression(expression)
-            return evaluateExpression(cleanExpression, isDegreeMode)
-        } catch (e: ArithmeticException) {
-            if (e.message?.contains("/ by zero") == true) {
-                throw Exception(division_by_0)
-            }
-            throw Exception(syntax_error)
-        } catch (e: NumberFormatException) {
-            throw Exception(syntax_error)
-        } catch (e: Exception) {
-            when (e.message) {
-                division_by_0, domain_error, syntax_error, is_infinity, require_real_number -> throw e
-                else -> throw Exception(syntax_error)
-            }
+    fun factorial(number: BigDecimal): BigDecimal {
+        if (number >= BigDecimal(3000)) {
+            is_infinity = true
+            return BigDecimal.ZERO
+        }
+        return if (number < BigDecimal.ZERO) {
+            domain_error = true
+            BigDecimal.ZERO
+        } else {
+            val decimalPartOfNumber = number.toDouble() - number.toInt()
+            if (decimalPartOfNumber == 0.0) {
+                var factorial = BigInteger("1")
+                for (i in 1..number.toInt()) {
+                    factorial *= i.toBigInteger()
+                }
+                factorial.toBigDecimal()
+            } else gammaLanczos(number + BigDecimal.ONE)
         }
     }
 
-    private fun preprocessExpression(expression: String): String {
-        var result = expression
-            .replace("×", "*")
-            .replace("÷", "/")
-            .replace("π", PI.toString())
-            .replace("e", Math.E.toString())
-            .trim()
+    private fun gammaLanczos(x: BigDecimal): BigDecimal {
+        // Lanczos approximation parameters
+        val p = arrayOf(
+            676.5203681218851,
+            -1259.1392167224028,
+            771.3234287776531,
+            -176.6150291621406,
+            12.507343278686905,
+            -0.13857109526572012,
+            9.984369578019572e-6,
+            1.5056327351493116e-7
+        )
+        val g = 7.0
+        val z = x.toDouble() - 1.0
 
-        // Handle implicit multiplication (e.g., "2(3)" -> "2*(3)")
-        result = addImplicitMultiplication(result)
-
-        return result
-    }
-
-    private fun addImplicitMultiplication(expression: String): String {
-        var result = expression
-        
-        // Add multiplication between number and opening parenthesis
-        result = result.replace(Regex("(\\d)\\("), "$1*(")
-        
-        // Add multiplication between closing and opening parenthesis
-        result = result.replace(Regex("\\)\\("), ")*(")
-        
-        // Add multiplication between closing parenthesis and number
-        result = result.replace(Regex("\\)(\\d)"), ")*$1")
-        
-        return result
-    }
-
-    private fun evaluateExpression(expression: String, isDegreeMode: Boolean): BigDecimal {
-        // This is a simplified implementation
-        // In a real calculator, you would implement a proper expression parser
-        // For now, we'll handle basic operations
-        
-        if (expression.isEmpty()) {
-            throw Exception(syntax_error)
+        var a = 0.9999999999998099
+        for (i in p.indices) {
+            a += p[i] / (z + i + 1)
         }
 
-        // Handle basic arithmetic operations
-        return try {
-            val result = evaluateBasicExpression(expression)
-            
-            if (result.toString().contains("Infinity")) {
-                throw Exception(is_infinity)
-            }
-            
-            result
-        } catch (e: ArithmeticException) {
-            throw Exception(division_by_0)
-        }
+        val t = z + g + 0.5
+        val sqrtTwoPi = sqrt(2.0 * PI)
+        val firstPart = sqrtTwoPi * t.pow(z + 0.5) * exp(-t)
+        val result = firstPart * a
+
+        return BigDecimal(result, MathContext.DECIMAL64)
     }
 
-    private fun evaluateBasicExpression(expression: String): BigDecimal {
-        // Simple evaluation for basic operations
-        // This would need to be expanded for a full calculator
-        
-        try {
-            // Handle simple number
-            if (expression.matches(Regex("-?\\d+(\\.\\d+)?"))) {
-                return BigDecimal(expression, mathContext)
+    private fun exponentiation(x: BigDecimal, parseFactor: BigDecimal): BigDecimal {
+        var value = x
+        val intPart = parseFactor.toInt()
+        val decimalPart = parseFactor.subtract(BigDecimal(intPart))
+
+        // if the number is null
+        if (value == BigDecimal.ZERO) {
+            syntax_error = false
+            value = BigDecimal.ZERO
+        } else {
+            if (parseFactor > BigDecimal(10000)) {
+                is_infinity = true
+                value = BigDecimal.ZERO
+            } else {
+                // If the number is negative and the factor is a float ( e.g : (-5)^0.5 )
+                if (value < BigDecimal.ZERO && decimalPart != BigDecimal.ZERO) {
+                    require_real_number = true
+                } // the factor is NOT a float
+                else if (parseFactor > BigDecimal.ZERO) {
+
+                    // To support bigdecimal exponent (e.g: 3.5)
+                    value = value.pow(intPart, MathContext.UNLIMITED)
+                        .multiply(
+                            BigDecimal.valueOf(
+                                value.toDouble().pow(decimalPart.toDouble())
+                            )
+                        )
+
+                    // To fix sqrt(2)^2 = 2
+                    val decimal = value.toInt()
+                    val fractional = value.toDouble() - decimal
+                    if (fractional > 0 && fractional < 1.0E-30) {
+                        value = decimal.toBigDecimal()
+                    }
+                } else {
+                    // To support negative factor
+                    value = value.pow(-intPart, MathContext.DECIMAL64)
+                        .multiply(
+                            BigDecimal.valueOf(
+                                value.toDouble().pow(-decimalPart.toDouble())
+                            )
+                        )
+
+                    value = try {
+                        BigDecimal.ONE.divide(value)
+                    } catch (e: ArithmeticException) {
+                        // if the result is a non-terminating decimal expansion
+                        BigDecimal.ONE.divide(value, numberPrecisionDecimal, RoundingMode.HALF_DOWN)
+                    }
+                }
             }
-            
-            // Handle basic operations (simplified)
-            when {
-                expression.contains("+") -> {
-                    val parts = expression.split("+")
-                    if (parts.size == 2) {
-                        return BigDecimal(parts[0].trim(), mathContext)
-                            .add(BigDecimal(parts[1].trim(), mathContext), mathContext)
-                    }
+        }
+        return value
+    }
+
+    fun bigDecimalSqrtFormerAndroidVersion(value: BigDecimal, mathContext: MathContext): BigDecimal {
+        // Newton's method for square root calculation with Android versions prior to API 33
+        var x0 = BigDecimal(0)
+        var x1 = value.divide(BigDecimal(2), mathContext)
+
+        // != evaluated true when comparing 0 and 0.0
+        // This allowed the passing of 0.0 (or more trailing zeroes) to be divided.
+        while (x0 < x1 || x0 > x1) {
+            x0 = x1
+            x1 = value.divide(x0, mathContext).add(x0).divide(BigDecimal(2), mathContext)
+        }
+
+        return x1
+    }
+
+    fun evaluate(equation: String, isDegreeModeActivated: Boolean): BigDecimal {
+        println("Equation BigDecimal : $equation")
+        return object : Any() {
+            var pos = -1
+            var ch = 0
+            fun nextChar() {
+                ch = if (++pos < equation.length) equation[pos].code else -1
+            }
+
+            fun eat(charToEat: Int): Boolean {
+                while (ch == ' '.code) nextChar()
+                if (ch == charToEat) {
+                    nextChar()
+                    return true
                 }
-                expression.contains("-") && !expression.startsWith("-") -> {
-                    val parts = expression.split("-")
-                    if (parts.size == 2) {
-                        return BigDecimal(parts[0].trim(), mathContext)
-                            .subtract(BigDecimal(parts[1].trim(), mathContext), mathContext)
-                    }
+                return false
+            }
+
+            fun parse(): BigDecimal {
+                nextChar()
+                val x = parseExpression()
+                if (pos < equation.length) println("Unexpected: \"" + ch.toChar() + "\" in expression: " + equation)
+                return x
+            }
+
+            fun parseExpression(): BigDecimal {
+                var x = parseTerm()
+                while (true) {
+                    if (eat('+'.code)) x = x.add(parseTerm()) // addition
+                    else if (eat('-'.code)) x = x.subtract(parseTerm()) // subtraction
+                    else return x
                 }
-                expression.contains("*") -> {
-                    val parts = expression.split("*")
-                    if (parts.size == 2) {
-                        return BigDecimal(parts[0].trim(), mathContext)
-                            .multiply(BigDecimal(parts[1].trim(), mathContext), mathContext)
-                    }
-                }
-                expression.contains("/") -> {
-                    val parts = expression.split("/")
-                    if (parts.size == 2) {
-                        val divisor = BigDecimal(parts[1].trim(), mathContext)
-                        if (divisor.compareTo(BigDecimal.ZERO) == 0) {
-                            throw Exception(division_by_0)
+            }
+
+            fun parseTerm(): BigDecimal {
+                var x = parseFactor()
+                while (true) {
+                    if (eat('*'.code)) x = x.multiply(parseFactor()) // Multiplication
+                    else if (eat('#'.code)) { // Modulo
+                        val fractionDenominator = parseFactor()
+                        if (fractionDenominator == BigDecimal.ZERO) {
+                            division_by_0 = true
+                            x = BigDecimal.ZERO
+                        } else {
+                            x = x.rem(fractionDenominator)
                         }
-                        return BigDecimal(parts[0].trim(), mathContext)
-                            .divide(divisor, mathContext)
                     }
+                    else if (eat('/'.code)) { // Division
+                        val fractionDenominator = parseFactor()
+                        // The Double value is the result of sin(2π) in Radian mode after conversions (0)
+                        // This catches the error/crash during zero division in issue #499
+                        if (fractionDenominator.toFloat() == 0f || fractionDenominator.toDouble() == -2.4492935982947064E-16) {
+                            division_by_0 = true
+                            x = BigDecimal.ZERO
+                        } else {
+                            try {
+                                x = x.divide(fractionDenominator)
+                            } catch (e: ArithmeticException) { // if the result is a non-terminating decimal expansion
+                                x = x.divide(fractionDenominator, numberPrecisionDecimal, RoundingMode.HALF_DOWN)
+                                println(x)
+                            }
+                        }
+                    }
+                    else return x
                 }
             }
-            
-            // If we can't parse it, try to convert directly
-            return BigDecimal(expression, mathContext)
-            
-        } catch (e: NumberFormatException) {
-            throw Exception(syntax_error)
-        } catch (e: ArithmeticException) {
-            throw Exception(division_by_0)
-        }
-    }
 
-    // Scientific functions
-    fun sin(value: BigDecimal, isDegreeMode: Boolean): BigDecimal {
-        val radians = if (isDegreeMode) {
-            value.multiply(BigDecimal(PI), mathContext).divide(BigDecimal(180), mathContext)
-        } else {
-            value
-        }
-        return BigDecimal(sin(radians.toDouble()), mathContext)
-    }
+            fun parseFactor(): BigDecimal {
+                if (eat('+'.code)) return parseFactor().plus() // unary plus
+                if (eat('-'.code)) return parseFactor().unaryMinus() // unary minus
+                var x: BigDecimal
+                val startPos = pos
+                if (eat('('.code)) { // parentheses
+                    x = parseExpression()
+                    if (!eat(')'.code)) {
+                        println("Missing ')'")
+                        x = BigDecimal.ZERO
+                        syntax_error = true
+                    }
+                } else if (ch >= '0'.code && ch <= '9'.code || ch == '.'.code) { // numbers
+                    while (ch >= '0'.code && ch <= '9'.code || ch == '.'.code) nextChar()
+                    val string = equation.substring(startPos, pos)
+                    if (string.count { it == '.' } > 1) {
+                        x = BigDecimal.ZERO
+                        syntax_error = true
+                    } else {
+                        if ((string.length == 1) && (string[0] == '.')) {
+                            x = BigDecimal.ZERO
+                            syntax_error = true
+                        } else {
+                            x = BigDecimal(string)
+                        }
+                    }
+                } else if (eat('e'.code)) {
+                    x = BigDecimal(Math.E)
+                } else if (eat('π'.code)) {
+                    x = BigDecimal(PI)
+                } else if (ch >= 'a'.code && ch <= 'z'.code) { // functions
+                    while (ch >= 'a'.code && ch <= 'z'.code) nextChar()
+                    val func: String = equation.substring(startPos, pos)
+                    if (eat('('.code)) {
+                        x = parseExpression()
+                        if (!eat(')'.code)) x = parseFactor()
+                    } else {
+                        x = parseFactor()
+                    }
+                    println(x)
+                    when (func) {
+                        "sqrt" -> {
+                            if (x >= BigDecimal.ZERO) {
+                                // Set the precision for the square root calculation
+                                val integerPartLength = x.toString().length
+                                val maxPrecision = (integerPartLength + 50).coerceAtMost(1000) // Maximum precision is 1000
+                                val precision = MathContext(maxPrecision, RoundingMode.HALF_DOWN)
+                                x = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // Use default BigDecimal sqrt function (API 33)
+                                    x.sqrt(precision)
+                                } else { // Use Newton's method for square root calculation with Android versions prior to API 33
+                                    bigDecimalSqrtFormerAndroidVersion(x, precision)
+                                }
+                            } else {
+                                require_real_number = true
+                            }
 
-    fun cos(value: BigDecimal, isDegreeMode: Boolean): BigDecimal {
-        val radians = if (isDegreeMode) {
-            value.multiply(BigDecimal(PI), mathContext).divide(BigDecimal(180), mathContext)
-        } else {
-            value
-        }
-        return BigDecimal(cos(radians.toDouble()), mathContext)
-    }
+                        }
+                        "factorial" -> {
+                            x = factorial(x)
+                        }
+                        "ln" -> {
+                            if (x > Double.MAX_VALUE.toBigDecimal()) {
+                                is_infinity = true
+                                x = BigDecimal.ZERO
+                            } else if (x <= BigDecimal.ZERO) {
+                                domain_error = true
+                            } else {
+                                x = BigDecimal(ln(x.toDouble()))
+                            }
+                        }
+                        "logtwo" -> {
+                            if (x > Double.MAX_VALUE.toBigDecimal()) {
+                                is_infinity = true
+                                x = BigDecimal.ZERO
+                            } else if (x <= BigDecimal.ZERO) {
+                                domain_error = true
+                            } else {
+                                x = BigDecimal(log2(x.toDouble()))
+                            }
+                        }
+                        "logten" -> {
+                            if (x > Double.MAX_VALUE.toBigDecimal()) {
+                                is_infinity = true
+                                x = BigDecimal.ZERO
+                            } else if (x <= BigDecimal.ZERO) {
+                                domain_error = true
+                            } else {
+                                x = BigDecimal(log10(x.toDouble()))
+                            }
+                        }
+                        "xp" -> {
+                            x = exponentiation(BigDecimal(Math.E), x)
+                        }
+                        "sin" -> {
+                            if (x > Double.MAX_VALUE.toBigDecimal()) {
+                                is_infinity = true
+                                x = BigDecimal.ZERO
+                            } else if (isDegreeModeActivated) {
+                                x = sin(Math.toRadians(x.toDouble())).toBigDecimal()
+                                // https://stackoverflow.com/questions/29516222/how-to-get-exact-value-of-trigonometric-functions-in-java
+                            } else {
+                                x = sin(x.toDouble()).toBigDecimal()
+                            }
+                            if (x > BigDecimal.ZERO && x < BigDecimal(1.0E-14)) {
+                                x = round(x.toDouble()).toBigDecimal()
+                            }
+                        }
+                        "cos" -> {
+                            if (x > Double.MAX_VALUE.toBigDecimal()) {
+                                is_infinity = true
+                                x = BigDecimal.ZERO
+                            } else if (isDegreeModeActivated) {
+                                x = cos(Math.toRadians(x.toDouble())).toBigDecimal()
+                            } else {
+                                x = cos(x.toDouble()).toBigDecimal()
+                            }
+                            if (x > BigDecimal.ZERO && x < BigDecimal(1.0E-14)) {
+                                x = round(x.toDouble()).toBigDecimal()
+                            }
+                        }
+                        "tan" -> {
+                            if (x > Double.MAX_VALUE.toBigDecimal()) {
+                                is_infinity = true
+                                x = BigDecimal.ZERO
+                            } else if (Math.toDegrees(x.toDouble()) == 90.0) {
+                                // Tangent is defined for R\{(2k+1)π/2, with k ∈ Z}
+                                domain_error = true
+                                x = BigDecimal.ZERO
+                            } else {
+                                x = if (isDegreeModeActivated) {
+                                    tan(Math.toRadians(x.toDouble())).toBigDecimal()
+                                } else {
+                                    tan(x.toDouble()).toBigDecimal()
+                                }
+                                if (x > BigDecimal.ZERO && x < BigDecimal(1.0E-14)) {
+                                    x = round(x.toDouble()).toBigDecimal()
+                                }
+                            }
+                        }
+                        "arcsi" -> {
+                            if (abs(x.toDouble()) > 1) {
+                                x = BigDecimal.ZERO
+                                domain_error = true
+                            } else {
+                                x = if (isDegreeModeActivated) {
+                                    (asin(x.toDouble()) * 180 / Math.PI).toBigDecimal()
+                                } else {
+                                    asin(x.toDouble()).toBigDecimal()
+                                }
+                                if (x > BigDecimal.ZERO && x < BigDecimal(1.0E-14)) {
+                                    x = round(x.toDouble()).toBigDecimal()
+                                }
+                            }
+                        }
+                        "arcco" -> {
+                            if (abs(x.toDouble()) > 1) {
+                                x = BigDecimal.ZERO
+                                domain_error = true
+                            } else {
+                                x = if (isDegreeModeActivated) {
+                                    (acos(x.toDouble())*180/Math.PI).toBigDecimal()
+                                } else {
+                                    acos(x.toDouble()).toBigDecimal()
+                                }
+                                if (x > BigDecimal.ZERO && x < BigDecimal(1.0E-14)) {
+                                    x = round(x.toDouble()).toBigDecimal()
+                                }
+                            }
 
-    fun tan(value: BigDecimal, isDegreeMode: Boolean): BigDecimal {
-        val radians = if (isDegreeMode) {
-            value.multiply(BigDecimal(PI), mathContext).divide(BigDecimal(180), mathContext)
-        } else {
-            value
-        }
-        return BigDecimal(tan(radians.toDouble()), mathContext)
-    }
-
-    fun sqrt(value: BigDecimal): BigDecimal {
-        if (value.compareTo(BigDecimal.ZERO) < 0) {
-            throw Exception(domain_error)
-        }
-        return BigDecimal(sqrt(value.toDouble()), mathContext)
-    }
-
-    fun ln(value: BigDecimal): BigDecimal {
-        if (value.compareTo(BigDecimal.ZERO) <= 0) {
-            throw Exception(domain_error)
-        }
-        return BigDecimal(ln(value.toDouble()), mathContext)
-    }
-
-    fun log10(value: BigDecimal): BigDecimal {
-        if (value.compareTo(BigDecimal.ZERO) <= 0) {
-            throw Exception(domain_error)
-        }
-        return BigDecimal(log10(value.toDouble()), mathContext)
-    }
-
-    fun pow(base: BigDecimal, exponent: BigDecimal): BigDecimal {
-        return BigDecimal(base.toDouble().pow(exponent.toDouble()), mathContext)
-    }
-
-    fun factorial(n: BigDecimal): BigDecimal {
-        if (n.remainder(BigDecimal.ONE, mathContext).compareTo(BigDecimal.ZERO) != 0) {
-            throw Exception(require_real_number)
-        }
-        
-        val intValue = n.toInt()
-        if (intValue < 0) {
-            throw Exception(domain_error)
-        }
-        
-        var result = BigDecimal.ONE
-        for (i in 1..intValue) {
-            result = result.multiply(BigDecimal(i), mathContext)
-        }
-        return result
+                        }
+                        "arcta" -> {
+                            if (x > Double.MAX_VALUE.toBigDecimal()) {
+                                is_infinity = true
+                                x = BigDecimal.ZERO
+                            } else if  (isDegreeModeActivated) {
+                                x = (atan(x.toDouble()) * 180 / Math.PI).toBigDecimal()
+                            } else {
+                                x =atan(x.toDouble()).toBigDecimal()
+                            }
+                            if (x > BigDecimal.ZERO && x < BigDecimal(1.0E-14)) {
+                                x = round(x.toDouble()).toBigDecimal()
+                            }
+                        }
+                        else -> {
+                            syntax_error = true
+                        }
+                    }
+                } else {
+                    x = BigDecimal.ZERO
+                    syntax_error = true
+                }
+                if (eat('^'.code)) {
+                    x = exponentiation(x, parseFactor())
+                }
+                return x
+            }
+        }.parse()
     }
 }

@@ -1,92 +1,133 @@
 package com.android.calculator.calculator.parser
 
-import java.math.BigDecimal
-import java.math.RoundingMode
-import java.text.DecimalFormat
-import java.text.DecimalFormatSymbols
-import java.util.Locale
-
-class NumberFormatter {
-
+object NumberFormatter {
     fun format(
-        number: BigDecimal,
-        precision: Int = 10,
-        useScientificNotation: Boolean = false,
-        numberingSystem: NumberingSystem = NumberingSystem.NONE
+        text: String,
+        decimalSeparatorSymbol: String,
+        groupingSeparatorSymbol: String,
+        numberingSystem: NumberingSystem = NumberingSystem.INTERNATIONAL
     ): String {
-        return when {
-            useScientificNotation && shouldUseScientificNotation(number) -> {
-                formatScientific(number, precision)
+        val textNoSeparator = removeSeparators(text, groupingSeparatorSymbol)
+        val numbersList = extractString(textNoSeparator, decimalSeparatorSymbol)
+        val numbersWithSeparators =
+            addSeparators(numbersList, decimalSeparatorSymbol, groupingSeparatorSymbol, numberingSystem)
+
+        val newString = StringBuilder()
+
+        for (item in numbersWithSeparators) {
+            newString.append(item)
+        }
+
+        return newString.toString()
+    }
+
+    // This function was changed to extract all elements from the input string, not just numbers.
+    // This returns a list of all elements. Once the numbers have had separators added, a new string
+    // can be constructed from the list.
+    private fun extractString(text: String, decimalSeparatorSymbol: String): List<String> {
+        val result = mutableListOf<String>()
+        var currentNumber = StringBuilder()
+
+        for (char in text) {
+            when {
+                char.isDigit() || char == decimalSeparatorSymbol.single() -> {
+                    currentNumber.append(char)
+                }
+                else -> {
+                    if (currentNumber.isNotEmpty()) {
+                        result.add(currentNumber.toString())
+                        currentNumber = StringBuilder()
+                    }
+                    result.add(char.toString())
+                }
             }
-            else -> {
-                formatStandard(number, precision, numberingSystem)
+        }
+
+        if (currentNumber.isNotEmpty()) {
+            result.add(currentNumber.toString())
+        }
+
+        return result
+    }
+
+    private fun addSeparators(
+        numbersList: List<String>,
+        decimalSeparatorSymbol: String,
+        groupingSeparatorSymbol: String,
+        numberingSystem: NumberingSystem
+    ): List<String> {
+        return numbersList.map {
+            if (it.contains(decimalSeparatorSymbol)) {
+                if (it.first() == decimalSeparatorSymbol[0]) {
+                    //this means the floating point number doesn't have integers
+                    it
+                } else {
+                    val integersPart = it.substring(0, it.indexOf(decimalSeparatorSymbol))
+                    val fractions = it.substring(it.indexOf(decimalSeparatorSymbol) + 1)
+                    formatIntegers(
+                        integersPart,
+                        groupingSeparatorSymbol,
+                        numberingSystem == NumberingSystem.INTERNATIONAL
+                    ) + decimalSeparatorSymbol + fractions
+                }
+            } else {
+                formatIntegers(it, groupingSeparatorSymbol, numberingSystem == NumberingSystem.INTERNATIONAL)
             }
         }
     }
 
-    private fun shouldUseScientificNotation(number: BigDecimal): Boolean {
-        val absValue = number.abs()
-        return absValue.compareTo(BigDecimal("1E6")) >= 0 || 
-               (absValue.compareTo(BigDecimal.ZERO) > 0 && absValue.compareTo(BigDecimal("1E-4")) < 0)
-    }
-
-    private fun formatScientific(number: BigDecimal, precision: Int): String {
-        val format = DecimalFormat("0.${createPrecisionPattern(precision - 1)}E0")
-        return format.format(number.toDouble())
-    }
-
-    private fun formatStandard(number: BigDecimal, precision: Int, numberingSystem: NumberingSystem): String {
-        // Round to specified precision
-        val rounded = number.setScale(precision, RoundingMode.HALF_UP).stripTrailingZeros()
-        
-        val symbols = when (numberingSystem) {
-            NumberingSystem.EUROPEAN -> DecimalFormatSymbols(Locale.GERMANY)
-            NumberingSystem.INDIAN -> createIndianSymbols()
-            else -> DecimalFormatSymbols(Locale.US)
-        }
-
-        val pattern = when (numberingSystem) {
-            NumberingSystem.INDIAN -> createIndianPattern()
-            NumberingSystem.EUROPEAN -> "#,##0.###"
-            else -> "#,##0.###"
-        }
-
-        val format = DecimalFormat(pattern, symbols)
-        format.maximumFractionDigits = precision
-        format.isGroupingUsed = numberingSystem != NumberingSystem.NONE
-
-        return format.format(rounded.toDouble())
-    }
-
-    private fun createPrecisionPattern(digits: Int): String {
-        return "0".repeat(digits)
-    }
-
-    private fun createIndianSymbols(): DecimalFormatSymbols {
-        val symbols = DecimalFormatSymbols(Locale.US)
-        symbols.groupingSeparator = ','
-        symbols.decimalSeparator = '.'
-        return symbols
-    }
-
-    private fun createIndianPattern(): String {
-        // Indian numbering system: 1,00,000 instead of 100,000
-        return "##,##,##0.###"
-    }
-
-    fun removeGroupingSeparators(text: String, numberingSystem: NumberingSystem): String {
-        return when (numberingSystem) {
-            NumberingSystem.EUROPEAN -> text.replace(".", "").replace(",", ".")
-            NumberingSystem.INDIAN, NumberingSystem.NONE -> text.replace(",", "")
+    private fun formatIntegers(
+        integers: String,
+        groupingSeparatorSymbol: String,
+        isInternational: Boolean
+    ): String {
+        // sample input  : 00110
+        return if (isInternational) {
+            integers.reversed()                         // reversed      : 01100
+                .chunked(3)                             // chunked       : [011, 00]
+                .joinToString(groupingSeparatorSymbol)  // joinedToString: 011,00
+                .reversed()                             // reversed      : 00,110
+        } else {
+            return formatIndianNumberingSystem(integers)
         }
     }
 
-    fun addGroupingSeparators(text: String, numberingSystem: NumberingSystem): String {
-        try {
-            val number = BigDecimal(text)
-            return formatStandard(number, 10, numberingSystem)
-        } catch (e: NumberFormatException) {
-            return text
+    private fun removeSeparators(text: String, groupingSeparatorSymbol: String): String {
+        return text.replace(groupingSeparatorSymbol, "")
+    }
+
+    private fun formatIndianNumberingSystem(numberStr: String): String {
+        val isNegative = numberStr.startsWith("-")
+        val numberWithoutSign = if (isNegative) numberStr.substring(1) else numberStr
+
+        val numberParts = numberWithoutSign.split(".")
+        val integerPart = numberParts[0]
+        val decimalPart = if (numberParts.size > 1) numberParts[1] else ""
+
+        val length = integerPart.length
+        val result = StringBuilder()
+        var count = 0
+
+        for (i in length - 1 downTo 0) {
+            result.append(integerPart[i])
+            count++
+
+            when {
+                /** First comma comes after 3 digits **/
+                count == 3 && i != 0 -> {
+                    result.append(',')
+                    count = 0
+                }
+                /** Subsequent commas every 2 digits **/
+                count == 2 && i != 0 && length - i > 3 -> {
+                    result.append(',')
+                    count = 0
+                }
+            }
         }
+
+        val formattedIntegerPart = result.reverse().toString()
+        val formattedNumber = if (decimalPart.isNotEmpty()) "$formattedIntegerPart.$decimalPart" else formattedIntegerPart
+        return if (isNegative) "-$formattedNumber" else formattedNumber
     }
 }

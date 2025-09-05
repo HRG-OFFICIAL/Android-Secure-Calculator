@@ -1,5 +1,7 @@
 package com.android.calculator.calculator.parser
 
+import com.android.calculator.calculator.syntax_error
+
 class Expression {
 
     fun getCleanExpression(calculation: String, decimalSeparatorSymbol: String, groupingSeparatorSymbol: String): String {
@@ -16,6 +18,7 @@ class Expression {
             cleanCalculation = formatFactorial(cleanCalculation)
         }
 
+
         cleanCalculation = addParenthesis(cleanCalculation)
 
         return cleanCalculation
@@ -25,173 +28,287 @@ class Expression {
         var calculation2 = calculation.replace('×', '*')
         calculation2 = calculation2.replace('÷', '/')
         calculation2 = calculation2.replace("log₂(", "logtwo(")
-        calculation2 = calculation2.replace("log₁₀(", "log(")
-        calculation2 = calculation2.replace("ln(", "ln(")
-        calculation2 = calculation2.replace("√(", "sqrt(")
-        calculation2 = calculation2.replace("∛(", "cbrt(")
-        calculation2 = calculation2.replace("sin⁻¹(", "asin(")
-        calculation2 = calculation2.replace("cos⁻¹(", "acos(")
-        calculation2 = calculation2.replace("tan⁻¹(", "atan(")
-        calculation2 = calculation2.replace("sinh⁻¹(", "asinh(")
-        calculation2 = calculation2.replace("cosh⁻¹(", "acosh(")
-        calculation2 = calculation2.replace("tanh⁻¹(", "atanh(")
-        calculation2 = calculation2.replace("π", "pi")
-        calculation2 = calculation2.replace("e", "e")
-
-        // Handle decimal and grouping separators
-        if (decimalSeparatorSymbol != ".") {
-            calculation2 = calculation2.replace(decimalSeparatorSymbol, ".")
-        }
-        if (groupingSeparatorSymbol.isNotEmpty()) {
-            calculation2 = calculation2.replace(groupingSeparatorSymbol, "")
-        }
-
+        // Need open parenthesis to prevent alteration of log₂
+        calculation2 = calculation2.replace("log(", "logten(")
+        calculation2 = calculation2.replace("E", "*10^")
+        // To avoid that "exp" is interpreted as "e", exp -> xp
+        calculation2 = calculation2.replace("exp", "xp")
+        // To avoid missmatch with cos, sin, tan -> arcco, arcsi, arcta
+        calculation2 = calculation2.replace("cos⁻¹", "arcco")
+        calculation2 = calculation2.replace("sin⁻¹", "arcsi")
+        calculation2 = calculation2.replace("tan⁻¹", "arcta")
+        calculation2 = calculation2.replace(groupingSeparatorSymbol, "")
+        calculation2 = calculation2.replace(decimalSeparatorSymbol, ".")
         return calculation2
     }
 
-    private fun addMultiply(calculation: String): String {
-        var result = calculation
-
-        // Add multiplication between number and opening parenthesis
-        result = result.replace(Regex("(\\d)\\("), "$1*(")
-        
-        // Add multiplication between closing and opening parenthesis
-        result = result.replace(Regex("\\)\\("), ")*(")
-        
-        // Add multiplication between closing parenthesis and number
-        result = result.replace(Regex("\\)(\\d)"), ")*$1")
-        
-        // Add multiplication between number and function
-        result = result.replace(Regex("(\\d)(sin|cos|tan|log|ln|sqrt|cbrt|asin|acos|atan|sinh|cosh|tanh|asinh|acosh|atanh)"), "$1*$2")
-        
-        // Add multiplication between constant and number/function
-        result = result.replace(Regex("(pi|e)(\\d|sin|cos|tan|log|ln|sqrt|cbrt|asin|acos|atan|sinh|cosh|tanh|asinh|acosh|atanh|\\()"), "$1*$2")
-        
-        // Add multiplication between number and constant
-        result = result.replace(Regex("(\\d)(pi|e)"), "$1*$2")
-
-        return result
-    }
-
-    private fun formatSquare(calculation: String): String {
-        var result = calculation
-        
-        // Replace √number with sqrt(number)
-        result = result.replace(Regex("√(\\d+(?:\\.\\d+)?)"), "sqrt($1)")
-        
-        // Replace √(expression) with sqrt(expression)
-        result = result.replace("√", "sqrt")
-        
-        return result
-    }
-
+    /* Transform any calculation string containing %
+     * to respect the user friend (non-mathematical) way (see issue #35)
+     */
     private fun getPercentString(calculation: String): String {
-        var result = calculation
-        
-        // Handle percentage calculations
-        // This is a simplified implementation
-        // In a real calculator, you'd need more sophisticated percentage handling
-        
-        return result
+        val percentPos = calculation.lastIndexOf('%')
+        if (percentPos < 1) {
+            return calculation
+        }
+        // find the last operator before the last %
+        val operatorBeforePercentPos = calculation.subSequence(0, percentPos).lastIndexOfAny(charArrayOf('-', '+', '*', '/', '(', ')'))
+
+        if (operatorBeforePercentPos < 1) {
+            return calculation
+        }
+
+        if (calculation[operatorBeforePercentPos] == '*') {
+            return calculation
+        }
+
+        if(calculation[operatorBeforePercentPos] == '/') {
+            // insert brackets into percentage. Fixes 900/10% -> 900/(10/100), not 900/10/100 which evals differently.
+            // also prevents it from doing the rest of this function, which screws the calculation up
+            val stringFirst = calculation.substring(0, operatorBeforePercentPos+1)
+            val stringMiddle = calculation.substring(operatorBeforePercentPos+1, percentPos+1)
+            val stringLast = calculation.substring(percentPos+1, calculation.length)
+            return "$stringFirst($stringMiddle)$stringLast"
+        }
+
+        // extract the first part of the calculation
+        var calculationStringFirst = calculation.subSequence(0, operatorBeforePercentPos).toString()
+
+        // recursively parse it
+        if (calculationStringFirst.contains('%')) {
+            calculationStringFirst = getPercentString(calculationStringFirst)
+        }
+        // check if there are already some parenthesis, so we skip formatting
+        if (calculation[operatorBeforePercentPos] == '(') {
+            return calculationStringFirst + calculation.subSequence(operatorBeforePercentPos, calculation.length)
+        }
+        if (calculation[operatorBeforePercentPos] == ')') {
+            val openParenPos = calculation.subSequence(0, operatorBeforePercentPos).lastIndexOfAny(
+                charArrayOf('('))
+            if (openParenPos == 0){
+                return calculationStringFirst + calculation.subSequence(operatorBeforePercentPos, calculation.length)
+            }
+            if (openParenPos > 0) {
+                val operatorBeforeParen = calculation.subSequence(0, openParenPos).lastIndexOfAny(
+                    charArrayOf('+', '-', '*', '/')
+                )
+                calculationStringFirst = calculation.substring(0, operatorBeforeParen)
+                return calculationStringFirst + calculation[operatorBeforeParen] + calculationStringFirst + "*(" + calculation.subSequence(openParenPos + 1, percentPos - 1) + ")" + calculation.subSequence(percentPos, calculation.length)
+            }
+
+        }
+        calculationStringFirst = "($calculationStringFirst)"
+
+        // modify the calculation to have something like (X)+(Y%*X)
+        return calculationStringFirst + calculation[operatorBeforePercentPos] + calculationStringFirst + "*(" + calculation.subSequence(operatorBeforePercentPos + 1, percentPos) + ")" + calculation.subSequence(percentPos, calculation.length)
+
     }
 
-    private fun formatFactorial(calculation: String): String {
-        var result = calculation
-        
-        // Replace number! with factorial(number)
-        result = result.replace(Regex("(\\d+(?:\\.\\d+)?)!"), "factorial($1)")
-        
-        // Replace )! with factorial(...)
-        var openParenCount = 0
-        var factorialIndex = -1
-        
-        for (i in result.indices) {
-            when (result[i]) {
-                '(' -> openParenCount++
-                ')' -> {
-                    openParenCount--
-                    if (i + 1 < result.length && result[i + 1] == '!') {
-                        factorialIndex = i + 1
-                        break
-                    }
-                }
+    fun addParenthesis(calculation: String): String {
+        // Add ")" which lack
+        var cleanCalculation = calculation
+        var openParentheses = 0
+        var closeParentheses = 0
+
+        for (i in calculation.indices) {
+            if (calculation[i] == '(') {
+                openParentheses += 1
+            }
+            if (calculation[i] == ')') {
+                closeParentheses += 1
             }
         }
-        
-        if (factorialIndex > 0) {
-            // Find the matching opening parenthesis
-            var closeParenCount = 0
-            var startIndex = -1
-            
-            for (i in factorialIndex - 1 downTo 0) {
-                when (result[i]) {
-                    ')' -> closeParenCount++
-                    '(' -> {
-                        closeParenCount--
-                        if (closeParenCount == 0) {
-                            startIndex = i
-                            break
+        if (closeParentheses < openParentheses) {
+            for (i in 0 until openParentheses - closeParentheses) {
+                cleanCalculation += ')'
+            }
+        }
+        // Trigger syntax error if missing '('
+        if (closeParentheses > openParentheses) {
+            syntax_error = true
+        }
+
+        return cleanCalculation
+    }
+
+    private fun addMultiply(calculation: String): String {
+        // Add "*" which lack
+        var cleanCalculation = calculation
+        var cleanCalculationLength = cleanCalculation.length
+        var i = 0
+        while (i < cleanCalculationLength) {
+
+            if (cleanCalculation[i] == '(') {
+                if (i != 0 && (cleanCalculation[i-1] in ".e0123456789)")) {
+                    cleanCalculation = cleanCalculation.addCharAtIndex('*', i)
+                    cleanCalculationLength ++
+                }
+            } else if (cleanCalculation[i] == ')') {
+                if (i+1 < cleanCalculation.length && (cleanCalculation[i+1] in "0123456789(.")) {
+                    cleanCalculation = cleanCalculation.addCharAtIndex('*', i+1)
+                    cleanCalculationLength ++
+                }
+            } else if (cleanCalculation[i] == '!') {
+                if (i+1 < cleanCalculation.length && (cleanCalculation[i+1] in "0123456789π(")) {
+                    cleanCalculation = cleanCalculation.addCharAtIndex('*', i+1)
+                    cleanCalculationLength ++
+                }
+            } else if (cleanCalculation[i] == '%') {
+                if (i+1 < cleanCalculation.length && (cleanCalculation[i+1] in "0123456789π(")) {
+                    cleanCalculation = cleanCalculation.addCharAtIndex('*', i+1)
+                    cleanCalculationLength ++
+                }
+            } else if (i-1 >= 0 && cleanCalculation[i] == '√') {
+                if (cleanCalculation[i-1] !in "+-/*(") {
+                    cleanCalculation = cleanCalculation.addCharAtIndex('*', i)
+                    cleanCalculationLength ++
+                }
+            } else if (cleanCalculation[i] == 'π') {
+                if (i+1 < cleanCalculation.length && (cleanCalculation[i+1] in "0123456789(")) {
+                    cleanCalculation = cleanCalculation.addCharAtIndex('*', i+1)
+                    cleanCalculationLength ++
+                }
+                if (i-1 >= 0 && (cleanCalculation[i-1] in ".%πe0123456789)")) {
+                    cleanCalculation = cleanCalculation.addCharAtIndex('*', i)
+                    cleanCalculationLength ++
+                }
+            } else if (cleanCalculation[i] == 'e') {
+                if (i+1 < cleanCalculation.length && (cleanCalculation[i+1] in "π0123456789(")) {
+                    cleanCalculation = cleanCalculation.addCharAtIndex('*', i+1)
+                    cleanCalculationLength ++
+                }
+                if (i-1 >= 0 && (cleanCalculation[i-1] in ".%πe0123456789)")) {
+                    cleanCalculation = cleanCalculation.addCharAtIndex('*', i)
+                    cleanCalculationLength ++
+                }
+            } else {
+                if (i+1<cleanCalculation.length) {
+                    val functionsList = listOf("arcco", "arcsi", "arcta", "cos", "sin", "tan", "ln", "log", "xp")
+                    for (function in functionsList) {
+                        val text = cleanCalculation.subSequence(0, i+1).toString()
+                        if (text.endsWith(function) && text.length != function.length) {
+                            if (text[text.length - function.length - 1] !in "+-/*(^") {
+                                cleanCalculation = cleanCalculation.subSequence(0, i - function.length + 1).toString() +
+                                        "*" + function + cleanCalculation.subSequence(i+1, cleanCalculation.length).toString()
+                                cleanCalculationLength ++
+                                break
+                            }
                         }
                     }
                 }
             }
-            
-            if (startIndex >= 0) {
-                val expression = result.substring(startIndex, factorialIndex)
-                result = result.substring(0, startIndex) + "factorial" + expression + result.substring(factorialIndex + 1)
-            }
+            i ++
         }
-        
-        return result
+        return cleanCalculation
     }
 
-    private fun addParenthesis(calculation: String): String {
-        var result = calculation
-        var openCount = 0
-        var closeCount = 0
-        
-        // Count existing parentheses
-        for (char in result) {
-            when (char) {
-                '(' -> openCount++
-                ')' -> closeCount++
-            }
-        }
-        
-        // Add missing closing parentheses
-        repeat(openCount - closeCount) {
-            result += ")"
-        }
-        
-        return result
-    }
+    private fun formatSquare(calculation: String): String {
+        // Replace √5 by sqrt(5)
+        var cleanCalculation = calculation
+        var parenthesisOpened = 0
 
-    fun isExpressionBalanced(expression: String): Boolean {
-        var openCount = 0
-        
-        for (char in expression) {
-            when (char) {
-                '(' -> openCount++
-                ')' -> {
-                    openCount--
-                    if (openCount < 0) return false
+        val cleanCalculationLength = cleanCalculation.length
+        var i = 0
+        while (i < cleanCalculationLength) {
+            if (i < cleanCalculation.length - 1) {
+                if (parenthesisOpened > 0) {
+                    if (cleanCalculation[i+1] in "(*-/+^") {
+                        cleanCalculation = cleanCalculation.addCharAtIndex(')', i+1)
+                        parenthesisOpened -= 1
+                    }
+                }
+                if (cleanCalculation[i] == '√' && cleanCalculation[i+1] != '(') {
+                    cleanCalculation = cleanCalculation.addCharAtIndex('(', i+1)
+                    parenthesisOpened += 1
                 }
             }
+            i++
         }
-        
-        return openCount == 0
+        cleanCalculation = cleanCalculation.replace("√", "sqrt")
+        return cleanCalculation
     }
 
-    fun formatExpression(expression: String): String {
-        // Format the expression for display
-        var result = expression
-        
-        // Replace function names with symbols
-        result = result.replace("sqrt", "√")
-        result = result.replace("pi", "π")
-        result = result.replace("*", "×")
-        result = result.replace("/", "÷")
-        
-        return result
+    private fun formatFactorial(calculation: String): String {
+        var i = calculation.length - 1
+
+        // Return error if the calculation is "!"
+        if (i == 0) {
+            syntax_error = true
+            return ""
+        } else {
+            var cleanCalculation = calculation
+
+            // Replace 5! by factorial(5)
+            while (i > 0) {
+                var parenthesisOpened = 0
+                // If the current character is "!"
+                if (cleanCalculation[i] == '!') {
+                    // If the previous character is a parenthesis
+                    if (cleanCalculation[i-1] == ')') {
+                        // Remove the "!"
+                        cleanCalculation = cleanCalculation.substring(0, i) + cleanCalculation.substring(i+1)
+
+                        var j = i
+                        while (j > 0) {
+                            if (cleanCalculation[j-1] in "*/+^" && parenthesisOpened == 0) {
+                                break
+                            }
+                            // If the previous character isn't a parenthesis
+                            if (cleanCalculation[j-1] != ')') {
+                                // Count open parentheses
+                                if (cleanCalculation[j] == ')') parenthesisOpened +=1
+                                else if (cleanCalculation[j-1] == '(') parenthesisOpened -= 1
+
+                                // If there are no open parentheses, add an F in front of the 1st parenthesis
+                                if (parenthesisOpened == 0) {
+                                    cleanCalculation = cleanCalculation.addCharAtIndex('F', j-1)
+                                    break
+                                }
+                            }
+
+                            // Decrement i on each run
+                            j--
+                        }
+                    } else {
+                        // If the previous character is not a parenthesis, add one
+                        cleanCalculation = cleanCalculation.substring(0, i) + ')' + cleanCalculation.substring(i + 1)
+
+                        // Store i in a temporary variable
+                        val tmp = i
+
+                        // Run until the previous character is a symbol or parenthesis
+                        while (i > 0 && cleanCalculation[i-1] !in "()*-/+^") {
+                            // Count open parentheses
+                            if (cleanCalculation[i] == ')') parenthesisOpened +=1
+                            else if (cleanCalculation[i] == '(') parenthesisOpened -= 1
+
+                            while (i > 1 && (cleanCalculation[i-1].isDigit() || cleanCalculation[i-1] == '.') && cleanCalculation[i-2] !in "()*-/+^") i--
+                            // If there is only one parenthesis open, close it and add an F in front of it
+                            if (parenthesisOpened == 1) {
+                                cleanCalculation = cleanCalculation.addCharAtIndex('(', i-1)
+                                cleanCalculation = cleanCalculation.addCharAtIndex('F', i-1)
+                            }
+
+                            // Decrement i on each run
+                            i--
+                        }
+
+                        // Restore i from the temporary variable
+                        i = tmp
+                    }
+                }
+                // Decrement i on each run
+                i--
+            }
+
+            // Replace "F" with "factorial"
+            cleanCalculation = cleanCalculation.replace("F", "factorial")
+
+            // Return the final result, so it can be calculated
+            return cleanCalculation
+        }
     }
+
+    private fun String.addCharAtIndex(char: Char, index: Int) =
+        StringBuilder(this).apply { insert(index, char) }.toString()
+
 }

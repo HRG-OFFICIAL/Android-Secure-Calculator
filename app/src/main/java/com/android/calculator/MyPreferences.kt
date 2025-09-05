@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate.*
 import androidx.preference.PreferenceManager
 import com.android.calculator.history.History
-import com.android.calculator.util.MyPreferenceMigrator
 import com.google.gson.Gson
 
 class MyPreferences(context: Context) {
@@ -42,8 +41,7 @@ class MyPreferences(context: Context) {
 
     var vibrationMode = preferences.getBoolean(KEY_VIBRATION_STATUS, true)
         set(value) = preferences.edit().putBoolean(KEY_VIBRATION_STATUS, value).apply()
-    private val currentScientificModeTypes= MyPreferenceMigrator.migrateScientificMode(preferences, KEY_SCIENTIFIC_MODE_ENABLED_BY_DEFAULT)
-    var scientificMode = preferences.getInt(KEY_SCIENTIFIC_MODE_ENABLED_BY_DEFAULT, currentScientificModeTypes)
+    var scientificMode = preferences.getInt(KEY_SCIENTIFIC_MODE_ENABLED_BY_DEFAULT, 0)
         set(value) = preferences.edit().putInt(KEY_SCIENTIFIC_MODE_ENABLED_BY_DEFAULT, value).apply()
     var useRadiansByDefault = preferences.getBoolean(KEY_RADIANS_INSTEAD_OF_DEGREES_BY_DEFAULT, false)
         set(value) = preferences.edit().putBoolean(KEY_RADIANS_INSTEAD_OF_DEGREES_BY_DEFAULT, value).apply()
@@ -51,43 +49,70 @@ class MyPreferences(context: Context) {
         set(value) = preferences.edit().putString(KEY_HISTORY, value).apply()
     var preventPhoneFromSleeping = preferences.getBoolean(KEY_PREVENT_PHONE_FROM_SLEEPING, false)
         set(value) = preferences.edit().putBoolean(KEY_PREVENT_PHONE_FROM_SLEEPING, value).apply()
-    var historySize = preferences.getInt(KEY_HISTORY_SIZE, 100)
-        set(value) = preferences.edit().putInt(KEY_HISTORY_SIZE, value).apply()
-    var numberPrecision = preferences.getInt(KEY_NUMBER_PRECISION, 10)
-        set(value) = preferences.edit().putInt(KEY_NUMBER_PRECISION, value).apply()
+    var historySize = preferences.getString(KEY_HISTORY_SIZE, "50")
+        set(value) = preferences.edit().putString(KEY_HISTORY_SIZE, value).apply()
+    var numberPrecision = preferences.getString(KEY_NUMBER_PRECISION, "10")
+        set(value) = preferences.edit().putString(KEY_NUMBER_PRECISION, value).apply()
     var writeNumberIntoScientificNotation = preferences.getBoolean(KEY_WRITE_NUMBER_INTO_SCIENTIC_NOTATION, false)
         set(value) = preferences.edit().putBoolean(KEY_WRITE_NUMBER_INTO_SCIENTIC_NOTATION, value).apply()
     var longClickToCopyValue = preferences.getBoolean(KEY_LONG_CLICK_TO_COPY_VALUE, true)
         set(value) = preferences.edit().putBoolean(KEY_LONG_CLICK_TO_COPY_VALUE, value).apply()
-    var addModuloButton = preferences.getBoolean(KEY_ADD_MODULO_BUTTON, false)
+    var addModuloButton = preferences.getBoolean(KEY_ADD_MODULO_BUTTON, true)
         set(value) = preferences.edit().putBoolean(KEY_ADD_MODULO_BUTTON, value).apply()
     var splitParenthesisButton = preferences.getBoolean(KEY_SPLIT_PARENTHESIS_BUTTON, false)
         set(value) = preferences.edit().putBoolean(KEY_SPLIT_PARENTHESIS_BUTTON, value).apply()
     var deleteHistoryOnSwipe = preferences.getBoolean(KEY_DELETE_HISTORY_ON_SWIPE, true)
         set(value) = preferences.edit().putBoolean(KEY_DELETE_HISTORY_ON_SWIPE, value).apply()
-    var autoSaveCalculationWithoutEqualButton = preferences.getBoolean(KEY_AUTO_SAVE_CALCULATION_WITHOUT_EQUAL_BUTTON, false)
+
+    var autoSaveCalculationWithoutEqualButton = preferences.getBoolean(KEY_AUTO_SAVE_CALCULATION_WITHOUT_EQUAL_BUTTON, true)
         set(value) = preferences.edit().putBoolean(KEY_AUTO_SAVE_CALCULATION_WITHOUT_EQUAL_BUTTON, value).apply()
+
     var numberingSystem = preferences.getInt(KEY_NUMBERING_SYSTEM, 0)
         set(value) = preferences.edit().putInt(KEY_NUMBERING_SYSTEM, value).apply()
-    var showOnLockScreen = preferences.getBoolean(KEY_SHOW_ON_LOCK_SCREEN, false)
+
+    var showOnLockScreen = preferences.getBoolean(KEY_SHOW_ON_LOCK_SCREEN, true)
         set(value) = preferences.edit().putBoolean(KEY_SHOW_ON_LOCK_SCREEN, value).apply()
 
+
     fun getHistory(): MutableList<History> {
-        return if (history == null) {
-            mutableListOf()
+        val gson = Gson()
+
+        val historyJson = preferences.getString(KEY_HISTORY, null)
+
+        return if (historyJson != null) {
+            try {
+                val list = gson.fromJson(historyJson, Array<History>::class.java).asList().toMutableList()
+                list
+            } catch (e: Exception) {
+                mutableListOf()
+            }
         } else {
-            val gson = Gson()
-            val historyArray = gson.fromJson(history, Array<History>::class.java)
-            historyArray.toMutableList()
+            mutableListOf()
         }
     }
 
-    fun saveHistory(history: MutableList<History>) {
+
+
+    fun saveHistory(history: List<History>){
         val gson = Gson()
-        this.history = gson.toJson(history)
+        val history2 = history.toMutableList()
+        while (historySize!!.toInt() > 0 && history2.size > historySize!!.toInt()) {
+            history2.removeAt(0)
+        }
+        this.history = gson.toJson(history2) // Convert to json
     }
 
-    fun clearHistory() {
-        this.history = null
+    fun getHistoryElementById(id: String): History? {
+        val history = getHistory()
+        return history.find { it.id == id }
+    }
+
+    fun updateHistoryElementById(id: String, history: History) {
+        val historyList = getHistory()
+        val index = historyList.indexOfFirst { it.id == id }
+        if (index != -1) {
+            historyList[index] = history
+            saveHistory(historyList)
+        }
     }
 }

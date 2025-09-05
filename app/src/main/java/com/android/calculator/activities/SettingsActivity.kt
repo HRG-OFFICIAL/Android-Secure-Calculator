@@ -16,6 +16,7 @@ import com.android.calculator.R
 import com.android.calculator.Themes
 import com.android.calculator.calculator.parser.NumberingSystem
 import com.android.calculator.util.ScientificMode
+import com.android.calculator.util.ScientificModeTypes
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class SettingsActivity : AppCompatActivity() {
@@ -56,13 +57,13 @@ class SettingsActivity : AppCompatActivity() {
 
             // Theme preference
             findPreference<Preference>("theme")?.setOnPreferenceClickListener {
-                Themes(context).openThemeSelector()
+                Themes.openDialogThemeSelector(context)
                 true
             }
 
             // Style preference
             findPreference<Preference>("style")?.setOnPreferenceClickListener {
-                Themes(context).openStyleSelector()
+                Themes.openDialogThemeSelector(context)
                 true
             }
 
@@ -100,16 +101,16 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         private fun showScientificModeDialog(context: Context, preferences: MyPreferences) {
-            val modes = ScientificMode.values()
+            val modes = ScientificModeTypes.entries.toTypedArray()
             val modeNames = modes.map { 
                 when (it) {
-                    ScientificMode.OFF -> getString(R.string.scientific_mode_off)
-                    ScientificMode.ON -> getString(R.string.scientific_mode_on)
-                    ScientificMode.ALWAYS -> getString(R.string.scientific_mode_always)
+                    ScientificModeTypes.OFF -> "Hide"
+                    ScientificModeTypes.NOT_ACTIVE -> "Show (Deactivated)"
+                    ScientificModeTypes.ACTIVE -> "Show (Activated)"
                 }
             }.toTypedArray()
 
-            val currentMode = ScientificMode.fromInt(preferences.scientificMode)
+            val currentMode = ScientificMode.getScientificModeType(preferences.scientificMode)
             val currentIndex = modes.indexOf(currentMode)
 
             MaterialAlertDialogBuilder(context)
@@ -126,12 +127,11 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         private fun showNumberingSystemDialog(context: Context, preferences: MyPreferences) {
-            val systems = NumberingSystem.values()
+            val systems = listOf(NumberingSystem.INTERNATIONAL, NumberingSystem.INDIAN)
             val systemNames = systems.map { 
                 when (it) {
-                    NumberingSystem.NONE -> getString(R.string.numbering_system_none)
-                    NumberingSystem.EUROPEAN -> getString(R.string.numbering_system_european)
-                    NumberingSystem.INDIAN -> getString(R.string.numbering_system_indian)
+                    NumberingSystem.INTERNATIONAL -> "International"
+                    NumberingSystem.INDIAN -> "Indian"
                 }
             }.toTypedArray()
 
@@ -157,7 +157,7 @@ class SettingsActivity : AppCompatActivity() {
             MaterialAlertDialogBuilder(context)
                 .setTitle(R.string.history_size)
                 .setSingleChoiceItems(sizes, currentIndex) { dialog, which ->
-                    preferences.historySize = sizes[which].toInt()
+                    preferences.historySize = sizes[which]
                     dialog.dismiss()
                 }
                 .setNegativeButton(R.string.cancel) { dialog, _ ->
@@ -174,7 +174,7 @@ class SettingsActivity : AppCompatActivity() {
             MaterialAlertDialogBuilder(context)
                 .setTitle(R.string.number_precision)
                 .setSingleChoiceItems(precisions, currentIndex) { dialog, which ->
-                    preferences.numberPrecision = precisions[which].toInt()
+                    preferences.numberPrecision = precisions[which]
                     dialog.dismiss()
                 }
                 .setNegativeButton(R.string.cancel) { dialog, _ ->

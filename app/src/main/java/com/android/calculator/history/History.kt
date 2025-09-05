@@ -1,6 +1,11 @@
 package com.android.calculator.history
 
+import com.google.gson.annotations.SerializedName
+import java.util.UUID
+
 data class History(
-    val calculation: String,
-    val result: String
+    @SerializedName("calculation") var calculation: String,
+    @SerializedName("result") var result: String,
+    @SerializedName("time") var time: String,
+    @SerializedName("id") var id: String = UUID.randomUUID().toString()
 )

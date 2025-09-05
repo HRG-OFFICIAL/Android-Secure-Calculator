@@ -92,10 +92,10 @@
         <item name="popup_background_color">@color/material_dynamic_secondary95</item>
         <item name="history_background_color">@color/material_dynamic_secondary95</item>
 
-        <item name="button_color">@color/material_dynamic_neutral95</item>
-        <item name="button_symbol_color">@color/material_dynamic_secondary90</item>
-        <item name="button_clear_color">@color/material_dynamic_tertiary90</item>
-        <item name="button_equals_color">@color/material_dynamic_primary90</item>
+        <item name="button_color">#e0e4ef</item>
+        <item name="button_symbol_color">#d26f2d</item>
+        <item name="button_clear_color">#c8d0e0</item>
+        <item name="button_equals_color">#d26f2d</item>
 
         <item name="text_category_color">@color/material_dynamic_primary70</item>
 
