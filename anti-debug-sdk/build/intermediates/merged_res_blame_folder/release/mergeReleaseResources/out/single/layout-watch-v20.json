@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "com.example.antidebug.anti-debug-sdk-release-31:/layout-watch-v20/abc_alert_dialog_title_material.xml",
+        "source": "com.example.antidebug.anti-debug-sdk-appcompat-1.6.1-6:/layout-watch-v20/abc_alert_dialog_title_material.xml"
+    },
+    {
+        "merged": "com.example.antidebug.anti-debug-sdk-release-31:/layout-watch-v20/abc_alert_dialog_button_bar_material.xml",
+        "source": "com.example.antidebug.anti-debug-sdk-appcompat-1.6.1-6:/layout-watch-v20/abc_alert_dialog_button_bar_material.xml"
+    }
+]

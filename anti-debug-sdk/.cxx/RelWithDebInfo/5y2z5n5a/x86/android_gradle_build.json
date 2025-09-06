@@ -1,0 +1,38 @@
+{
+  "buildFiles": [
+    "C:\\Users\\harsh\\AndroidStudioProjects\\Android_Calculator\\anti-debug-sdk\\src\\main\\cpp\\CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "C:\\Users\\harsh\\AppData\\Local\\Android\\Sdk\\cmake\\3.22.1\\bin\\ninja.exe",
+      "-C",
+      "C:\\Users\\harsh\\AndroidStudioProjects\\Android_Calculator\\anti-debug-sdk\\.cxx\\RelWithDebInfo\\5y2z5n5a\\x86",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "C:\\Users\\harsh\\AppData\\Local\\Android\\Sdk\\cmake\\3.22.1\\bin\\ninja.exe",
+    "-C",
+    "C:\\Users\\harsh\\AndroidStudioProjects\\Android_Calculator\\anti-debug-sdk\\.cxx\\RelWithDebInfo\\5y2z5n5a\\x86",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "anti-debug-native::@6890427a1f51a3e7e1df": {
+      "toolchain": "toolchain",
+      "abi": "x86",
+      "artifactName": "anti-debug-native",
+      "output": "C:\\Users\\harsh\\AndroidStudioProjects\\Android_Calculator\\anti-debug-sdk\\build\\intermediates\\cxx\\RelWithDebInfo\\5y2z5n5a\\obj\\x86\\libanti-debug-native.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "C:\\Users\\harsh\\AppData\\Local\\Android\\Sdk\\ndk\\27.0.12077973\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe",
+      "cppCompilerExecutable": "C:\\Users\\harsh\\AppData\\Local\\Android\\Sdk\\ndk\\27.0.12077973\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

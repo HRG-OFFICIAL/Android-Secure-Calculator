@@ -43,6 +43,7 @@ import com.android.calculator.calculator.parser.NumberingSystem
 import com.android.calculator.calculator.parser.NumberingSystem.Companion.toNumberingSystem
 import com.android.calculator.calculator.require_real_number
 import com.android.calculator.calculator.syntax_error
+import com.android.calculator.BuildConfig
 import com.android.calculator.databinding.ActivityMainBinding
 import com.android.calculator.history.History
 import com.android.calculator.history.HistoryAdapter
@@ -56,6 +57,9 @@ import java.math.RoundingMode
 import java.text.DecimalFormatSymbols
 import java.util.Locale
 import java.util.UUID
+// Anti-Debug SDK imports
+import com.example.antidebug.AntiDebug
+import com.example.antidebug.ThreatType
 
 var appLanguage: Locale = Locale.getDefault()
 var currentTheme: Int = 0
@@ -89,6 +93,40 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // ===== ANTI-DEBUG PROTECTION START =====
+        try {
+            // Initialize AntiDebug SDK
+            AntiDebug.init(this, enableContinuousMonitoring = true)
+            
+            // Perform comprehensive security check
+            val securityReport = AntiDebug.performSecurityCheck()
+            
+            Log.d("AntiDebug", "Security Report - Debugger: ${securityReport.debuggerDetected}, Emulator: ${securityReport.emulatorDetected}, Root: ${securityReport.rootDetected}, Tampered: ${securityReport.tamperingDetected}")
+            
+            // Exit app if any critical threat is detected
+            if (securityReport.debuggerDetected || securityReport.emulatorDetected || 
+                securityReport.rootDetected || securityReport.tamperingDetected) {
+                Log.w("AntiDebug", "Security threat detected! Terminating application.")
+                
+                // Handle different threat types appropriately
+                when {
+                    securityReport.debuggerDetected -> AntiDebug.handleThreat(ThreatType.DEBUGGER)
+                    securityReport.emulatorDetected -> AntiDebug.handleThreat(ThreatType.EMULATOR)
+                    securityReport.rootDetected -> AntiDebug.handleThreat(ThreatType.ROOT)
+                    securityReport.tamperingDetected -> AntiDebug.handleThreat(ThreatType.TAMPERING)
+                }
+                
+                finishAffinity()
+                return
+            }
+        } catch (e: Exception) {
+            Log.e("AntiDebug", "Anti-debug initialization failed", e)
+            // Fail securely - exit if protection can't be initialized
+            finishAffinity()
+            return
+        }
+        // ===== ANTI-DEBUG PROTECTION END =====
 
         //keeping screen on
         window.addFlags(
@@ -201,6 +239,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         setupUI()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Clean calculator app resources if needed
     }
 
     private fun setupUI() {

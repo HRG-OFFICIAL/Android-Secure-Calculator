@@ -54,6 +54,8 @@ A modern, feature-rich calculator application for Android devices with a clean i
 - Android Studio Arctic Fox (2020.3.1) or later
 - JDK 8 or higher
 - Android SDK with API 34
+- PowerShell 5.1+ (for testing APK builder script)
+- Windows OS (for PowerShell script compatibility)
 
 ### Building the Project
 
@@ -75,6 +77,7 @@ A modern, feature-rich calculator application for Android devices with a clean i
 
 ## 🧪 Testing
 
+### Automated Tests
 Run the test suite:
 ```bash
 # Unit tests
@@ -86,6 +89,77 @@ Run the test suite:
 # All tests
 ./gradlew test
 ```
+
+### Security Testing APK Builder
+
+The project includes a PowerShell script that can generate testing APKs with various security configurations to help test anti-debugging protections. This is particularly useful for testing the app's behavior in secured environments.
+
+#### Features
+
+- **Selective Bypass Options**: Disable specific security checks while keeping others active
+- **Force Detection Mode**: Forces all security checks to return `true` but allows the app to continue running
+- **Build Type Selection**: Generate debug or release APKs
+- **Source Protection**: Automatically restores source code after building
+- **Install Option**: Automatically install generated APKs on connected devices
+
+#### Usage Examples
+
+```powershell
+# Bypass emulator detection only (debug build)
+.\build-test-apk.ps1 -BypassEmulator
+
+# Bypass debugger detection only (release build)
+.\build-test-apk.ps1 -BypassDebugger -BuildType release
+
+# Bypass all security checks
+.\build-test-apk.ps1 -BypassAll
+
+# Force all detections to return true but continue running
+.\build-test-apk.ps1 -ForceDetectAll
+
+# Auto-install after building
+.\build-test-apk.ps1 -BypassEmulator -InstallAfterBuild
+
+# Skip confirmation prompt
+.\build-test-apk.ps1 -BypassEmulator -Force
+```
+
+#### Generated APK Types
+
+| APK Type | Purpose | Naming Convention |
+|----------|---------|-------------------|
+| Bypass Specific | Disable one or more security checks | `calculator-testing-noemu-nodbg-[build]-[timestamp].apk` |
+| Bypass All | Disable all security checks | `calculator-testing-bypass-all-[build]-[timestamp].apk` |
+| Force Detection | All checks return true but app continues | `calculator-testing-force-detect-all-[build]-[timestamp].apk` |
+
+#### Script Parameters
+
+| Parameter | Type | Description | Default |
+|-----------|------|-------------|----------|
+| `-BuildType` | String | Build type: `debug` or `release` | `debug` |
+| `-BypassEmulator` | Switch | Disable emulator termination | `false` |
+| `-BypassDebugger` | Switch | Disable debugger termination | `false` |
+| `-BypassRoot` | Switch | Disable root termination | `false` |
+| `-BypassTamper` | Switch | Disable tamper termination | `false` |
+| `-BypassAll` | Switch | Disable all security checks | `false` |
+| `-ForceDetectAll` | Switch | Force all detections true, no termination | `false` |
+| `-OutputDir` | String | APK output directory | `builds` |
+| `-Force` | Switch | Skip confirmation prompts | `false` |
+| `-InstallAfterBuild` | Switch | Auto-install APK after building | `false` |
+
+#### Security Testing Workflow
+
+1. **Development Phase**: Use bypass modes to test app functionality
+2. **Security Validation**: Use force detection mode to verify logging and UI responses
+3. **Production Testing**: Test with full security enabled on target devices
+4. **Threat Simulation**: Use specific bypass combinations to test edge cases
+
+#### Important Notes
+
+- ⚠️ **Source Code Safety**: The script automatically backs up and restores original source code
+- 🔒 **Testing Only**: Generated APKs are for testing purposes and should not be distributed
+- 📱 **Device Compatibility**: Release APKs are smaller and better for performance testing
+- 🔍 **Debugging**: Debug APKs include additional logging and debugging symbols
 
 ## 🎨 Customization
 
@@ -112,6 +186,28 @@ The calculator supports extensive theming through:
 - Smooth animations and transitions
 - Accessibility support
 
+## 🛑 Security Features
+
+This calculator app implements comprehensive anti-debugging and tamper detection measures:
+
+### Anti-Debug Protections
+- **Debugger Detection**: Detects various debugging tools and environments
+- **Emulator Detection**: Identifies if the app is running in an emulated environment
+- **Root Detection**: Checks for rooted devices and superuser access
+- **Tampering Detection**: Validates app integrity and prevents modification
+
+### Security Implementation
+- **Native Library Integration**: Utilizes native code for enhanced security checks
+- **Continuous Monitoring**: Real-time threat detection during app execution
+- **Graceful Termination**: Secure app shutdown when threats are detected
+- **Comprehensive Logging**: Detailed security event logging for analysis
+
+### Testing and Development
+The included testing framework allows developers to:
+- Test individual security components
+- Simulate threat environments for validation
+- Verify security behavior without compromising production builds
+
 ## 🔒 Privacy
 
 This calculator app:
@@ -133,17 +229,22 @@ Contributions are welcome! Please feel free to submit pull requests or open issu
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🏗️ Project Structure
+## 🏢 Project Structure
 
 ```
-app/
-├── src/main/
-│   ├── java/com/android/calculator/
-│   │   ├── activities/          # UI activities
-│   │   ├── calculator/         # Core calculation logic
-│   │   ├── history/            # History management
-│   │   ├── services/           # Background services
-│   │   └── util/              # Utility classes
-│   └── res/                   # Resources (layouts, strings, themes)
-└── src/test/                  # Unit and integration tests
+├── app/
+│   ├── src/main/
+│   │   ├── cpp/               # Native library (security)
+│   │   ├── java/com/android/calculator/
+│   │   │   ├── activities/    # UI activities
+│   │   │   ├── calculator/   # Core calculation logic
+│   │   │   ├── history/      # History management
+│   │   │   ├── services/     # Background services
+│   │   │   └── util/        # Utility classes
+│   │   └── res/           # Resources (layouts, strings, themes)
+│   └── src/test/          # Unit and integration tests
+├── antidebug/             # Anti-debug library module
+├── build-test-apk.ps1     # Testing APK builder script
+├── builds/                # Generated testing APKs
+└── gradle/                # Gradle wrapper and configuration
 ```

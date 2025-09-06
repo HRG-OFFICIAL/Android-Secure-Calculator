@@ -1,0 +1,1 @@
+C:\Users\harsh\AndroidStudioProjects\Android_Calculator\anti-debug-sdk\build\intermediates\cxx\Debug\575vu216\obj\arm64-v8a

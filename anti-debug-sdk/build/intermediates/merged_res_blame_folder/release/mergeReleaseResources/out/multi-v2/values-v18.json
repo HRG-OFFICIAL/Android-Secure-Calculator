@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.example.antidebug.anti-debug-sdk-release-31:/values-v18/values-v18.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\harsh\\.gradle\\caches\\8.14\\transforms\\3ad1e7285d4f922976ac248a11aac881\\transformed\\appcompat-1.6.1\\res\\values-v18\\values-v18.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "48",
+                        "endOffsets": "99"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "com.example.antidebug.anti-debug-sdk-mergeReleaseResources-29:/values-v18/values-v18.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\harsh\\.gradle\\caches\\8.14\\transforms\\3ad1e7285d4f922976ac248a11aac881\\transformed\\appcompat-1.6.1\\res\\values-v18\\values-v18.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "48",
+                        "endOffsets": "99"
+                    }
+                }
+            ]
+        }
+    ]
+}

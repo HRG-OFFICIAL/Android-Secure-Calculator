@@ -1,0 +1,6 @@
+# ninja log v5
+1	2446	7788496424308155	CMakeFiles/anti-debug-native.dir/native-lib.cpp.o	393882f4a11f9aff
+2609	2821	7788496428178721	C:/Users/harsh/AndroidStudioProjects/Android_Calculator/anti-debug-sdk/build/intermediates/cxx/RelWithDebInfo/5y2z5n5a/obj/x86/libanti-debug-native.so	683c0caa0f984f0c
+1	19	0	clean	530ca94c722213fa
+12	1783	7788534891334516	CMakeFiles/anti-debug-native.dir/native-lib.cpp.o	393882f4a11f9aff
+1784	1953	7788534893124671	C:/Users/harsh/AndroidStudioProjects/Android_Calculator/anti-debug-sdk/build/intermediates/cxx/RelWithDebInfo/5y2z5n5a/obj/x86/libanti-debug-native.so	683c0caa0f984f0c

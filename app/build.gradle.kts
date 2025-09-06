@@ -21,6 +21,7 @@ android {
 
     buildTypes {
         release {
+            // R8/ProGuard enabled for protected builds with aggressive obfuscation
             isMinifyEnabled = true
             isShrinkResources = true
             signingConfig = signingConfigs.getByName("debug")
@@ -32,6 +33,12 @@ android {
         debug {
             applicationIdSuffix = ".debug"
             isDebuggable = true
+            // R8/ProGuard enabled for protected debug builds too
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
@@ -44,17 +51,26 @@ android {
         buildConfig = true
     }
 
+    // 16KB page size compatibility for Android 15+ devices
+    packaging {
+        jniLibs {
+            useLegacyPackaging = false
+        }
+    }
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "21"
     }
 }
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    // AntiDebugSDK dependency added only during protected builds
+    implementation(project(":anti-debug-sdk"))
     implementation(libs.androidx.runtime)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

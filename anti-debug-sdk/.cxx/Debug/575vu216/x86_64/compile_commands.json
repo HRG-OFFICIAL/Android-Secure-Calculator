@@ -1,0 +1,7 @@
+[
+{
+  "directory": "C:/Users/harsh/AndroidStudioProjects/Android_Calculator/anti-debug-sdk/.cxx/Debug/575vu216/x86_64",
+  "command": "C:\\Users\\harsh\\AppData\\Local\\Android\\Sdk\\ndk\\27.0.12077973\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=x86_64-none-linux-android21 --sysroot=C:/Users/harsh/AppData/Local/Android/Sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Danti_debug_native_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++17 -fno-limit-debug-info  -fPIC -Wall -Wextra -Werror -Wno-unused-parameter -Wno-unused-variable -O2 -fstack-protector-strong -fPIC -D_FORTIFY_SOURCE=2 -o CMakeFiles\\anti-debug-native.dir\\native-lib.cpp.o -c C:\\Users\\harsh\\AndroidStudioProjects\\Android_Calculator\\anti-debug-sdk\\src\\main\\cpp\\native-lib.cpp",
+  "file": "C:\\Users\\harsh\\AndroidStudioProjects\\Android_Calculator\\anti-debug-sdk\\src\\main\\cpp\\native-lib.cpp"
+}
+]
