@@ -3,19 +3,17 @@ package com.android.calculator
 import com.android.calculator.calculator.parser.NumberFormatter
 import com.android.calculator.calculator.parser.NumberingSystem
 import org.junit.Assert.assertEquals
-import org.junit.BeforeClass
 import org.junit.Test
-import java.math.BigDecimal
 
 class NumberFormatterTest {
 
     @Test
     fun `given a decimal number when formatting then format with grouping separator`() {
         // Given
-        val number = BigDecimal("12345")
+        val number = "12345"
 
         // When
-        val result = formatter.format(number, 10, false, NumberingSystem.NONE)
+        val result = NumberFormatter.format(number, ".", ",", NumberingSystem.INTERNATIONAL)
 
         // Then
         val expected = "12,345"
@@ -25,10 +23,10 @@ class NumberFormatterTest {
     @Test
     fun `given a floating-point number when formatting then format with grouping separator and decimal separator`() {
         // Given
-        val number = BigDecimal("1234.567")
+        val number = "1234.567"
 
         // When
-        val result = formatter.format(number, 10, false, NumberingSystem.NONE)
+        val result = NumberFormatter.format(number, ".", ",", NumberingSystem.INTERNATIONAL)
 
         // Then
         val expected = "1,234.567"
@@ -38,10 +36,10 @@ class NumberFormatterTest {
     @Test
     fun `given a large number when formatting then format with grouping separator`() {
         // Given
-        val number = BigDecimal("9223372036854775807")
+        val number = "9223372036854775807"
 
         // When
-        val result = formatter.format(number, 10, false, NumberingSystem.NONE)
+        val result = NumberFormatter.format(number, ".", ",", NumberingSystem.INTERNATIONAL)
 
         // Then
         val expected = "9,223,372,036,854,775,807"
@@ -51,10 +49,10 @@ class NumberFormatterTest {
     @Test
     fun `given a negative integer number when formatting then format with grouping separator and negative sign`() {
         // Given
-        val number = BigDecimal("-12345")
+        val number = "-12345"
 
         // When
-        val result = formatter.format(number, 10, false, NumberingSystem.NONE)
+        val result = NumberFormatter.format(number, ".", ",", NumberingSystem.INTERNATIONAL)
 
         // Then
         val expected = "-12,345"
@@ -64,10 +62,10 @@ class NumberFormatterTest {
     @Test
     fun `given a negative floating-point number when formatting then format with grouping separator, decimal separator, and negative sign`() {
         // Given
-        val number = BigDecimal("-1234.567")
+        val number = "-1234.567"
 
         // When
-        val result = formatter.format(number, 10, false, NumberingSystem.NONE)
+        val result = NumberFormatter.format(number, ".", ",", NumberingSystem.INTERNATIONAL)
 
         // Then
         val expected = "-1,234.567"
@@ -77,10 +75,10 @@ class NumberFormatterTest {
     @Test
     fun `given a zero input when formatting then return zero`() {
         // Given
-        val number = BigDecimal("0")
+        val number = "0"
 
         // When
-        val result = formatter.format(number, 10, false, NumberingSystem.NONE)
+        val result = NumberFormatter.format(number, ".", ",", NumberingSystem.INTERNATIONAL)
 
         // Then
         val expected = "0"
@@ -90,36 +88,36 @@ class NumberFormatterTest {
     @Test
     fun `given a zero input with decimal when formatting then return zero with decimal`() {
         // Given
-        val number = BigDecimal("0.0")
+        val number = "0.0"
 
         // When
-        val result = formatter.format(number, 10, false, NumberingSystem.NONE)
+        val result = NumberFormatter.format(number, ".", ",", NumberingSystem.INTERNATIONAL)
 
         // Then
-        val expected = "0"
+        val expected = "0.0"
         assertEquals(expected, result)
     }
 
     @Test
     fun `given a floating point number then formatting in Indian Numbering System`() {
         // Given
-        val number = BigDecimal("1234567.890")
+        val number = "1234567.890"
 
         // When
-        val result = formatter.format(number, 10, false, NumberingSystem.INDIAN)
+        val result = NumberFormatter.format(number, ".", ",", NumberingSystem.INDIAN)
 
         // Then
-        val expected = "12,34,567.89"
+        val expected = "12,34,567.890"
         assertEquals(expected, result)
     }
 
     @Test
     fun `given a large integer number then formatting in Indian Numbering System`() {
         // Given
-        val number = BigDecimal("987654321")
+        val number = "987654321"
 
         // When
-        val result = formatter.format(number, 10, false, NumberingSystem.INDIAN)
+        val result = NumberFormatter.format(number, ".", ",", NumberingSystem.INDIAN)
 
         // Then
         val expected = "98,76,54,321"
@@ -129,10 +127,10 @@ class NumberFormatterTest {
     @Test
     fun `given a number with two-digit integer part then no formatting is applied`() {
         // Given
-        val number = BigDecimal("12.34")
+        val number = "12.34"
 
         // When
-        val result = formatter.format(number, 10, false, NumberingSystem.INDIAN)
+        val result = NumberFormatter.format(number, ".", ",", NumberingSystem.INDIAN)
 
         // Then
         val expected = "12.34"
@@ -142,10 +140,10 @@ class NumberFormatterTest {
     @Test
     fun `given a number with exactly three digits then no comma is added`() {
         // Given
-        val number = BigDecimal("999")
+        val number = "999"
 
         // When
-        val result = formatter.format(number, 10, false, NumberingSystem.INDIAN)
+        val result = NumberFormatter.format(number, ".", ",", NumberingSystem.INDIAN)
 
         // Then
         val expected = "999"
@@ -155,10 +153,10 @@ class NumberFormatterTest {
     @Test
     fun `given a number with four digits then a comma is added correctly`() {
         // Given
-        val number = BigDecimal("1234")
+        val number = "1234"
 
         // When
-        val result = formatter.format(number, 10, false, NumberingSystem.INDIAN)
+        val result = NumberFormatter.format(number, ".", ",", NumberingSystem.INDIAN)
 
         // Then
         val expected = "1,234"
@@ -168,10 +166,10 @@ class NumberFormatterTest {
     @Test
     fun `given a number with five digits then a comma is added correctly`() {
         // Given
-        val number = BigDecimal("12345")
+        val number = "12345"
 
         // When
-        val result = formatter.format(number, 10, false, NumberingSystem.INDIAN)
+        val result = NumberFormatter.format(number, ".", ",", NumberingSystem.INDIAN)
 
         // Then
         val expected = "12,345"
@@ -181,10 +179,10 @@ class NumberFormatterTest {
     @Test
     fun `given a number with six digits then commas are added correctly`() {
         // Given
-        val number = BigDecimal("123456")
+        val number = "123456"
 
         // When
-        val result = formatter.format(number, 10, false, NumberingSystem.INDIAN)
+        val result = NumberFormatter.format(number, ".", ",", NumberingSystem.INDIAN)
 
         // Then
         val expected = "1,23,456"
@@ -194,10 +192,10 @@ class NumberFormatterTest {
     @Test
     fun `given a number with decimals then only integer part is formatted`() {
         // Given
-        val number = BigDecimal("9020555.555")
+        val number = "9020555.555"
 
         // When
-        val result = formatter.format(number, 10, false, NumberingSystem.INDIAN)
+        val result = NumberFormatter.format(number, ".", ",", NumberingSystem.INDIAN)
 
         // Then
         val expected = "90,20,555.555"
@@ -207,10 +205,10 @@ class NumberFormatterTest {
     @Test
     fun `given a small number then no formatting is applied`() {
         // Given
-        val number = BigDecimal("5")
+        val number = "5"
 
         // When
-        val result = formatter.format(number, 10, false, NumberingSystem.INDIAN)
+        val result = NumberFormatter.format(number, ".", ",", NumberingSystem.INDIAN)
 
         // Then
         val expected = "5"
@@ -220,36 +218,13 @@ class NumberFormatterTest {
     @Test
     fun `given a negative number then formatting is applied correctly`() {
         // Given
-        val number = BigDecimal("-1234567")
+        val number = "-1234567"
 
         // When
-        val result = formatter.format(number, 10, false, NumberingSystem.INDIAN)
+        val result = NumberFormatter.format(number, ".", ",", NumberingSystem.INDIAN)
 
         // Then
         val expected = "-12,34,567"
         assertEquals(expected, result)
-    }
-
-    @Test
-    fun `given scientific notation requirement then format in scientific notation`() {
-        // Given
-        val number = BigDecimal("1234567890")
-
-        // When
-        val result = formatter.format(number, 5, true, NumberingSystem.NONE)
-
-        // Then
-        val expected = "1.2346E9"
-        assertEquals(expected, result)
-    }
-
-    companion object {
-        lateinit var formatter: NumberFormatter
-
-        @JvmStatic
-        @BeforeClass
-        fun setup(): Unit {
-            formatter = NumberFormatter()
-        }
     }
 }
