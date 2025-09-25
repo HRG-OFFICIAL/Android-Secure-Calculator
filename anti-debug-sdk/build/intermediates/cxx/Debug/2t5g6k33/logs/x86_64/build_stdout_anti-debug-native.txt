@@ -1,2 +1,0 @@
-ninja: Entering directory `C:\Users\harsh\AndroidStudioProjects\Android_Calculator\anti-debug-sdk\.cxx\Debug\2t5g6k33\x86_64'
-ninja: no work to do.

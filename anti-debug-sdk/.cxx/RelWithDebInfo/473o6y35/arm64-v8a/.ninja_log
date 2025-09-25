@@ -47,3 +47,6 @@
 1	18	0	clean	530ca94c722213fa
 11	2792	7790741784780308	CMakeFiles/anti-debug-native.dir/native-lib.cpp.o	ef6cc6ee9f727ed8
 2794	3025	7790741787168661	C:/Users/harsh/AndroidStudioProjects/Android_Calculator/anti-debug-sdk/build/intermediates/cxx/RelWithDebInfo/473o6y35/obj/arm64-v8a/libanti-debug-native.so	fcd0b9824ad76ad1
+0	10	0	clean	530ca94c722213fa
+6	2335	7805297625243257	CMakeFiles/anti-debug-native.dir/native-lib.cpp.o	ef6cc6ee9f727ed8
+2336	2636	7805297628301721	C:/Users/harsh/AndroidStudioProjects/Android_Calculator/anti-debug-sdk/build/intermediates/cxx/RelWithDebInfo/473o6y35/obj/arm64-v8a/libanti-debug-native.so	fcd0b9824ad76ad1

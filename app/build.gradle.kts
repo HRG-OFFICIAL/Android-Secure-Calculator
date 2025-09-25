@@ -55,10 +55,10 @@ android {
         create("aggressive") {
             dimension = "obfuscation"
             applicationIdSuffix = ".aggressive"
-            // Uses OPTIMIZED SHRINKING - maximize R8 shrinking while maintaining security
+            // Uses COMPREHENSIVE OBFUSCATION - maximum obfuscation with all techniques
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-production.pro"
+                "proguard-comprehensive.pro"
             )
         }
     }
