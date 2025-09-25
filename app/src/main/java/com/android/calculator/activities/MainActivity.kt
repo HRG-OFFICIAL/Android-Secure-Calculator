@@ -60,6 +60,9 @@ import java.util.UUID
 // Anti-Debug SDK imports
 import com.example.antidebug.AntiDebug
 import com.example.antidebug.ThreatType
+// Selective Testing imports
+import com.android.calculator.util.SelectiveTestingConfig
+import com.android.calculator.util.TestingHelper
 
 var appLanguage: Locale = Locale.getDefault()
 var currentTheme: Int = 0
@@ -94,31 +97,57 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // ===== ANTI-DEBUG PROTECTION START =====
+        // ===== SELECTIVE ANTI-DEBUG PROTECTION START =====
         try {
             // Initialize AntiDebug SDK
             AntiDebug.init(this, enableContinuousMonitoring = true)
             
-            // Perform comprehensive security check
-            val securityReport = AntiDebug.performSecurityCheck()
+            // Get current testing configuration
+            val testingConfig = TestingHelper.getCurrentConfig()
+            TestingHelper.logCurrentConfig()
             
-            Log.d("AntiDebug", "Security Report - Debugger: ${securityReport.debuggerDetected}, Emulator: ${securityReport.emulatorDetected}, Root: ${securityReport.rootDetected}, Tampered: ${securityReport.tamperingDetected}")
+            // Perform selective security checks based on testing configuration
+            val securityReport = performSelectiveSecurityCheck(testingConfig)
             
-            // Exit app if any critical threat is detected
-            if (securityReport.debuggerDetected || securityReport.emulatorDetected || 
-                securityReport.rootDetected || securityReport.tamperingDetected) {
-                Log.w("AntiDebug", "Security threat detected! Terminating application.")
+            // Log detailed security report
+            Log.d("AntiDebug", "=== SELECTIVE SECURITY REPORT ===")
+            Log.d("AntiDebug", "Testing Scenario: ${testingConfig.scenarioName}")
+            Log.d("AntiDebug", "Debugger: ${securityReport.debuggerDetected} (${if (testingConfig.enableDebugger) "ENABLED" else "DISABLED"})")
+            Log.d("AntiDebug", "Emulator: ${securityReport.emulatorDetected} (${if (testingConfig.enableEmulator) "ENABLED" else "DISABLED"})")
+            Log.d("AntiDebug", "Root: ${securityReport.rootDetected} (${if (testingConfig.enableRoot) "ENABLED" else "DISABLED"})")
+            Log.d("AntiDebug", "Tampered: ${securityReport.tamperingDetected} (${if (testingConfig.enableTampering) "ENABLED" else "DISABLED"})")
+            Log.d("AntiDebug", "=================================")
+            
+            // Check for threats only in enabled features
+            val hasEnabledThreats = checkEnabledThreats(securityReport, testingConfig)
+            
+            if (hasEnabledThreats) {
+                Log.w("AntiDebug", "THREAT DETECTED in enabled features! Terminating application.")
                 
-                // Handle different threat types appropriately
+                // Handle different threat types appropriately (only enabled ones)
                 when {
-                    securityReport.debuggerDetected -> AntiDebug.handleThreat(ThreatType.DEBUGGER)
-                    securityReport.emulatorDetected -> AntiDebug.handleThreat(ThreatType.EMULATOR)
-                    securityReport.rootDetected -> AntiDebug.handleThreat(ThreatType.ROOT)
-                    securityReport.tamperingDetected -> AntiDebug.handleThreat(ThreatType.TAMPERING)
+                    testingConfig.enableDebugger && securityReport.debuggerDetected -> {
+                        Log.w("AntiDebug", "DEBUGGER DETECTED - Terminating for debugger detection")
+                        AntiDebug.handleThreat(ThreatType.DEBUGGER)
+                    }
+                    testingConfig.enableEmulator && securityReport.emulatorDetected -> {
+                        Log.w("AntiDebug", "EMULATOR DETECTED - Terminating for emulator detection")
+                        AntiDebug.handleThreat(ThreatType.EMULATOR)
+                    }
+                    testingConfig.enableRoot && securityReport.rootDetected -> {
+                        Log.w("AntiDebug", "ROOT DETECTED - Terminating for root detection")
+                        AntiDebug.handleThreat(ThreatType.ROOT)
+                    }
+                    testingConfig.enableTampering && securityReport.tamperingDetected -> {
+                        Log.w("AntiDebug", "TAMPERING DETECTED - Terminating for tampering detection")
+                        AntiDebug.handleThreat(ThreatType.TAMPERING)
+                    }
                 }
                 
                 finishAffinity()
                 return
+            } else {
+                Log.i("AntiDebug", "All enabled security checks passed - App continuing normally")
             }
         } catch (e: Exception) {
             Log.e("AntiDebug", "Anti-debug initialization failed", e)
@@ -126,7 +155,7 @@ class MainActivity : AppCompatActivity() {
             finishAffinity()
             return
         }
-        // ===== ANTI-DEBUG PROTECTION END =====
+        // ===== SELECTIVE ANTI-DEBUG PROTECTION END =====
 
         //keeping screen on
         window.addFlags(
@@ -971,6 +1000,58 @@ class MainActivity : AppCompatActivity() {
             binding.noHistoryText?.visibility = View.GONE
             binding.historyRecylcleView.visibility = View.VISIBLE
         }
+    }
+
+    // ===== SELECTIVE TESTING HELPER METHODS =====
+    
+    /**
+     * Perform selective security checks based on testing configuration
+     */
+    private fun performSelectiveSecurityCheck(config: SelectiveTestingConfig.TestingConfig): com.example.antidebug.SecurityReport {
+        val fullReport = AntiDebug.performSecurityCheck()
+        
+        // Return modified report based on testing configuration
+        return com.example.antidebug.SecurityReport(
+            debuggerDetected = if (config.enableDebugger) fullReport.debuggerDetected else false,
+            rootDetected = if (config.enableRoot) fullReport.rootDetected else false,
+            emulatorDetected = if (config.enableEmulator) fullReport.emulatorDetected else false,
+            tamperingDetected = if (config.enableTampering) fullReport.tamperingDetected else false,
+            hooksDetected = fullReport.hooksDetected, // Always check hooks
+            suspiciousBehavior = fullReport.suspiciousBehavior, // Always check behavior
+            timestamp = fullReport.timestamp
+        )
+    }
+    
+    /**
+     * Check if any enabled features detected threats
+     */
+    private fun checkEnabledThreats(report: com.example.antidebug.SecurityReport, config: SelectiveTestingConfig.TestingConfig): Boolean {
+        return (config.enableDebugger && report.debuggerDetected) ||
+               (config.enableEmulator && report.emulatorDetected) ||
+               (config.enableRoot && report.rootDetected) ||
+               (config.enableTampering && report.tamperingDetected)
+    }
+    
+    /**
+     * Switch to different testing scenario (for runtime testing)
+     */
+    fun switchTestingScenario(scenario: String) {
+        val newConfig = when (scenario.lowercase()) {
+            "debugger" -> SelectiveTestingConfig.TestScenarios.debuggerOnly()
+            "emulator" -> SelectiveTestingConfig.TestScenarios.emulatorOnly()
+            "root" -> SelectiveTestingConfig.TestScenarios.rootOnly()
+            "tampering" -> SelectiveTestingConfig.TestScenarios.tamperingOnly()
+            "all" -> SelectiveTestingConfig.TestScenarios.allFeatures()
+            "none" -> SelectiveTestingConfig.TestScenarios.noFeatures()
+            else -> {
+                Log.w("Testing", "Unknown scenario: $scenario, using debugger only")
+                SelectiveTestingConfig.TestScenarios.debuggerOnly()
+            }
+        }
+        
+        Log.i("Testing", "Switched to scenario: ${newConfig.scenarioName}")
+        // Note: This would require restarting the activity to take effect
+        // For now, just log the change
     }
 
     private fun manageScientificMode(scientificModeTypes: ScientificModeTypes) {

@@ -10,13 +10,17 @@ android {
 
     defaultConfig {
         applicationId = "com.android.calculator"
-        resourceConfigurations += listOf("ar", "az", "be", "bn", "bs", "cs", "de", "el", "es", "fa", "fr", "hi", "hr", "hu", "in", "it", "ja", "kn", "mk", "ml", "nb-rNO", "nl", "or", "pl", "pt-rBR", "ro", "ru", "sat", "sr", "sv", "tr", "uk", "vi", "zh-rCN", "zh-rHK", "zh-rTW")
         minSdk = 21
         targetSdk = 34
         versionCode = 53
         versionName = "3.2.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+    
+    // Modern resource configuration
+    androidResources {
+        localeFilters += listOf("ar", "az", "be", "bn", "bs", "cs", "de", "el", "es", "fa", "fr", "hi", "hr", "hu", "in", "it", "ja", "kn", "mk", "ml", "nb-rNO", "nl", "or", "pl", "pt-rBR", "ro", "ru", "sat", "sr", "sv", "tr", "uk", "vi", "zh-rCN", "zh-rHK", "zh-rTW")
     }
 
     buildTypes {
@@ -33,11 +37,28 @@ android {
         debug {
             applicationIdSuffix = ".debug"
             isDebuggable = true
-            // R8/ProGuard enabled for protected debug builds too
-            isMinifyEnabled = true
+            // For Android Studio compatibility: disable minification in debug
+            // The product flavors will handle obfuscation when needed
+            isMinifyEnabled = false
+            isShrinkResources = false
+        }
+    }
+    
+    // Custom build variants for different obfuscation levels
+    flavorDimensions += "obfuscation"
+    productFlavors {
+        create("standard") {
+            dimension = "obfuscation"
+            isDefault = true  // Make standard the default flavor for Android Studio
+            // Uses standard proguard-rules.pro
+        }
+        create("aggressive") {
+            dimension = "obfuscation"
+            applicationIdSuffix = ".aggressive"
+            // Uses OPTIMIZED SHRINKING - maximize R8 shrinking while maintaining security
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-production.pro"
             )
         }
     }

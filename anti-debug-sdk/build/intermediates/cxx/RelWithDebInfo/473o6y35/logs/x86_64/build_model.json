@@ -30,9 +30,6 @@
     "variantName": "release",
     "isDebuggableEnabled": false,
     "validAbiList": [
-      "armeabi-v7a",
-      "arm64-v8a",
-      "x86",
       "x86_64"
     ],
     "buildTargetSet": [],
@@ -159,6 +156,7 @@
         "rootBuildGradleFolder": "C:\\Users\\harsh\\AndroidStudioProjects\\Android_Calculator",
         "sdkFolder": "C:\\Users\\harsh\\AppData\\Local\\Android\\Sdk",
         "isBuildOnlyTargetAbiEnabled": true,
+        "ideBuildTargetAbi": "x86_64,arm64-v8a",
         "isCmakeBuildCohabitationEnabled": false,
         "isPrefabEnabled": false
       },

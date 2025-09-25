@@ -30,9 +30,7 @@
 # No other -keep rules = maximum obfuscation
 
 # Aggressively obfuscate internal implementation
--obfuscationdictionary obfuscation-dictionary.txt
--packageobfuscationdictionary obfuscation-dictionary.txt
--classobfuscationdictionary obfuscation-dictionary.txt
+# Dictionary files removed - using random single-letter obfuscation
 
 
 # MAXIMUM AGGRESSIVE OBFUSCATION OPTIONS
