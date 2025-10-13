@@ -1,27 +1,32 @@
 package com.android.calculator.calculator.parser
 
 import com.android.calculator.calculator.syntax_error
+import com.android.calculator.obfuscation.ObfuscationManager
 
 class Expression {
 
     fun getCleanExpression(calculation: String, decimalSeparatorSymbol: String, groupingSeparatorSymbol: String): String {
-        var cleanCalculation = replaceSymbolsFromCalculation(calculation, decimalSeparatorSymbol, groupingSeparatorSymbol)
-        cleanCalculation = addMultiply(cleanCalculation)
-        if (cleanCalculation.contains('√')) {
-            cleanCalculation = formatSquare(cleanCalculation)
-        }
-        if (cleanCalculation.contains('%')) {
-            cleanCalculation = getPercentString(cleanCalculation)
-            cleanCalculation = cleanCalculation.replace("%", "/100")
-        }
-        if (cleanCalculation.contains('!')) {
-            cleanCalculation = formatFactorial(cleanCalculation)
-        }
+        // Apply obfuscation to expression parsing
+        return ObfuscationManager.StaticObfuscation.executeWithObfuscationReturn {
+            ObfuscationManager.StaticObfuscation.obfuscatedBranch {
+                var cleanCalculation = replaceSymbolsFromCalculation(calculation, decimalSeparatorSymbol, groupingSeparatorSymbol)
+                cleanCalculation = addMultiply(cleanCalculation)
+                if (cleanCalculation.contains('√')) {
+                    cleanCalculation = formatSquare(cleanCalculation)
+                }
+                if (cleanCalculation.contains('%')) {
+                    cleanCalculation = getPercentString(cleanCalculation)
+                    cleanCalculation = cleanCalculation.replace("%", "/100")
+                }
+                if (cleanCalculation.contains('!')) {
+                    cleanCalculation = formatFactorial(cleanCalculation)
+                }
 
+                cleanCalculation = addParenthesis(cleanCalculation)
 
-        cleanCalculation = addParenthesis(cleanCalculation)
-
-        return cleanCalculation
+                cleanCalculation
+            }
+        }
     }
 
     private fun replaceSymbolsFromCalculation(calculation: String, decimalSeparatorSymbol: String, groupingSeparatorSymbol: String): String {

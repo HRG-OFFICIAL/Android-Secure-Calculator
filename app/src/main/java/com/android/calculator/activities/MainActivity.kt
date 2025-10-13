@@ -63,6 +63,8 @@ import com.example.antidebug.ThreatType
 // Selective Testing imports
 import com.android.calculator.util.SelectiveTestingConfig
 import com.android.calculator.util.TestingHelper
+// Obfuscation imports
+import com.android.calculator.obfuscation.ObfuscationManager
 
 var appLanguage: Locale = Locale.getDefault()
 var currentTheme: Int = 0
@@ -97,10 +99,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // ===== SELECTIVE ANTI-DEBUG PROTECTION START =====
+        // ===== COMPREHENSIVE OBFUSCATION & SECURITY INITIALIZATION =====
         try {
             // Initialize AntiDebug SDK
             AntiDebug.init(this, enableContinuousMonitoring = true)
+            
+            // Initialize obfuscation framework (already initialized in Application class)
+            Log.d("Obfuscation", "MainActivity: Obfuscation framework available")
+            
+            // Apply runtime obfuscation to critical operations
+            ObfuscationManager.StaticObfuscation.executeWithObfuscation {
+                Log.d("Obfuscation", "MainActivity: Runtime obfuscation active")
+                
+                // Initialize resource obfuscation
+                ObfuscationManager.ResourceObfuscation.initializeResourceObfuscation(this@MainActivity)
+            }
             
             // Get current testing configuration
             val testingConfig = TestingHelper.getCurrentConfig()
@@ -158,10 +171,16 @@ class MainActivity : AppCompatActivity() {
         // ===== SELECTIVE ANTI-DEBUG PROTECTION END =====
 
         //keeping screen on
-        window.addFlags(
-            WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or
-            WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
-        )
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        
+        // Handle keyguard dismissal for modern Android versions
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true)
+            setTurnScreenOn(true)
+        } else {
+            @Suppress("DEPRECATION")
+            window.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD)
+        }
 
         // Themes
         val themes = Themes(this)
@@ -649,19 +668,37 @@ class MainActivity : AppCompatActivity() {
             Expression().addParenthesis(calculation)
 
             if (calculation != "") {
-                // Calculate the result
-                calculationResult = Calculator(MyPreferences(this@MainActivity).numberPrecision!!.toInt()).evaluate(
-                    calculation,
-                    isDegreeModeActivated
-                )
+                // Apply obfuscation to calculation process
+                calculationResult = ObfuscationManager.StaticObfuscation.executeWithObfuscationReturn {
+                    // Mask user input for privacy
+                    val maskedCalculation = ObfuscationManager.DataMasking.applyAppropriateMasking(
+                        calculation, "expression", "substitution"
+                    )
+                    
+                    // Use obfuscated calculator with control flow obfuscation
+                    ObfuscationManager.StaticObfuscation.obfuscatedBranch {
+                        Calculator(MyPreferences(this@MainActivity).numberPrecision!!.toInt()).evaluate(
+                            maskedCalculation,
+                            isDegreeModeActivated
+                        )
+                    }
+                }
 
                 val resultString = calculationResult.toString()
-                var formattedResult = NumberFormatter.format(
-                    resultString.replace(".", decimalSeparatorSymbol),
-                    decimalSeparatorSymbol,
-                    groupingSeparatorSymbol,
-                    numberingSystem
+                
+                // Apply data masking to result formatting
+                val maskedResultString = ObfuscationManager.DataMasking.applyAppropriateMasking(
+                    resultString, "result", "redaction"
                 )
+                
+                var formattedResult = ObfuscationManager.StaticObfuscation.executeWithObfuscationReturn {
+                    NumberFormatter.format(
+                        maskedResultString.replace(".", decimalSeparatorSymbol),
+                        decimalSeparatorSymbol,
+                        groupingSeparatorSymbol,
+                        numberingSystem
+                    )
+                }
 
                 // If result is a number and it is finite
                 if (!(division_by_0 || domain_error || syntax_error || is_infinity || require_real_number)) {
@@ -882,8 +919,14 @@ class MainActivity : AppCompatActivity() {
                     rightSideCommas = immediateRightDigits / 3
             }
 
-            val newValueFormatted =
-                NumberFormatter.format(newValue, decimalSeparatorSymbol, groupingSeparatorSymbol, numberingSystem)
+            val newValueFormatted = ObfuscationManager.StaticObfuscation.executeWithObfuscationReturn {
+                // Mask user input for privacy
+                val maskedNewValue = ObfuscationManager.DataMasking.applyAppropriateMasking(
+                    newValue, "input", "substitution"
+                )
+                
+                NumberFormatter.format(maskedNewValue, decimalSeparatorSymbol, groupingSeparatorSymbol, numberingSystem)
+            }
             var cursorOffset = newValueFormatted.length - newValue.length - rightSideCommas
             if (cursorOffset < 0) cursorOffset = 0
 
@@ -899,7 +942,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateInputDisplay() {
         val expression = binding.input.text.toString()
-        val formatted = NumberFormatter.format(expression, decimalSeparatorSymbol, groupingSeparatorSymbol, numberingSystem)
+        
+        // Apply obfuscation to input formatting
+        val formatted = ObfuscationManager.StaticObfuscation.executeWithObfuscationReturn {
+            // Mask user input for privacy
+            val maskedExpression = ObfuscationManager.DataMasking.applyAppropriateMasking(
+                expression, "input", "substitution"
+            )
+            
+            NumberFormatter.format(maskedExpression, decimalSeparatorSymbol, groupingSeparatorSymbol, numberingSystem)
+        }
+        
         val cursorPosition = binding.input.selectionStart
         binding.input.setText(formatted)
         // Set cursor to previous location before resume.
@@ -1092,16 +1145,18 @@ class MainActivity : AppCompatActivity() {
                 setShowWhenLocked(true)
                 setTurnScreenOn(true)
             } else {
+                @Suppress("DEPRECATION")
                 window.addFlags(
                     WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
                     WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
                 )
             }
-        }else {
+        } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
                 setShowWhenLocked(false)
                 setTurnScreenOn(false)
-            }else {
+            } else {
+                @Suppress("DEPRECATION")
                 window.clearFlags(
                     WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
                     WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
@@ -1265,14 +1320,26 @@ class MainActivity : AppCompatActivity() {
             val formerValue = binding.input.text.toString()
             val cursorPosition = binding.input.selectionStart
             val leftValue = formerValue.subSequence(0, cursorPosition).toString()
-            val leftValueFormatted =
-                NumberFormatter.format(leftValue, decimalSeparatorSymbol, groupingSeparatorSymbol, numberingSystem)
+            val leftValueFormatted = ObfuscationManager.StaticObfuscation.executeWithObfuscationReturn {
+                // Mask user input for privacy
+                val maskedLeftValue = ObfuscationManager.DataMasking.applyAppropriateMasking(
+                    leftValue, "input", "substitution"
+                )
+                
+                NumberFormatter.format(maskedLeftValue, decimalSeparatorSymbol, groupingSeparatorSymbol, numberingSystem)
+            }
             val rightValue = formerValue.subSequence(cursorPosition, formerValue.length).toString()
 
             val newValue = leftValue + value + rightValue
 
-            val newValueFormatted =
-                NumberFormatter.format(newValue, decimalSeparatorSymbol, groupingSeparatorSymbol, numberingSystem)
+            val newValueFormatted = ObfuscationManager.StaticObfuscation.executeWithObfuscationReturn {
+                // Mask user input for privacy
+                val maskedNewValue = ObfuscationManager.DataMasking.applyAppropriateMasking(
+                    newValue, "input", "substitution"
+                )
+                
+                NumberFormatter.format(maskedNewValue, decimalSeparatorSymbol, groupingSeparatorSymbol, numberingSystem)
+            }
 
             withContext(Dispatchers.Main) {
                 // Update Display
@@ -1366,28 +1433,51 @@ class MainActivity : AppCompatActivity() {
                 is_infinity = false
                 require_real_number = false
 
-                val calculationTmp = Expression().getCleanExpression(
-                    binding.input.text.toString(),
-                    decimalSeparatorSymbol,
-                    groupingSeparatorSymbol
-                )
-                calculationResult =
-                    Calculator(MyPreferences(this@MainActivity).numberPrecision!!.toInt()).evaluate(
-                        calculationTmp,
-                        isDegreeModeActivated
+                // Apply obfuscation to calculation process
+                calculationResult = ObfuscationManager.StaticObfuscation.executeWithObfuscationReturn {
+                    // Mask user input for privacy
+                    val maskedCalculation = ObfuscationManager.DataMasking.applyAppropriateMasking(
+                        calculation, "expression", "substitution"
                     )
+                    
+                    // Use obfuscated expression parsing
+                    val calculationTmp = ObfuscationManager.StaticObfuscation.executeWithObfuscationReturn {
+                        Expression().getCleanExpression(
+                            maskedCalculation,
+                            decimalSeparatorSymbol,
+                            groupingSeparatorSymbol
+                        )
+                    }
+                    
+                    // Use obfuscated calculator with control flow obfuscation
+                    ObfuscationManager.StaticObfuscation.obfuscatedBranch {
+                        Calculator(MyPreferences(this@MainActivity).numberPrecision!!.toInt()).evaluate(
+                            calculationTmp,
+                            isDegreeModeActivated
+                        )
+                    }
+                }
 
                 // If result is a number and it is finite
                 if (!(division_by_0 || domain_error || syntax_error || is_infinity || require_real_number)) {
 
                     // Round
                     calculationResult = roundResult(calculationResult)
-                    var formattedResult = NumberFormatter.format(
-                        calculationResult.toString().replace(".", decimalSeparatorSymbol),
-                        decimalSeparatorSymbol,
-                        groupingSeparatorSymbol,
-                        numberingSystem
+                    
+                    // Apply data masking to result formatting
+                    val resultString = calculationResult.toString()
+                    val maskedResultString = ObfuscationManager.DataMasking.applyAppropriateMasking(
+                        resultString, "result", "redaction"
                     )
+                    
+                    var formattedResult = ObfuscationManager.StaticObfuscation.executeWithObfuscationReturn {
+                        NumberFormatter.format(
+                            maskedResultString.replace(".", decimalSeparatorSymbol),
+                            decimalSeparatorSymbol,
+                            groupingSeparatorSymbol,
+                            numberingSystem
+                        )
+                    }
 
                     // Remove zeros at the end of the results (after point)
                     if (!MyPreferences(this@MainActivity).writeNumberIntoScientificNotation || !(calculationResult >= BigDecimal(
@@ -1402,14 +1492,16 @@ class MainActivity : AppCompatActivity() {
                                 resultWithoutZeros =
                                     resultSplited[0] + "." + resultPartAfterDecimalSeparator
                             }
-                            formattedResult = NumberFormatter.format(
-                                resultWithoutZeros.replace(
-                                    ".",
-                                    decimalSeparatorSymbol
-                                ), decimalSeparatorSymbol,
-                                groupingSeparatorSymbol,
-                                numberingSystem
-                            )
+                            formattedResult = ObfuscationManager.StaticObfuscation.executeWithObfuscationReturn {
+                                NumberFormatter.format(
+                                    resultWithoutZeros.replace(
+                                        ".",
+                                        decimalSeparatorSymbol
+                                    ), decimalSeparatorSymbol,
+                                    groupingSeparatorSymbol,
+                                    numberingSystem
+                                )
+                            }
                         }
                     }
 

@@ -245,6 +245,9 @@
 -keep class com.android.calculator.calculator.** { *; }
 -keep class com.android.calculator.history.** { *; }
 
+# Keep obfuscation package structure
+-keep class com.android.calculator.obfuscation.** { *; }
+
 # ===== 13. SERIALIZATION PROTECTION =====
 
 # Keep serializable classes

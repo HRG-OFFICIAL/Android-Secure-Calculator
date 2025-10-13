@@ -1,6 +1,7 @@
 package com.android.calculator.calculator
 
 import android.os.Build
+import android.util.Log
 import java.math.BigDecimal
 import java.math.BigInteger
 import java.math.MathContext
@@ -20,6 +21,7 @@ import kotlin.math.round
 import kotlin.math.sin
 import kotlin.math.sqrt
 import kotlin.math.tan
+import com.android.calculator.obfuscation.ObfuscationManager
 
 var division_by_0 = false
 var domain_error = false
@@ -31,52 +33,102 @@ class Calculator(
         private val numberPrecisionDecimal: Int
     ) {
 
-    fun factorial(number: BigDecimal): BigDecimal {
-        if (number >= BigDecimal(3000)) {
-            is_infinity = true
-            return BigDecimal.ZERO
-        }
-        return if (number < BigDecimal.ZERO) {
-            domain_error = true
-            BigDecimal.ZERO
-        } else {
-            val decimalPartOfNumber = number.toDouble() - number.toInt()
-            if (decimalPartOfNumber == 0.0) {
-                var factorial = BigInteger("1")
-                for (i in 1..number.toInt()) {
-                    factorial *= i.toBigInteger()
+    // Obfuscated string constants for sensitive operations
+    private val obfuscatedErrorMessages = mapOf(
+        "division_by_zero" to ObfuscationManager.StaticObfuscation.obfuscateString("Division by zero", "error"),
+        "domain_error" to ObfuscationManager.StaticObfuscation.obfuscateString("Domain error", "error"),
+        "syntax_error" to ObfuscationManager.StaticObfuscation.obfuscateString("Syntax error", "error"),
+        "infinity" to ObfuscationManager.StaticObfuscation.obfuscateString("Infinity", "error"),
+        "real_number_required" to ObfuscationManager.StaticObfuscation.obfuscateString("Real number required", "error")
+    )
+    
+    // Dynamic class loading for runtime obfuscation
+    private fun loadDynamicCalculationClass(): Class<*>? {
+        return ObfuscationManager.RuntimeObfuscation.generateDynamicMethod(System.currentTimeMillis())
+    }
+    
+    // Code virtualization for sensitive calculations
+    private fun virtualizeCalculation(operation: String, value1: BigDecimal, value2: BigDecimal): BigDecimal {
+        return ObfuscationManager.StaticObfuscation.executeWithObfuscationReturn {
+            // Use code virtualization for complex calculations
+            ObfuscationManager.StaticObfuscation.obfuscatedBranch {
+                when (operation) {
+                    "add" -> value1.add(value2)
+                    "subtract" -> value1.subtract(value2)
+                    "multiply" -> value1.multiply(value2)
+                    "divide" -> if (value2 != BigDecimal.ZERO) value1.divide(value2, MathContext.DECIMAL64) else BigDecimal.ZERO
+                    else -> BigDecimal.ZERO
                 }
-                factorial.toBigDecimal()
-            } else gammaLanczos(number + BigDecimal.ONE)
+            }
+        }
+    }
+
+    fun factorial(number: BigDecimal): BigDecimal {
+        // Apply control flow obfuscation to hide calculation logic
+        return ObfuscationManager.StaticObfuscation.executeWithObfuscationReturn {
+            ObfuscationManager.StaticObfuscation.obfuscatedBranch {
+                // Obfuscated factorial calculation with control flow flattening
+                val result = ObfuscationManager.StaticObfuscation.conditionalExecution(
+                    condition = number >= BigDecimal(3000),
+                    trueAction = {
+                        is_infinity = true
+                        BigDecimal.ZERO
+                    },
+                    falseAction = {
+                        ObfuscationManager.StaticObfuscation.conditionalExecution(
+                            condition = number < BigDecimal.ZERO,
+                            trueAction = {
+                                domain_error = true
+                                BigDecimal.ZERO
+                            },
+                            falseAction = {
+                                val decimalPartOfNumber = number.toDouble() - number.toInt()
+                                ObfuscationManager.StaticObfuscation.conditionalExecution(
+                                    condition = decimalPartOfNumber == 0.0,
+                                    trueAction = {
+                                        var factorial = BigInteger("1")
+                                        for (i in 1..number.toInt()) {
+                                            factorial *= i.toBigInteger()
+                                        }
+                                        factorial.toBigDecimal()
+                                    },
+                                    falseAction = {
+                                        gammaLanczos(number + BigDecimal.ONE)
+                                    }
+                                )
+                            }
+                        )
+                    }
+                )
+                result
+            }
         }
     }
 
     private fun gammaLanczos(x: BigDecimal): BigDecimal {
-        // Lanczos approximation parameters
-        val p = arrayOf(
-            676.5203681218851,
-            -1259.1392167224028,
-            771.3234287776531,
-            -176.6150291621406,
-            12.507343278686905,
-            -0.13857109526572012,
-            9.984369578019572e-6,
-            1.5056327351493116e-7
-        )
-        val g = 7.0
-        val z = x.toDouble() - 1.0
+        // Apply obfuscation to hide mathematical constants and calculations
+        return ObfuscationManager.StaticObfuscation.executeWithObfuscationReturn {
+            // Obfuscated Lanczos approximation parameters
+            val obfuscatedConstants = ObfuscationManager.StaticObfuscation.obfuscateString("676.5203681218851,-1259.1392167224028,771.3234287776531,-176.6150291621406,12.507343278686905,-0.13857109526572012,9.984369578019572e-6,1.5056327351493116e-7", "gamma")
+            val p = obfuscatedConstants.split(",").map { it.toDouble() }.toTypedArray()
+            
+            // Mask sensitive mathematical values
+            val maskedG = ObfuscationManager.DataMasking.maskNumericValue(7.0, "gamma_g")
+            val g = maskedG.toDouble()
+            val z = x.toDouble() - 1.0
 
-        var a = 0.9999999999998099
-        for (i in p.indices) {
-            a += p[i] / (z + i + 1)
+            var a = 0.9999999999998099
+            for (i in p.indices) {
+                a += p[i] / (z + i + 1)
+            }
+
+            val t = z + g + 0.5
+            val sqrtTwoPi = sqrt(2.0 * PI)
+            val firstPart = sqrtTwoPi * t.pow(z + 0.5) * exp(-t)
+            val result = firstPart * a
+
+            BigDecimal(result, MathContext.DECIMAL64)
         }
-
-        val t = z + g + 0.5
-        val sqrtTwoPi = sqrt(2.0 * PI)
-        val firstPart = sqrtTwoPi * t.pow(z + 0.5) * exp(-t)
-        val result = firstPart * a
-
-        return BigDecimal(result, MathContext.DECIMAL64)
     }
 
     private fun exponentiation(x: BigDecimal, parseFactor: BigDecimal): BigDecimal {

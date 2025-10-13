@@ -36278,13 +36278,25 @@ com.android.calculator.history.History:
     static void <clinit>()
 com.android.calculator.history.HistoryAdapter:
     static void <clinit>()
+com.android.calculator.obfuscation.demo.CalculationData:
+    static void <clinit>()
+com.android.calculator.obfuscation.demo.CalculationItem:
+    static void <clinit>()
+com.android.calculator.obfuscation.demo.CalculationList:
+    static void <clinit>()
+com.android.calculator.obfuscation.demo.Calculator:
+    static void <clinit>()
+com.android.calculator.obfuscation.demo.ObfuscationDemo:
+    static void <clinit>()
+com.android.calculator.obfuscation.demo.ValidationRules:
+    static void <clinit>()
+com.android.calculator.obfuscation.runtime.ReflectionIndirection$$InternalSyntheticBackport$1$030bba09d444c77644ab42323a223f398cafd1815b0cf65086e87a5dba62131c$0
+com.android.calculator.obfuscation.static.AdvancedObfuscator$MethodObfuscator$$InternalSyntheticNonNull$22$65ee585e743a45970e69dc5cfcde2d5834d643697d7040ea967efc39c05bb742$0
+com.android.calculator.obfuscation.static.ResourceObfuscator$$InternalSyntheticNonNull$18$d1ee74eef42ef0b88d767f15e4670d6596cec115884e77d7756770746bb2f799$0
+com.android.calculator.obfuscation.static.ResourceObfuscator$ResourceShrinker$$InternalSyntheticNonNull$32$5fdaab853bd14675bdb735572e145e9244bdf0c8d73c2211906ae2c394ffee91$0
 com.android.calculator.services.MyTileService$$InternalSyntheticApiModelOutline$1$dc7d2d9173d0c70076ec02d4c5243dbd14886b2bfcfcf306c488050364a5550d$1
 com.android.calculator.services.MyTileService:
     static void <clinit>()
-com.android.calculator.util.AdvancedObfuscator$MethodObfuscator$$InternalSyntheticNonNull$22$303e261fb6e0f08dda38b96983d68417dcade4506f64484f0f515c527b4083ca$0
-com.android.calculator.util.ReflectionIndirection$$InternalSyntheticBackport$1$cc577b179315727d3d55c2a8913aa2dd79233764030061319326815a272d722e$0
-com.android.calculator.util.ResourceObfuscator$$InternalSyntheticNonNull$18$20cce42b73634ecdd6f9222842c9c0fb6c2fe12d5ca604bc8c3fcbbc9de7fbfa$0
-com.android.calculator.util.ResourceObfuscator$ResourceShrinker$$InternalSyntheticNonNull$32$c37b34294e14bbc7cfa28cd31202af08612b2a86d5e30f517714148db2787833$0
 com.android.calculator.util.SelectiveTestingConfig$TestingConfig$$InternalSyntheticBackport$1$e34333958b590a1d8e6d6ec63fda0973fa5098ee796d3dac72f0529539dca0ca$0
 com.android.calculator.util.SelectiveTestingConfig$TestingConfig$$InternalSyntheticBackport$1$e34333958b590a1d8e6d6ec63fda0973fa5098ee796d3dac72f0529539dca0ca$1
 com.android.calculator.util.SelectiveTestingConfig$TestingConfig$$InternalSyntheticBackport$1$e34333958b590a1d8e6d6ec63fda0973fa5098ee796d3dac72f0529539dca0ca$2
