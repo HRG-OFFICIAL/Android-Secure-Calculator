@@ -44,9 +44,8 @@
 -overloadaggressively
 -mergeinterfacesaggressively
 
-# 1.2 Control Flow Obfuscation
--optimizations !code/simplification/cast,!code/simplification/field,!code/simplification/arithmetic
--optimizations !code/simplification/variable,!code/simplification/arithmetic,!field/*,!class/merging/*
+# 1.2 Control Flow Obfuscation - Standardized optimization settings
+-optimizations !code/simplification/cast,!code/simplification/field,!code/simplification/arithmetic,!code/simplification/variable,!field/*,!class/merging/*
 
 # 1.3 String Encryption
 -adaptclassstrings
@@ -141,7 +140,7 @@
 # 6.1 Aggressive Shrinking
 -dontwarn **
 -ignorewarnings
--optimizations !code/simplification/cast,!code/simplification/field
+# Use standardized optimization settings (defined above)
 
 # 6.2 Single Optimization Pass (More reliable)
 -optimizationpasses 1
@@ -303,23 +302,17 @@
 
 # ===== 17. PERFORMANCE OPTIMIZATIONS =====
 
-# Optimize for performance
--optimizations !code/simplification/cast,!code/simplification/field
+# Use standardized optimization settings (defined above)
 -optimizationpasses 1
-
-# Remove unused code
--allowaccessmodification
--overloadaggressively
--mergeinterfacesaggressively
 
 # ===== 18. FINAL CONFIGURATION =====
 
-# Final obfuscation settings
+# Final obfuscation settings (consolidated to avoid conflicts)
 -repackageclasses 'a'
 -allowaccessmodification
 -overloadaggressively
 -mergeinterfacesaggressively
--optimizations !code/simplification/variable,!code/simplification/arithmetic,!field/*,!class/merging/*
+# Use standardized optimization settings (defined above)
 
 # Additional security measures
 -dontskipnonpubliclibraryclassmembers

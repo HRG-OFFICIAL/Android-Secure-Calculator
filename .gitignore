@@ -27,3 +27,43 @@ app/release/output-metadata.json
 
 *.salive
 /app/release/*
+# Gradle
+.gradle/
+build/
+
+# Annotation processing
+.apt_generated/
+
+# Crashlytics
+crashlytics-build.properties
+
+# Room files
+*.db
+*.db-journal
+*.db-shm
+*.db-wal# Keystore files
+*.jks
+*.keystore
+
+# Google Services (e.g. Firebase)
+google-services.json
+
+# Android Studio Navigation Editor
+.navigation/
+
+# Fabric Crashlytics
+fabric.properties
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+
+# Gradle metadata
+.gradle-metadata/
+
+# Kotlin
+*.kpt
+
+# yarn
+.yarn/

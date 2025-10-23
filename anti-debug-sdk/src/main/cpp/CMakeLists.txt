@@ -60,6 +60,18 @@ target_compile_options(anti-debug-native PRIVATE
     -fstack-protector-strong
     -fPIC
     -D_FORTIFY_SOURCE=2
+    # Symbol visibility control - hide all symbols by default
+    -fvisibility=hidden
+    -fvisibility-inlines-hidden
+    # Additional security flags
+    -fno-strict-aliasing
+    -fno-common
+    -fno-builtin
+    -fno-stack-protector
+    # Obfuscation flags
+    -fno-ident
+    -fno-asynchronous-unwind-tables
+    -fno-unwind-tables
 )
 
 # Add linker flags for security and 16KB page size compatibility
@@ -72,4 +84,38 @@ target_link_options(anti-debug-native PRIVATE
     -Wl,-z,common-page-size=16384
     # Ensure LOAD segments are properly aligned
     -Wl,--section-start=.text=0x10000
+    # Symbol stripping and obfuscation
+    -Wl,--strip-all
+    -Wl,--strip-debug
+    -Wl,--discard-all
+    -Wl,--gc-sections
+    -Wl,--build-id=none
+    # Remove symbol table and debug info
+    -Wl,-s
+    # Obfuscate section names
+    -Wl,--build-id=none
+    -Wl,--hash-style=gnu
+)
+
+# Set properties for symbol visibility
+set_target_properties(anti-debug-native PROPERTIES
+    CXX_VISIBILITY_PRESET hidden
+    VISIBILITY_INLINES_HIDDEN ON
+    # Strip symbols during build
+    LINK_FLAGS "-Wl,--strip-all"
+)
+
+# Create a version script to control symbol visibility
+file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/version_script.txt
+"{
+  global:
+    Java_*;
+  local:
+    *;
+};
+")
+
+# Apply version script to control symbol visibility
+target_link_options(anti-debug-native PRIVATE
+    -Wl,--version-script=${CMAKE_CURRENT_BINARY_DIR}/version_script.txt
 )

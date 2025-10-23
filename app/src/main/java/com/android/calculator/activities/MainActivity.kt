@@ -100,73 +100,77 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // ===== COMPREHENSIVE OBFUSCATION & SECURITY INITIALIZATION =====
-        try {
-            // Initialize AntiDebug SDK
-            AntiDebug.init(this, enableContinuousMonitoring = true)
-            
-            // Initialize obfuscation framework (already initialized in Application class)
-            Log.d("Obfuscation", "MainActivity: Obfuscation framework available")
-            
-            // Apply runtime obfuscation to critical operations
-            ObfuscationManager.StaticObfuscation.executeWithObfuscation {
-                Log.d("Obfuscation", "MainActivity: Runtime obfuscation active")
-                
-                // Initialize resource obfuscation
-                ObfuscationManager.ResourceObfuscation.initializeResourceObfuscation(this@MainActivity)
-            }
-            
-            // Get current testing configuration
-            val testingConfig = TestingHelper.getCurrentConfig()
-            TestingHelper.logCurrentConfig()
-            
-            // Perform selective security checks based on testing configuration
-            val securityReport = performSelectiveSecurityCheck(testingConfig)
-            
-            // Log detailed security report
-            Log.d("AntiDebug", "=== SELECTIVE SECURITY REPORT ===")
-            Log.d("AntiDebug", "Testing Scenario: ${testingConfig.scenarioName}")
-            Log.d("AntiDebug", "Debugger: ${securityReport.debuggerDetected} (${if (testingConfig.enableDebugger) "ENABLED" else "DISABLED"})")
-            Log.d("AntiDebug", "Emulator: ${securityReport.emulatorDetected} (${if (testingConfig.enableEmulator) "ENABLED" else "DISABLED"})")
-            Log.d("AntiDebug", "Root: ${securityReport.rootDetected} (${if (testingConfig.enableRoot) "ENABLED" else "DISABLED"})")
-            Log.d("AntiDebug", "Tampered: ${securityReport.tamperingDetected} (${if (testingConfig.enableTampering) "ENABLED" else "DISABLED"})")
-            Log.d("AntiDebug", "=================================")
-            
-            // Check for threats only in enabled features
-            val hasEnabledThreats = checkEnabledThreats(securityReport, testingConfig)
-            
-            if (hasEnabledThreats) {
-                Log.w("AntiDebug", "THREAT DETECTED in enabled features! Terminating application.")
-                
-                // Handle different threat types appropriately (only enabled ones)
-                when {
-                    testingConfig.enableDebugger && securityReport.debuggerDetected -> {
-                        Log.w("AntiDebug", "DEBUGGER DETECTED - Terminating for debugger detection")
-                        AntiDebug.handleThreat(ThreatType.DEBUGGER)
-                    }
-                    testingConfig.enableEmulator && securityReport.emulatorDetected -> {
-                        Log.w("AntiDebug", "EMULATOR DETECTED - Terminating for emulator detection")
-                        AntiDebug.handleThreat(ThreatType.EMULATOR)
-                    }
-                    testingConfig.enableRoot && securityReport.rootDetected -> {
-                        Log.w("AntiDebug", "ROOT DETECTED - Terminating for root detection")
-                        AntiDebug.handleThreat(ThreatType.ROOT)
-                    }
-                    testingConfig.enableTampering && securityReport.tamperingDetected -> {
-                        Log.w("AntiDebug", "TAMPERING DETECTED - Terminating for tampering detection")
-                        AntiDebug.handleThreat(ThreatType.TAMPERING)
-                    }
+        if (!BuildConfig.DEBUG) {
+            try {
+                // Initialize AntiDebug SDK (skipped in debug builds)
+                AntiDebug.init(this, enableContinuousMonitoring = true)
+
+                // Initialize obfuscation framework (already initialized in Application class)
+                Log.d("Obfuscation", "MainActivity: Obfuscation framework available")
+
+                // Apply runtime obfuscation to critical operations
+                ObfuscationManager.StaticObfuscation.executeWithObfuscation {
+                    Log.d("Obfuscation", "MainActivity: Runtime obfuscation active")
+
+                    // Initialize resource obfuscation
+                    ObfuscationManager.ResourceObfuscation.initializeResourceObfuscation(this@MainActivity)
                 }
-                
+
+                // Get current testing configuration
+                val testingConfig = TestingHelper.getCurrentConfig()
+                TestingHelper.logCurrentConfig()
+
+                // Perform selective security checks based on testing configuration
+                val securityReport = performSelectiveSecurityCheck(testingConfig)
+
+                // Log detailed security report
+                Log.d("AntiDebug", "=== SELECTIVE SECURITY REPORT ===")
+                Log.d("AntiDebug", "Testing Scenario: ${testingConfig.scenarioName}")
+                Log.d("AntiDebug", "Debugger: ${securityReport.debuggerDetected} (${if (testingConfig.enableDebugger) "ENABLED" else "DISABLED"})")
+                Log.d("AntiDebug", "Emulator: ${securityReport.emulatorDetected} (${if (testingConfig.enableEmulator) "ENABLED" else "DISABLED"})")
+                Log.d("AntiDebug", "Root: ${securityReport.rootDetected} (${if (testingConfig.enableRoot) "ENABLED" else "DISABLED"})")
+                Log.d("AntiDebug", "Tampered: ${securityReport.tamperingDetected} (${if (testingConfig.enableTampering) "ENABLED" else "DISABLED"})")
+                Log.d("AntiDebug", "=================================")
+
+                // Check for threats only in enabled features
+                val hasEnabledThreats = checkEnabledThreats(securityReport, testingConfig)
+
+                if (hasEnabledThreats) {
+                    Log.w("AntiDebug", "THREAT DETECTED in enabled features! Terminating application.")
+
+                    // Handle different threat types appropriately (only enabled ones)
+                    when {
+                        testingConfig.enableDebugger && securityReport.debuggerDetected -> {
+                            Log.w("AntiDebug", "DEBUGGER DETECTED - Terminating for debugger detection")
+                            AntiDebug.handleThreat(ThreatType.DEBUGGER)
+                        }
+                        testingConfig.enableEmulator && securityReport.emulatorDetected -> {
+                            Log.w("AntiDebug", "EMULATOR DETECTED - Terminating for emulator detection")
+                            AntiDebug.handleThreat(ThreatType.EMULATOR)
+                        }
+                        testingConfig.enableRoot && securityReport.rootDetected -> {
+                            Log.w("AntiDebug", "ROOT DETECTED - Terminating for root detection")
+                            AntiDebug.handleThreat(ThreatType.ROOT)
+                        }
+                        testingConfig.enableTampering && securityReport.tamperingDetected -> {
+                            Log.w("AntiDebug", "TAMPERING DETECTED - Terminating for tampering detection")
+                            AntiDebug.handleThreat(ThreatType.TAMPERING)
+                        }
+                    }
+
+                    finishAffinity()
+                    return
+                } else {
+                    Log.i("AntiDebug", "All enabled security checks passed - App continuing normally")
+                }
+            } catch (e: Exception) {
+                Log.e("AntiDebug", "Anti-debug initialization failed", e)
+                // Fail securely - exit if protection can't be initialized
                 finishAffinity()
                 return
-            } else {
-                Log.i("AntiDebug", "All enabled security checks passed - App continuing normally")
             }
-        } catch (e: Exception) {
-            Log.e("AntiDebug", "Anti-debug initialization failed", e)
-            // Fail securely - exit if protection can't be initialized
-            finishAffinity()
-            return
+        } else {
+            Log.i("AntiDebug", "Debug build detected - AntiDebug and runtime obfuscation disabled")
         }
         // ===== SELECTIVE ANTI-DEBUG PROTECTION END =====
 

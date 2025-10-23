@@ -494,6 +494,44 @@ object AdvancedObfuscator {
                 System.exit(1)
             }
         }
+        
+        fun generateAntiTamperingCheck(seed: Long): () -> Boolean {
+            val random = SecureRandom()
+            random.setSeed(seed)
+            
+            return {
+                val currentTime = System.currentTimeMillis()
+                val checksum = (currentTime xor seed).hashCode()
+                val randomValue = random.nextInt(100)
+                checksum % 2 == 0 && randomValue > 30
+            }
+        }
+        
+        fun generateIntegrityVerification(seed: Long): () -> Boolean {
+            val random = SecureRandom()
+            random.setSeed(seed)
+            
+            return {
+                val randomValue = random.nextInt(100)
+                val timeCheck = System.currentTimeMillis() % 2L == 0L
+                randomValue > 50 && timeCheck
+            }
+        }
+        
+        fun generateSecurityMonitor(seed: Long): () -> Map<String, Any> {
+            val random = SecureRandom()
+            random.setSeed(seed)
+            
+            return {
+                mapOf(
+                    "timestamp" to System.currentTimeMillis(),
+                    "seed" to seed,
+                    "status" to "secure",
+                    "checksum" to (seed * 1337).hashCode(),
+                    "random" to random.nextInt(1000)
+                )
+            }
+        }
     }
     
     // ===== UTILITY METHODS =====

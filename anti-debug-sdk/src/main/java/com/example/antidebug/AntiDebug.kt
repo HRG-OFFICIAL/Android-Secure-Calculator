@@ -67,6 +67,17 @@ object AntiDebug {
         responseHandler = ResponseHandler(this.context)
         dataProtection = DataProtection(this.context)
         
+        // Initialize certificate fingerprints for tamper detection
+        // Note: Certificate fingerprints will be loaded at runtime from the main app
+        val debugFingerprints = setOf(
+            "SHA256: 14:6D:E9:83:C5:73:17:34:02:85:12:8F:32:37:4E:85:D3:ED:F3:AA:8C:0A:BC:10:24:02:1C:60:5D:BE:AB:A6"
+        )
+        val releaseFingerprints = setOf(
+            "TODO: Add production certificate fingerprint here"
+        )
+        val allFingerprints = debugFingerprints + releaseFingerprints
+        TamperDetection.initializeFingerprints(allFingerprints)
+        
         initialized = true
         
         // Start continuous monitoring if enabled

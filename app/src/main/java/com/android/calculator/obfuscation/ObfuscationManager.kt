@@ -47,6 +47,10 @@ object ObfuscationManager {
     object StaticObfuscation {
         
         fun applyComprehensiveObfuscation(block: () -> Unit) {
+            if (com.android.calculator.BuildConfig.DEBUG) {
+                block()
+                return
+            }
             AdvancedObfuscator.applyComprehensiveObfuscation(block)
         }
         
@@ -59,14 +63,24 @@ object ObfuscationManager {
         }
         
         fun executeWithObfuscation(block: () -> Unit) {
+            if (com.android.calculator.BuildConfig.DEBUG) {
+                block()
+                return
+            }
             ControlFlowObfuscator.executeWithObfuscation(block)
         }
         
         fun <T> executeWithObfuscationReturn(block: () -> T): T {
+            if (com.android.calculator.BuildConfig.DEBUG) {
+                return block()
+            }
             return ControlFlowObfuscator.executeWithObfuscation(block)
         }
         
         fun <T> obfuscatedBranch(realLogic: () -> T): T {
+            if (com.android.calculator.BuildConfig.DEBUG) {
+                return realLogic()
+            }
             return FlowObfuscator.obfuscatedBranch(realLogic)
         }
         
@@ -83,10 +97,15 @@ object ObfuscationManager {
         }
         
         fun timingCheck(normalAction: () -> Unit): Boolean {
+            if (com.android.calculator.BuildConfig.DEBUG) {
+                normalAction()
+                return false
+            }
             return FlowObfuscator.timingCheck(normalAction)
         }
         
         fun obfuscateResourceName(originalName: String, resourceType: String): String {
+            if (com.android.calculator.BuildConfig.DEBUG) return originalName
             return ResourceObfuscator.ResourceNameMangler.obfuscateResourceName(originalName, resourceType)
         }
     }
@@ -98,10 +117,12 @@ object ObfuscationManager {
     object RuntimeObfuscation {
         
         fun loadEncryptedClass(encryptedClassData: ByteArray, className: String): Class<*>? {
+            if (com.android.calculator.BuildConfig.DEBUG) return null
             return AdvancedObfuscator.DynamicClassLoader.loadEncryptedClass(encryptedClassData, className)
         }
         
         fun virtualizeMethod(method: () -> Unit): () -> Unit {
+            if (com.android.calculator.BuildConfig.DEBUG) return method
             return AdvancedObfuscator.CodeVirtualizer.virtualizeMethod(method)
         }
         
@@ -115,7 +136,35 @@ object ObfuscationManager {
         }
         
         fun createReflectionIndirection(className: String, methodName: String): Any? {
+            if (com.android.calculator.BuildConfig.DEBUG) return null
             return ReflectionIndirection.createIndirection(className, methodName)
+        }
+        
+        /**
+         * Generate dynamic anti-tampering check code
+         * Creates obfuscated code that performs security checks at runtime
+         */
+        fun generateAntiTamperingCheck(seed: Long): () -> Boolean {
+            if (com.android.calculator.BuildConfig.DEBUG) return { false }
+            return AdvancedObfuscator.DynamicCodeGenerator.generateAntiTamperingCheck(seed)
+        }
+        
+        /**
+         * Generate dynamic integrity verification
+         * Creates code that verifies application integrity at runtime
+         */
+        fun generateIntegrityVerification(seed: Long): () -> Boolean {
+            if (com.android.calculator.BuildConfig.DEBUG) return { true }
+            return AdvancedObfuscator.DynamicCodeGenerator.generateIntegrityVerification(seed)
+        }
+        
+        /**
+         * Generate dynamic security monitor
+         * Creates code that continuously monitors for security threats
+         */
+        fun generateSecurityMonitor(seed: Long): () -> Map<String, Any> {
+            if (com.android.calculator.BuildConfig.DEBUG) return { emptyMap() }
+            return AdvancedObfuscator.DynamicCodeGenerator.generateSecurityMonitor(seed)
         }
     }
     
@@ -154,6 +203,7 @@ object ObfuscationManager {
         }
         
         fun applyAppropriateMasking(data: String, dataType: String, maskingType: String = "redaction"): String {
+            if (com.android.calculator.BuildConfig.DEBUG) return data
             return com.android.calculator.obfuscation.data.DataMasking.applyAppropriateMasking(data, dataType, maskingType)
         }
         
@@ -200,10 +250,12 @@ object ObfuscationManager {
     object ResourceObfuscation {
         
         fun encryptAsset(context: Context, assetName: String, data: ByteArray): String {
+            if (com.android.calculator.BuildConfig.DEBUG) return ""
             return ResourceObfuscator.AssetEncryption.encryptAsset(context, assetName, data)
         }
         
         fun decryptAsset(context: Context, assetName: String): ByteArray? {
+            if (com.android.calculator.BuildConfig.DEBUG) return null
             return ResourceObfuscator.AssetEncryption.decryptAsset(context, assetName)
         }
         
@@ -216,6 +268,7 @@ object ObfuscationManager {
         }
         
         fun initializeResourceObfuscation(context: Context) {
+            if (com.android.calculator.BuildConfig.DEBUG) return
             try {
                 ResourceObfuscator.ResourceNameMangler.initializeMappings()
                 ResourceObfuscator.AssetEncryption.initializeEncryption(context)

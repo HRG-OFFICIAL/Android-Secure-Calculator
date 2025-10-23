@@ -3,6 +3,7 @@ package com.example.antidebug
 import android.content.Context
 import android.content.pm.PackageManager
 import android.content.pm.Signature
+import android.content.SharedPreferences
 import android.util.Log
 import java.io.File
 import java.io.FileInputStream
@@ -12,6 +13,9 @@ import java.security.cert.CertificateFactory
 import java.security.cert.X509Certificate
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
+import javax.crypto.Cipher
+import javax.crypto.spec.SecretKeySpec
+import android.util.Base64
 
 /**
  * TamperDetection - Comprehensive application integrity and anti-tampering checks
@@ -29,12 +33,17 @@ class TamperDetection(private val context: Context) {
     
     companion object {
         private const val TAG = "TamperDetection"
+        private const val PREFS_NAME = "tamper_detection_prefs"
+        private const val DEX_CHECKSUM_KEY = "dex_checksum"
+        private const val APK_CHECKSUM_KEY = "apk_checksum"
+        private const val ENCRYPTION_KEY = "TamperDetectionKey2025!"
         
-        // Expected certificate fingerprints (SHA-256) - should be set by app developer
-        private val EXPECTED_CERT_FINGERPRINTS: Set<String> = setOf(
-            // Add your app's certificate fingerprints here
-            // Example: "AA:BB:CC:DD:EE:FF:..."
-        )
+        // Expected certificate fingerprints will be loaded from CertificateInfo
+        private var expectedCertFingerprints: Set<String> = emptySet()
+        
+        fun initializeFingerprints(fingerprints: Set<String>) {
+            expectedCertFingerprints = fingerprints
+        }
         
         // Breakpoint instruction patterns for different architectures
         private val BREAKPOINT_PATTERNS = arrayOf(
@@ -52,6 +61,7 @@ class TamperDetection(private val context: Context) {
     
     private val packageManager = context.packageManager
     private val packageName = context.packageName
+    private val prefs: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     
     /**
      * Main method to check if application has been tampered with
@@ -124,7 +134,7 @@ class TamperDetection(private val context: Context) {
      */
     private fun checkCertificateFingerprint(): Boolean {
         return try {
-            if (EXPECTED_CERT_FINGERPRINTS.isEmpty()) {
+            if (expectedCertFingerprints.isEmpty()) {
                 Log.w(TAG, "No expected fingerprints configured")
                 return false
             }
@@ -144,7 +154,7 @@ class TamperDetection(private val context: Context) {
                     .generateCertificate(signature.toByteArray().inputStream()) as X509Certificate
                 
                 val fingerprint = getFingerprint(cert)
-                if (fingerprint !in EXPECTED_CERT_FINGERPRINTS) {
+                if (fingerprint !in expectedCertFingerprints) {
                     Log.d(TAG, "Unexpected certificate fingerprint: $fingerprint")
                     return true
                 }
@@ -487,21 +497,83 @@ class TamperDetection(private val context: Context) {
     }
     
     /**
-     * Get stored checksum (should be implemented by app developer)
-     * This is a placeholder - in real implementation, checksum should be stored securely
+     * Get stored checksum from encrypted SharedPreferences
      */
     private fun getStoredChecksum(): String? {
-        // TODO: Implement secure checksum storage
-        // Could be stored encrypted in assets, retrieved from server, etc.
-        return null
+        return try {
+            val encryptedChecksum = prefs.getString(DEX_CHECKSUM_KEY, null)
+            if (encryptedChecksum != null) {
+                decryptString(encryptedChecksum)
+            } else {
+                null
+            }
+        } catch (e: Exception) {
+            Log.w(TAG, "Failed to get stored checksum: ${e.message}")
+            null
+        }
     }
     
     /**
-     * Get stored APK checksum (should be implemented by app developer)
+     * Get stored APK checksum from encrypted SharedPreferences
      */
     private fun getStoredAPKChecksum(): String? {
-        // TODO: Implement secure APK checksum storage
-        return null
+        return try {
+            val encryptedChecksum = prefs.getString(APK_CHECKSUM_KEY, null)
+            if (encryptedChecksum != null) {
+                decryptString(encryptedChecksum)
+            } else {
+                null
+            }
+        } catch (e: Exception) {
+            Log.w(TAG, "Failed to get stored APK checksum: ${e.message}")
+            null
+        }
+    }
+    
+    /**
+     * Store checksum securely using encryption
+     */
+    fun storeChecksum(checksum: String, isApk: Boolean = false) {
+        try {
+            val encrypted = encryptString(checksum)
+            val key = if (isApk) APK_CHECKSUM_KEY else DEX_CHECKSUM_KEY
+            prefs.edit().putString(key, encrypted).apply()
+            Log.d(TAG, "Stored ${if (isApk) "APK" else "DEX"} checksum securely")
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to store checksum: ${e.message}")
+        }
+    }
+    
+    /**
+     * Encrypt string using AES
+     */
+    private fun encryptString(plaintext: String): String {
+        return try {
+            val key = SecretKeySpec(ENCRYPTION_KEY.toByteArray().sliceArray(0..15), "AES")
+            val cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
+            cipher.init(Cipher.ENCRYPT_MODE, key)
+            val encrypted = cipher.doFinal(plaintext.toByteArray())
+            Base64.encodeToString(encrypted, Base64.DEFAULT)
+        } catch (e: Exception) {
+            Log.e(TAG, "Encryption failed: ${e.message}")
+            plaintext
+        }
+    }
+    
+    /**
+     * Decrypt string using AES
+     */
+    private fun decryptString(encryptedText: String): String {
+        return try {
+            val key = SecretKeySpec(ENCRYPTION_KEY.toByteArray().sliceArray(0..15), "AES")
+            val cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
+            cipher.init(Cipher.DECRYPT_MODE, key)
+            val encrypted = Base64.decode(encryptedText, Base64.DEFAULT)
+            String(cipher.doFinal(encrypted))
+        } catch (e: Exception) {
+            Log.e(TAG, "Decryption failed: ${e.message}")
+            ""
+        }
     }
     
     /**

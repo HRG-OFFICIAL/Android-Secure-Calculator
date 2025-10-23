@@ -1,0 +1,8 @@
+{
+    "api_endpoint": "https://api.secure-calculator.com/v1",
+    "encryption_key": "secure_key_2025",
+    "feature_flags": {
+        "advanced_crypto": true,
+        "cloud_sync": false
+    }
+}
