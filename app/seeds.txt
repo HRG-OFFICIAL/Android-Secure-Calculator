@@ -1,4 +1,4 @@
-androidx.preference.PreferenceFragment$3
+﻿androidx.preference.PreferenceFragment$3
 androidx.appcompat.widget.SearchView$SearchAutoComplete
 com.android.calculator.history.History
 androidx.preference.PreferenceFragmentCompat$OnPreferenceDisplayDialogCallback
@@ -7,7 +7,7 @@ com.android.calculator.activities.MainActivity$WhenMappings
 androidx.recyclerview.widget.DefaultItemAnimator$5
 kotlin.jvm.internal.FunctionReference
 com.android.calculator.obfuscation.demo.ValidationRules
-com.example.antidebug.TamperDetection$Companion
+com.example.raspsdk.TamperDetection$Companion
 androidx.preference.SeekBarPreference$1
 kotlinx.coroutines.internal.StackTraceRecoveryKt
 androidx.recyclerview.widget.RecyclerView$ItemAnimator$ItemHolderInfo
@@ -140,7 +140,7 @@ com.android.calculator.activities.MainActivity$setSwipeTouchHelperForRecyclerVie
 androidx.preference.PreferenceFragmentCompat$2
 kotlin.jvm.internal.markers.KMutableMap
 androidx.preference.MultiSelectListPreference
-com.example.antidebug.AntiDebug
+com.example.raspsdk.RASP
 androidx.preference.DialogPreference$TargetFragment
 kotlin.jvm.internal.Ref$ByteRef
 com.android.calculator.obfuscation.static.AdvancedObfuscator$JunkCodeInserter
@@ -201,7 +201,7 @@ androidx.recyclerview.widget.DiffUtil$Snake
 androidx.recyclerview.widget.OpReorderer
 androidx.preference.PreferenceGroup$1
 androidx.recyclerview.widget.ItemTouchHelper$Callback$1
-com.example.antidebug.ThreatType
+com.example.raspsdk.ThreatType
 androidx.preference.PreferenceFragment$DividerDecoration
 androidx.recyclerview.widget.ViewTypeStorage$IsolatedViewTypeStorage
 androidx.recyclerview.widget.SortedList$BatchedCallback
@@ -211,7 +211,7 @@ androidx.recyclerview.widget.AsyncListDiffer
 androidx.preference.ListPreferenceDialogFragmentCompat$1
 androidx.recyclerview.widget.PagerSnapHelper$1
 androidx.preference.Preference$OnPreferenceCopyListener
-com.example.antidebug.RootDetection$Companion
+com.example.raspsdk.RootDetection$Companion
 androidx.recyclerview.widget.RecyclerView$ItemAnimator$ItemAnimatorFinishedListener
 androidx.preference.PreferenceFragmentCompat
 androidx.recyclerview.widget.RecyclerView$SmoothScroller$Action
@@ -283,7 +283,7 @@ androidx.recyclerview.widget.ItemTouchHelper$ItemTouchHelperGestureListener
 androidx.recyclerview.widget.StableIdStorage$NoStableIdStorage
 androidx.preference.DropDownPreference
 com.google.android.material.bottomsheet.BottomSheetBehavior
-com.example.antidebug.SecurityReport
+com.example.raspsdk.SecurityReport
 com.android.calculator.activities.MainActivity$updateDisplay$1
 androidx.recyclerview.widget.OrientationHelper
 androidx.recyclerview.widget.RecyclerView$SmoothScroller
@@ -532,7 +532,7 @@ com.google.android.material.floatingactionbutton.FloatingActionButton$Behavior
 androidx.recyclerview.widget.RecyclerView$LayoutManager$2
 androidx.preference.EditTextPreference$SavedState
 androidx.core.graphics.drawable.IconCompatParcelizer
-com.example.antidebug.DebuggerDetection$Companion
+com.example.raspsdk.DebuggerDetection$Companion
 androidx.recyclerview.widget.LinearLayoutManager$SavedState
 androidx.recyclerview.widget.RecyclerView$RecyclerViewDataObserver
 androidx.recyclerview.widget.RecyclerView$Adapter$StateRestorationPolicy
@@ -615,7 +615,7 @@ androidx.recyclerview.widget.DefaultItemAnimator$MoveInfo
 androidx.recyclerview.widget.FastScroller$2
 androidx.recyclerview.widget.RecyclerView$SimpleOnItemTouchListener
 com.android.calculator.activities.MainActivity$updateResultDisplay$1$5
-com.android.calculator.obfuscation.native.NativeObfuscator$NativeAntiDebug
+com.android.calculator.obfuscation.native.NativeObfuscator$NativeRASP
 androidx.recyclerview.widget.GridLayoutManager$LayoutParams
 androidx.preference.PreferenceGroup$SavedState$1
 com.google.android.material.datepicker.MaterialCalendar
@@ -642,7 +642,7 @@ androidx.recyclerview.widget.ViewBoundsCheck
 com.android.calculator.calculator.Calculator$evaluate$1
 androidx.recyclerview.widget.GapWorker$1
 androidx.recyclerview.widget.AsyncListDiffer$1$2
-com.example.antidebug.HookDetection$Companion
+com.example.raspsdk.HookDetection$Companion
 androidx.recyclerview.widget.StaggeredGridLayoutManager
 androidx.lifecycle.ProcessLifecycleOwner$attach$1
 kotlin.jvm.internal.LocalVariableReferencesKt
@@ -702,7 +702,7 @@ androidx.recyclerview.widget.LinearSmoothScroller: int mInterimTargetDy
 androidx.recyclerview.widget.LinearLayoutManager: boolean mStackFromEnd
 androidx.preference.R$attr: int initialExpandedChildrenCount
 androidx.preference.R$styleable: int SwitchPreference_android_switchTextOn
-com.example.antidebug.SecurityReport: boolean tamperingDetected
+com.example.raspsdk.SecurityReport: boolean tamperingDetected
 kotlin.jvm.internal.AdaptedFunctionReference: boolean isTopLevel
 androidx.recyclerview.widget.MessageThreadUtil$1: int ADD_TILE
 com.google.crypto.tink.proto.AesCmacKeyFormat: com.google.crypto.tink.proto.AesCmacParams params_
@@ -976,7 +976,7 @@ androidx.recyclerview.widget.BatchingListUpdateCallback: androidx.recyclerview.w
 androidx.recyclerview.widget.RecyclerView$ItemAnimator$ItemHolderInfo: int bottom
 com.android.calculator.obfuscation.native.NativeObfuscator: byte[] nativeKey
 kotlinx.coroutines.internal.ConcurrentLinkedListNode: java.lang.Object _next
-com.example.antidebug.ThreatType: com.example.antidebug.ThreatType EMULATOR
+com.example.raspsdk.ThreatType: com.example.raspsdk.ThreatType EMULATOR
 com.google.crypto.tink.proto.KeyTemplate: com.google.crypto.tink.shaded.protobuf.ByteString value_
 com.android.calculator.obfuscation.static.AdvancedObfuscator$MethodObfuscator: int $stable
 androidx.fragment.app.DialogFragment: int STYLE_NO_TITLE
@@ -1360,7 +1360,7 @@ androidx.concurrent.futures.AbstractResolvableFuture: androidx.concurrent.future
 com.android.calculator.obfuscation.ObfuscationManager$NativeObfuscation: com.android.calculator.obfuscation.ObfuscationManager$NativeObfuscation INSTANCE
 androidx.fragment.app.Fragment: androidx.fragment.app.Fragment mParentFragment
 kotlin.jvm.internal.TypeReference: java.util.List arguments
-com.example.antidebug.ThreatType: com.example.antidebug.ThreatType DEBUGGER
+com.example.raspsdk.ThreatType: com.example.raspsdk.ThreatType DEBUGGER
 androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event ON_START
 androidx.preference.PreferenceFragmentCompat$3: androidx.preference.Preference val$preference
 androidx.recyclerview.widget.StaggeredGridLayoutManager$SavedState: boolean mAnchorLayoutFromEnd
@@ -1555,7 +1555,7 @@ kotlin.jvm.internal.DoubleSpreadBuilder: double[] values
 com.google.crypto.tink.proto.AesGcmSivKey: com.google.crypto.tink.shaded.protobuf.Parser PARSER
 androidx.activity.ComponentActivity: java.util.concurrent.CopyOnWriteArrayList mOnConfigurationChangedListeners
 com.google.crypto.tink.proto.HmacParams: int TAG_SIZE_FIELD_NUMBER
-com.example.antidebug.SecurityReport: boolean hooksDetected
+com.example.raspsdk.SecurityReport: boolean hooksDetected
 com.android.calculator.obfuscation.demo.CalculationItem: boolean isValid
 androidx.customview.view.AbsSavedState: androidx.customview.view.AbsSavedState EMPTY_STATE
 androidx.recyclerview.widget.AsyncListUtil: androidx.recyclerview.widget.AsyncListUtil$DataCallback mDataCallback
@@ -1778,7 +1778,7 @@ androidx.recyclerview.widget.DiffUtil$DiffResult: boolean mDetectMoves
 androidx.preference.PreferenceFragmentCompat$ScrollToPreferenceObserver: androidx.recyclerview.widget.RecyclerView mList
 com.google.crypto.tink.proto.XChaCha20Poly1305Key: com.google.crypto.tink.proto.XChaCha20Poly1305Key DEFAULT_INSTANCE
 androidx.recyclerview.widget.DiffUtil$CenteredArray: int[] mData
-com.example.antidebug.SecurityReport: boolean debuggerDetected
+com.example.raspsdk.SecurityReport: boolean debuggerDetected
 com.google.crypto.tink.proto.EncryptedKeyset: com.google.crypto.tink.proto.KeysetInfo keysetInfo_
 androidx.recyclerview.widget.StaggeredGridLayoutManager$SavedState: int mSpanLookupSize
 androidx.recyclerview.widget.GridLayoutManager$SpanSizeLookup: android.util.SparseIntArray mSpanGroupIndexCache
@@ -2019,7 +2019,7 @@ androidx.preference.R$layout: int preference_dropdown
 androidx.preference.R$styleable: int[] PreferenceFragment
 androidx.preference.ListPreferenceDialogFragment: java.lang.CharSequence[] mEntryValues
 androidx.recyclerview.widget.DefaultItemAnimator$5: androidx.recyclerview.widget.RecyclerView$ViewHolder val$holder
-com.example.antidebug.ThreatType: com.example.antidebug.ThreatType HOOKS
+com.example.raspsdk.ThreatType: com.example.raspsdk.ThreatType HOOKS
 androidx.preference.Preference: boolean mDependencyMet
 com.android.calculator.obfuscation.demo.SecureUtility: int SECRET_CONSTANT
 kotlin.jvm.internal.Ref$CharRef: char element
@@ -2057,10 +2057,10 @@ com.android.calculator.activities.MainActivity: boolean isDegreeModeActivated
 androidx.preference.R$styleable: int PreferenceTheme_editTextPreferenceStyle
 kotlin.jvm.internal.ByteCompanionObject: int SIZE_BYTES
 androidx.preference.Preference: androidx.preference.PreferenceGroup mParentGroup
-com.example.antidebug.ThreatType: kotlin.enums.EnumEntries $ENTRIES
+com.example.raspsdk.ThreatType: kotlin.enums.EnumEntries $ENTRIES
 androidx.preference.R$attr: int allowDividerAbove
 androidx.recyclerview.widget.RecyclerView$ViewHolder: androidx.recyclerview.widget.RecyclerView$Adapter mBindingAdapter
-com.example.antidebug.SecurityReport: boolean rootDetected
+com.example.raspsdk.SecurityReport: boolean rootDetected
 androidx.fragment.app.Fragment: androidx.fragment.app.FragmentManager mFragmentManager
 androidx.recyclerview.widget.DefaultItemAnimator$3: androidx.recyclerview.widget.DefaultItemAnimator this$0
 androidx.preference.R$attr: int preferenceStyle
@@ -2085,7 +2085,7 @@ androidx.fragment.app.Fragment: java.util.concurrent.atomic.AtomicInteger mNextL
 com.google.crypto.tink.proto.AesCmacKey: int KEY_VALUE_FIELD_NUMBER
 com.google.crypto.tink.proto.AesCtrKey: com.google.crypto.tink.shaded.protobuf.Parser PARSER
 androidx.recyclerview.widget.AdapterHelper$UpdateOp: int positionStart
-com.example.antidebug.ThreatType: com.example.antidebug.ThreatType[] $VALUES
+com.example.raspsdk.ThreatType: com.example.raspsdk.ThreatType[] $VALUES
 com.google.crypto.tink.proto.AesCmacKeyFormat: com.google.crypto.tink.shaded.protobuf.Parser PARSER
 kotlin.jvm.internal.ShortCompanionObject: short MIN_VALUE
 androidx.preference.Preference: int mLayoutResId
@@ -2281,7 +2281,7 @@ androidx.recyclerview.widget.RecyclerView$RecycledViewPool: android.util.SparseA
 com.google.crypto.tink.proto.Keyset: int PRIMARY_KEY_ID_FIELD_NUMBER
 androidx.preference.R$styleable: int Preference_android_defaultValue
 androidx.recyclerview.widget.BatchingListUpdateCallback: int TYPE_REMOVE
-com.example.antidebug.SecurityReport: boolean suspiciousBehavior
+com.example.raspsdk.SecurityReport: boolean suspiciousBehavior
 androidx.recyclerview.widget.LinearLayoutManager$LayoutState: int LAYOUT_END
 kotlinx.coroutines.internal.LockFreeTaskQueueCore: long _state
 androidx.recyclerview.widget.RecyclerView: int mLastAutoMeasureNonExactMeasuredHeight
@@ -2406,7 +2406,7 @@ com.android.calculator.obfuscation.native.NativeObfuscator$NativeCodeGenerator: 
 androidx.recyclerview.widget.AsyncListUtil: androidx.recyclerview.widget.ThreadUtil$MainThreadCallback mMainThreadCallback
 androidx.preference.R$styleable: int Preference_android_shouldDisableView
 com.android.calculator.activities.MainActivity$updateResultDisplay$1$5: int label
-com.example.antidebug.SecurityReport: long timestamp
+com.example.raspsdk.SecurityReport: long timestamp
 com.android.calculator.history.History: java.lang.String id
 androidx.preference.R$styleable: int SwitchPreferenceCompat_android_summaryOn
 androidx.preference.R$layout: int preference_recyclerview
@@ -2634,7 +2634,7 @@ androidx.recyclerview.widget.FastScroller: int mHorizontalThumbCenterX
 androidx.fragment.app.Fragment: androidx.fragment.app.Fragment mTarget
 com.google.crypto.tink.proto.AesEaxKey: int KEY_VALUE_FIELD_NUMBER
 androidx.fragment.app.DialogFragment: androidx.lifecycle.Observer mObserver
-com.android.calculator.obfuscation.native.NativeObfuscator$NativeAntiDebug: com.android.calculator.obfuscation.native.NativeObfuscator$NativeAntiDebug INSTANCE
+com.android.calculator.obfuscation.native.NativeObfuscator$NativeRASP: com.android.calculator.obfuscation.native.NativeObfuscator$NativeRASP INSTANCE
 androidx.recyclerview.widget.SnapHelper: float MILLISECONDS_PER_INCH
 androidx.recyclerview.widget.FastScroller: int mDragState
 androidx.preference.R$style: int PreferenceCategoryTitleTextStyle
@@ -2739,7 +2739,7 @@ androidx.recyclerview.widget.FastScroller$1: androidx.recyclerview.widget.FastSc
 androidx.preference.PreferenceDialogFragmentCompat: androidx.preference.DialogPreference mPreference
 androidx.recyclerview.widget.RecyclerView: androidx.recyclerview.widget.RecyclerView$OnItemTouchListener mInterceptingOnItemTouchListener
 androidx.recyclerview.widget.AsyncListUtil$2: android.util.SparseBooleanArray mLoadedTiles
-com.example.antidebug.ThreatType: com.example.antidebug.ThreatType ROOT
+com.example.raspsdk.ThreatType: com.example.raspsdk.ThreatType ROOT
 androidx.recyclerview.widget.StaggeredGridLayoutManager: java.lang.Runnable mCheckForGapsRunnable
 kotlin.jvm.internal.CallableReference: boolean isTopLevel
 androidx.recyclerview.widget.StaggeredGridLayoutManager$LazySpanLookup$FullSpanItem: int[] mGapPerSpan
@@ -2762,7 +2762,7 @@ androidx.recyclerview.widget.RecyclerView$LayoutParams: boolean mInsetsDirty
 androidx.recyclerview.widget.ItemTouchHelper$RecoverAnimation$1: androidx.recyclerview.widget.ItemTouchHelper$RecoverAnimation this$0
 androidx.preference.SeekBarPreference$SavedState: int mSeekBarValue
 com.android.calculator.obfuscation.static.ControlFlowObfuscator: int $stable
-com.example.antidebug.SecurityReport: boolean emulatorDetected
+com.example.raspsdk.SecurityReport: boolean emulatorDetected
 androidx.preference.Preference: androidx.preference.PreferenceManager mPreferenceManager
 androidx.preference.CheckBoxPreference: androidx.preference.CheckBoxPreference$Listener mListener
 androidx.preference.R$layout: int preference_material
@@ -3000,7 +3000,7 @@ androidx.recyclerview.widget.DefaultItemAnimator$6: android.view.View val$view
 androidx.preference.R$layout: int preference_category
 androidx.preference.Preference: java.lang.Object mDefaultValue
 androidx.recyclerview.widget.MessageThreadUtil$2: androidx.recyclerview.widget.MessageThreadUtil this$0
-com.example.antidebug.ThreatType: com.example.antidebug.ThreatType SUSPICIOUS_BEHAVIOR
+com.example.raspsdk.ThreatType: com.example.raspsdk.ThreatType SUSPICIOUS_BEHAVIOR
 androidx.recyclerview.widget.RecyclerView: int mInitialTouchY
 androidx.fragment.app.DialogFragment: int mStyle
 androidx.fragment.app.FragmentManagerState: android.os.Parcelable$Creator CREATOR
@@ -3063,7 +3063,7 @@ kotlin.text.Regex$Serialized: long serialVersionUID
 com.android.calculator.obfuscation.runtime.ReflectionIndirection: java.security.SecureRandom secureRandom
 kotlinx.coroutines.internal.LockFreeTaskQueueCore: java.lang.Object _next
 androidx.recyclerview.widget.LinearSnapHelper: androidx.recyclerview.widget.OrientationHelper mHorizontalHelper
-com.android.calculator.obfuscation.native.NativeObfuscator$NativeAntiDebug: int $stable
+com.android.calculator.obfuscation.native.NativeObfuscator$NativeRASP: int $stable
 androidx.recyclerview.widget.AdapterHelper: boolean DEBUG
 androidx.preference.ListPreferenceDialogFragmentCompat: java.lang.String SAVE_STATE_ENTRIES
 androidx.preference.PreferenceManager: int mSharedPreferencesMode
@@ -3240,7 +3240,7 @@ kotlin.jvm.internal.DoubleCompanionObject: int SIZE_BYTES
 androidx.recyclerview.widget.LinearLayoutManager$LayoutState: int mNoRecycleSpace
 com.google.crypto.tink.proto.AesGcmKey: int version_
 androidx.recyclerview.widget.DefaultItemAnimator$MoveInfo: androidx.recyclerview.widget.RecyclerView$ViewHolder holder
-com.example.antidebug.ThreatType: com.example.antidebug.ThreatType TAMPERING
+com.example.raspsdk.ThreatType: com.example.raspsdk.ThreatType TAMPERING
 androidx.fragment.app.Fragment: int RESUMED
 com.android.calculator.calculator.Calculator: int $stable
 kotlin.jvm.internal.DoubleCompanionObject: double MAX_VALUE
@@ -3312,7 +3312,7 @@ com.android.calculator.activities.MainActivity$setSwipeTouchHelperForRecyclerVie
 androidx.preference.SwitchPreference: void performClick(android.view.View)
 kotlin.jvm.internal.PropertyReference0: java.lang.Object getDelegate()
 androidx.preference.PreferenceDataStore: java.lang.String getString(java.lang.String,java.lang.String)
-com.example.antidebug.SecurityReport: boolean getRootDetected()
+com.example.raspsdk.SecurityReport: boolean getRootDetected()
 androidx.fragment.app.Fragment: android.content.Context getContext()
 com.android.calculator.activities.MainActivity$equalsButton$1$5: MainActivity$equalsButton$1$5(com.android.calculator.activities.MainActivity,java.lang.String,kotlin.jvm.internal.Ref$ObjectRef,java.lang.String,kotlin.coroutines.Continuation)
 androidx.recyclerview.widget.ChildHelper: void removeAllViewsUnfiltered()
@@ -3329,7 +3329,7 @@ androidx.recyclerview.widget.RecyclerView$LayoutManager: boolean isAutoMeasureEn
 androidx.recyclerview.widget.RecyclerView$5: void onLeftHiddenState(android.view.View)
 androidx.slidingpanelayout.widget.SlidingPaneLayout: void setShadowResource(int)
 androidx.recyclerview.widget.ViewTypeStorage$IsolatedViewTypeStorage$WrapperViewTypeLookup: ViewTypeStorage$IsolatedViewTypeStorage$WrapperViewTypeLookup(androidx.recyclerview.widget.ViewTypeStorage$IsolatedViewTypeStorage,androidx.recyclerview.widget.NestedAdapterWrapper)
-com.example.antidebug.SecurityReport: boolean component4()
+com.example.raspsdk.SecurityReport: boolean component4()
 androidx.versionedparcelable.CustomVersionedParcelable: CustomVersionedParcelable()
 androidx.constraintlayout.widget.ConstraintLayout: androidx.constraintlayout.core.widgets.ConstraintWidget getViewWidget(android.view.View)
 androidx.recyclerview.widget.RecyclerView$LayoutManager: int getLayoutDirection()
@@ -3643,7 +3643,7 @@ androidx.preference.PreferenceGroupAdapter$PreferenceResourceDescriptor: Prefere
 androidx.core.widget.ImageViewCompat$Api21Impl: android.content.res.ColorStateList getImageTintList(android.widget.ImageView)
 androidx.appcompat.widget.Toolbar: void setSubtitle(java.lang.CharSequence)
 androidx.recyclerview.widget.AsyncListDiffer$1$1: int getOldListSize()
-com.example.antidebug.SecurityReport: boolean getHooksDetected()
+com.example.raspsdk.SecurityReport: boolean getHooksDetected()
 com.android.calculator.activities.MainActivity: void toggleDegreeMode()
 androidx.recyclerview.widget.OrientationHelper: int getStartAfterPadding()
 com.google.android.material.chip.Chip: void setBackgroundResource(int)
@@ -3670,7 +3670,7 @@ com.android.calculator.obfuscation.ObfuscationManager$StaticObfuscation: java.la
 com.android.calculator.calculator.Calculator: java.math.BigDecimal virtualizeCalculation$lambda$1$lambda$0(java.lang.String,java.math.BigDecimal,java.math.BigDecimal)
 androidx.recyclerview.widget.StaggeredGridLayoutManager$Span: void popEnd()
 androidx.recyclerview.widget.ViewTypeStorage$SharedIdRangeViewTypeStorage: androidx.recyclerview.widget.NestedAdapterWrapper getWrapperForGlobalType(int)
-com.android.calculator.activities.MainActivity: com.example.antidebug.SecurityReport performSelectiveSecurityCheck(com.android.calculator.util.SelectiveTestingConfig$TestingConfig)
+com.android.calculator.activities.MainActivity: com.example.raspsdk.SecurityReport performSelectiveSecurityCheck(com.android.calculator.util.SelectiveTestingConfig$TestingConfig)
 androidx.activity.OnBackPressedCallback: void handleOnBackProgressed(androidx.activity.BackEventCompat)
 com.android.calculator.activities.AboutActivity: void setupClickListeners$lambda$7(com.android.calculator.activities.AboutActivity,android.view.View)
 com.android.calculator.obfuscation.static.ResourceObfuscator$AssetEncryption: byte[] encryptAssetData(byte[],java.lang.String)
@@ -3703,7 +3703,7 @@ androidx.constraintlayout.helper.widget.Flow: void setPaddingTop(int)
 com.google.android.material.textfield.TextInputLayout: android.widget.TextView getSuffixTextView()
 com.android.calculator.util.SelectiveTestingConfig$TestScenarios: com.android.calculator.util.SelectiveTestingConfig$TestingConfig noFeatures()
 kotlin.collections.LongIterator: java.lang.Object next()
-com.android.calculator.obfuscation.native.NativeObfuscator$NativeAntiDebug: byte[] addAntiDebugChecks(byte[])
+com.android.calculator.obfuscation.native.NativeObfuscator$NativeRASP: byte[] addRASPChecks(byte[])
 androidx.appcompat.view.menu.ListMenuItemView: void setCheckable(boolean)
 com.google.gson.internal.LazilyParsedNumber: java.lang.Object writeReplace()
 androidx.recyclerview.widget.AsyncListDiffer: AsyncListDiffer(androidx.recyclerview.widget.ListUpdateCallback,androidx.recyclerview.widget.AsyncDifferConfig)
@@ -3796,7 +3796,7 @@ androidx.recyclerview.widget.RecyclerView: int getMinFlingVelocity()
 androidx.core.graphics.drawable.IconCompat$Api28Impl: int getType(java.lang.Object)
 androidx.recyclerview.widget.RecyclerView$6: RecyclerView$6(androidx.recyclerview.widget.RecyclerView)
 androidx.recyclerview.widget.RecyclerView$LayoutManager: android.view.View onFocusSearchFailed(android.view.View,int,androidx.recyclerview.widget.RecyclerView$Recycler,androidx.recyclerview.widget.RecyclerView$State)
-com.example.antidebug.SecurityReport: boolean hasThreats()
+com.example.raspsdk.SecurityReport: boolean hasThreats()
 androidx.recyclerview.widget.ItemTouchHelper$RecoverAnimation: void onAnimationStart(android.animation.Animator)
 androidx.constraintlayout.widget.ConstraintLayout: java.lang.Object getDesignInformation(int,java.lang.Object)
 kotlin.jvm.internal.ArrayIterator: void remove()
@@ -3981,7 +3981,7 @@ androidx.recyclerview.widget.RecyclerView$LayoutManager$1: int getParentEnd()
 com.android.calculator.activities.MainActivity$updateResultDisplay$1: java.lang.Object invoke(java.lang.Object,java.lang.Object)
 androidx.recyclerview.widget.RecyclerView$SmoothScroller: int getChildPosition(android.view.View)
 com.android.calculator.calculator.parser.NumberingSystem$Companion: NumberingSystem$Companion(kotlin.jvm.internal.DefaultConstructorMarker)
-com.example.antidebug.SecurityReport: boolean getTamperingDetected()
+com.example.raspsdk.SecurityReport: boolean getTamperingDetected()
 androidx.appcompat.widget.AppCompatEditText: java.lang.CharSequence getText()
 com.google.android.material.button.MaterialButton: void setRippleColor(android.content.res.ColorStateList)
 kotlin.jvm.internal.ReflectionFactory: kotlin.reflect.KDeclarationContainer getOrCreateKotlinPackage(java.lang.Class,java.lang.String)
@@ -4041,7 +4041,7 @@ androidx.recyclerview.widget.RecyclerViewAccessibilityDelegate$ItemDelegate: and
 androidx.preference.Preference: int getLayoutResource()
 com.google.android.material.button.MaterialButton: android.content.res.ColorStateList getSupportBackgroundTintList()
 androidx.recyclerview.widget.RecyclerView$Recycler: void recycleViewHolderInternal(androidx.recyclerview.widget.RecyclerView$ViewHolder)
-com.example.antidebug.ResponseHandler$ResponseType: com.example.antidebug.ResponseHandler$ResponseType[] values()
+com.example.raspsdk.ResponseHandler$ResponseType: com.example.raspsdk.ResponseHandler$ResponseType[] values()
 com.android.calculator.activities.MainActivity: void leftParenthesisButton(android.view.View)
 androidx.core.content.res.ResourcesCompat$Api23Impl: int getColor(android.content.res.Resources,int,android.content.res.Resources$Theme)
 androidx.vectordrawable.graphics.drawable.VectorDrawableCompat$VGroup: android.graphics.Matrix getLocalMatrix()
@@ -4124,7 +4124,7 @@ androidx.recyclerview.widget.StaggeredGridLayoutManager$LazySpanLookup: int inva
 androidx.preference.EditTextPreference: android.os.Parcelable onSaveInstanceState()
 com.android.calculator.TextSizeAdjuster$AdjustableTextType: com.android.calculator.TextSizeAdjuster$AdjustableTextType valueOf(java.lang.String)
 androidx.core.view.WindowInsetsCompat$Impl20: void setRootViewData(androidx.core.graphics.Insets)
-com.example.antidebug.ResponseHandler$ResponseType: com.example.antidebug.ResponseHandler$ResponseType valueOf(java.lang.String)
+com.example.raspsdk.ResponseHandler$ResponseType: com.example.raspsdk.ResponseHandler$ResponseType valueOf(java.lang.String)
 com.android.calculator.activities.MainActivity: void updateResultDisplay()
 com.android.calculator.obfuscation.runtime.ReflectionIndirection: java.lang.reflect.Constructor findConstructor(java.lang.Class,java.lang.Object[])
 androidx.preference.PreferenceHeaderFragmentCompat: void onViewCreated$lambda-10(androidx.preference.PreferenceHeaderFragmentCompat)
@@ -4310,7 +4310,7 @@ com.android.calculator.history.History: int hashCode()
 androidx.recyclerview.widget.AdapterHelper$UpdateOp: java.lang.String toString()
 com.android.calculator.activities.MainActivity: void setErrorColor(boolean)
 com.android.calculator.obfuscation.ObfuscationManager$NativeObfuscation: ObfuscationManager$NativeObfuscation()
-com.example.antidebug.ThreatType: kotlin.enums.EnumEntries getEntries()
+com.example.raspsdk.ThreatType: kotlin.enums.EnumEntries getEntries()
 androidx.recyclerview.widget.ItemTouchHelper$RecoverAnimation$1: void onAnimationUpdate(android.animation.ValueAnimator)
 androidx.activity.ComponentActivity: void removeOnMultiWindowModeChangedListener(androidx.core.util.Consumer)
 androidx.appcompat.widget.AppCompatButton: int getAutoSizeStepGranularity()
@@ -4385,7 +4385,7 @@ androidx.preference.DropDownPreference: void onBindViewHolder(androidx.preferenc
 com.google.android.material.textfield.TextInputLayout: void setHelperTextColor(android.content.res.ColorStateList)
 androidx.activity.ComponentActivity: androidx.activity.FullyDrawnReporter getFullyDrawnReporter()
 com.google.android.material.transformation.FabTransformationBehavior: FabTransformationBehavior(android.content.Context,android.util.AttributeSet)
-com.example.antidebug.SecurityReport: SecurityReport(boolean,boolean,boolean,boolean,boolean,boolean,long)
+com.example.raspsdk.SecurityReport: SecurityReport(boolean,boolean,boolean,boolean,boolean,boolean,long)
 kotlin.jvm.internal.DoubleCompanionObject: void getNEGATIVE_INFINITY$annotations()
 androidx.fragment.app.Fragment: java.lang.Object getEnterTransition()
 androidx.recyclerview.widget.ConcatAdapterController: long getItemId(int)
@@ -4488,12 +4488,12 @@ com.android.calculator.obfuscation.static.AdvancedObfuscator$MetadataStripper: A
 androidx.appcompat.app.AppCompatActivity: android.view.MenuInflater getMenuInflater()
 androidx.preference.SeekBarPreference: boolean getShowSeekBarValue()
 androidx.recyclerview.widget.LinearLayoutManager: android.view.View findOneVisibleChild(int,int,boolean,boolean)
-com.example.antidebug.SecurityReport: boolean component6()
+com.example.raspsdk.SecurityReport: boolean component6()
 androidx.recyclerview.widget.RecyclerView$LayoutManager: void layoutDecoratedWithMargins(android.view.View,int,int,int,int)
 androidx.core.app.ComponentActivity: boolean shouldDumpInternalState(java.lang.String[])
 androidx.appcompat.widget.AppCompatTextHelper$Api26Impl: void setAutoSizeTextTypeUniformWithPresetSizes(android.widget.TextView,int[],int)
 com.google.android.material.chip.Chip: void setBackgroundTintMode(android.graphics.PorterDuff$Mode)
-com.example.antidebug.ThreatType: com.example.antidebug.ThreatType[] values()
+com.example.raspsdk.ThreatType: com.example.raspsdk.ThreatType[] values()
 com.android.calculator.activities.MainActivity$updateResultDisplay$1$7: java.lang.Object invokeSuspend(java.lang.Object)
 androidx.recyclerview.widget.RecyclerView: int computeVerticalScrollExtent()
 com.google.android.material.textfield.TextInputLayout: void setPasswordVisibilityToggleContentDescription(int)
@@ -4550,7 +4550,7 @@ androidx.core.view.ViewCompat$Api31Impl: androidx.core.view.ContentInfoCompat pe
 androidx.recyclerview.widget.RecyclerView$LayoutManager: boolean performAccessibilityActionForItem(android.view.View,int,android.os.Bundle)
 com.google.android.material.sidesheet.SideSheetBehavior: SideSheetBehavior()
 com.google.android.material.chip.Chip: void setCloseIconVisible(int)
-com.example.antidebug.SecurityReport: boolean component3()
+com.example.raspsdk.SecurityReport: boolean component3()
 androidx.recyclerview.widget.GapWorker: void run()
 com.google.crypto.tink.proto.HashType: com.google.crypto.tink.proto.HashType valueOf(java.lang.String)
 androidx.appcompat.widget.ActionBarOverlayLayout: void setWindowCallback(android.view.Window$Callback)
@@ -4599,7 +4599,7 @@ androidx.preference.PreferenceRecyclerViewAccessibilityDelegate: PreferenceRecyc
 androidx.recyclerview.widget.RecyclerViewAccessibilityDelegate$ItemDelegate: void onInitializeAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent)
 androidx.constraintlayout.helper.widget.Flow: void setPadding(int)
 com.google.android.material.textfield.TextInputEditText: com.google.android.material.textfield.TextInputLayout getTextInputLayout()
-com.example.antidebug.TamperDetection$Companion: boolean nativeBreakpointScan()
+com.example.raspsdk.TamperDetection$Companion: boolean nativeBreakpointScan()
 kotlinx.coroutines.selects.TrySelectDetailedResult: kotlinx.coroutines.selects.TrySelectDetailedResult valueOf(java.lang.String)
 androidx.core.widget.NestedScrollView: float getBottomFadingEdgeStrength()
 com.android.calculator.obfuscation.ObfuscationManager$RuntimeObfuscation: java.lang.Class loadEncryptedClass(byte[],java.lang.String)
@@ -4709,7 +4709,7 @@ androidx.recyclerview.widget.RecyclerView$RecyclerViewDataObserver: void onChang
 androidx.recyclerview.widget.ItemTouchHelper: void startGestureDetection()
 kotlin.jvm.internal.MutablePropertyReference0: MutablePropertyReference0()
 androidx.recyclerview.widget.RecyclerView: void scrollTo(int,int)
-com.example.antidebug.SecurityReport: boolean component1()
+com.example.raspsdk.SecurityReport: boolean component1()
 androidx.preference.PreferenceGroup$PreferencePositionCallback: int getPreferenceAdapterPosition(androidx.preference.Preference)
 kotlin.jvm.internal.MagicApiIntrinsics: int intMagicApiCall(int)
 androidx.preference.PreferenceGroupAdapter: long getItemId(int)
@@ -4937,7 +4937,7 @@ com.android.calculator.activities.MainActivity$updateResultDisplay$1$5: MainActi
 androidx.fragment.app.Fragment: android.view.View getFocusedView()
 androidx.security.crypto.MasterKey$KeyScheme: androidx.security.crypto.MasterKey$KeyScheme valueOf(java.lang.String)
 androidx.security.crypto.EncryptedSharedPreferences$PrefKeyEncryptionScheme: androidx.security.crypto.EncryptedSharedPreferences$PrefKeyEncryptionScheme[] values()
-com.android.calculator.obfuscation.native.NativeObfuscator$NativeAntiDebug: NativeObfuscator$NativeAntiDebug()
+com.android.calculator.obfuscation.native.NativeObfuscator$NativeRASP: NativeObfuscator$NativeRASP()
 androidx.preference.Preference: void unregisterDependency()
 com.google.android.material.chip.Chip: void setMaxWidth(int)
 androidx.appcompat.widget.AppCompatCheckedTextView: android.content.res.ColorStateList getSupportCompoundDrawablesTintList()
@@ -5152,7 +5152,7 @@ com.google.gson.stream.JsonToken: com.google.gson.stream.JsonToken[] values()
 androidx.preference.SeekBarPreference$SavedState$1: androidx.preference.SeekBarPreference$SavedState createFromParcel(android.os.Parcel)
 kotlin.jvm.internal.FunctionImpl: java.lang.Object invoke(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object)
 androidx.constraintlayout.widget.ConstraintLayout: void forceLayout()
-com.example.antidebug.RootDetection$Companion: boolean nativeRootCheck()
+com.example.raspsdk.RootDetection$Companion: boolean nativeRootCheck()
 androidx.core.widget.NestedScrollView: NestedScrollView(android.content.Context,android.util.AttributeSet)
 androidx.constraintlayout.widget.ConstraintLayout: void setOnConstraintsChanged(androidx.constraintlayout.widget.ConstraintsChangedListener)
 com.android.calculator.obfuscation.ObfuscationManager$StaticObfuscation: void applyComprehensiveObfuscation(kotlin.jvm.functions.Function0)
@@ -5211,7 +5211,7 @@ androidx.recyclerview.widget.RecyclerView: boolean checkLayoutParams(android.vie
 com.google.android.material.textfield.MaterialAutoCompleteTextView: int getSimpleItemSelectedColor()
 androidx.preference.Preference: int compareTo(java.lang.Object)
 com.android.calculator.obfuscation.demo.ValidationRules: ValidationRules()
-com.example.antidebug.SecurityReport: int getThreatCount()
+com.example.raspsdk.SecurityReport: int getThreatCount()
 com.android.calculator.obfuscation.ObfuscationManager$DataMasking: java.lang.String encryptField$default(com.android.calculator.obfuscation.ObfuscationManager$DataMasking,java.lang.String,java.lang.String,int,java.lang.Object)
 androidx.fragment.app.Fragment: void onPrepareOptionsMenu(android.view.Menu)
 com.sothree.slidinguppanel.SlidingUpPanelLayout: void setShadowHeight(int)
@@ -5239,7 +5239,7 @@ androidx.appcompat.app.AppCompatDelegateImpl$Api24Impl: androidx.core.os.LocaleL
 androidx.recyclerview.widget.ListAdapter: void submitList(java.util.List)
 kotlin.jvm.internal.FunctionReference: kotlin.reflect.KCallable getReflected()
 com.android.calculator.calculator.Calculator: java.math.BigDecimal factorial$lambda$9(java.math.BigDecimal,com.android.calculator.calculator.Calculator)
-com.example.antidebug.ThreatType: com.example.antidebug.ThreatType[] $values()
+com.example.raspsdk.ThreatType: com.example.raspsdk.ThreatType[] $values()
 com.google.android.material.snackbar.BaseTransientBottomBar$SnackbarBaseLayout: void setBackgroundTintList(android.content.res.ColorStateList)
 com.google.android.material.button.MaterialButton: MaterialButton(android.content.Context,android.util.AttributeSet)
 androidx.preference.MultiSelectListPreferenceDialogFragmentCompat: void onDialogClosed(boolean)
@@ -5693,7 +5693,7 @@ kotlin.jvm.internal.DoubleSpreadBuilder: int getSize(double[])
 androidx.fragment.app.Fragment: void setAllowReturnTransitionOverlap(boolean)
 androidx.recyclerview.widget.RecyclerView: void smoothScrollToPosition(int)
 androidx.recyclerview.widget.RecyclerView: void dispatchChildAttached(android.view.View)
-com.example.antidebug.SecurityReport: boolean equals(java.lang.Object)
+com.example.raspsdk.SecurityReport: boolean equals(java.lang.Object)
 kotlin.collections.CharIterator: void remove()
 androidx.recyclerview.widget.ConcatAdapterController: androidx.recyclerview.widget.RecyclerView$ViewHolder onCreateViewHolder(android.view.ViewGroup,int)
 kotlin.text.Regex$Serialized: java.lang.Object readResolve()
@@ -5808,7 +5808,7 @@ androidx.preference.MultiSelectListPreferenceDialogFragmentCompat: androidx.pref
 androidx.recyclerview.widget.RecyclerView: void smoothScrollBy(int,int,android.view.animation.Interpolator,int)
 androidx.recyclerview.widget.GridLayoutManager: void setSpanSizeLookup(androidx.recyclerview.widget.GridLayoutManager$SpanSizeLookup)
 androidx.recyclerview.widget.SimpleItemAnimator: boolean animateDisappearance(androidx.recyclerview.widget.RecyclerView$ViewHolder,androidx.recyclerview.widget.RecyclerView$ItemAnimator$ItemHolderInfo,androidx.recyclerview.widget.RecyclerView$ItemAnimator$ItemHolderInfo)
-com.example.antidebug.SecurityReport: boolean getEmulatorDetected()
+com.example.raspsdk.SecurityReport: boolean getEmulatorDetected()
 androidx.recyclerview.widget.LinearLayoutManager$SavedState: boolean hasValidAnchor()
 androidx.recyclerview.widget.RecyclerView$ViewFlinger: void postOnAnimation()
 androidx.recyclerview.widget.ViewBoundsCheck$Callback: int getChildEnd(android.view.View)
@@ -5961,7 +5961,7 @@ androidx.recyclerview.widget.StaggeredGridLayoutManager$LazySpanLookup$FullSpanI
 com.google.gson.FieldNamingPolicy: com.google.gson.FieldNamingPolicy[] values()
 androidx.fragment.app.Fragment: androidx.lifecycle.LifecycleOwner getViewLifecycleOwner()
 androidx.appcompat.app.AppCompatActivity: void closeOptionsMenu()
-com.android.calculator.activities.MainActivity: boolean checkEnabledThreats(com.example.antidebug.SecurityReport,com.android.calculator.util.SelectiveTestingConfig$TestingConfig)
+com.android.calculator.activities.MainActivity: boolean checkEnabledThreats(com.example.raspsdk.SecurityReport,com.android.calculator.util.SelectiveTestingConfig$TestingConfig)
 androidx.preference.EditTextPreferenceDialogFragment: boolean needInputMethod()
 androidx.recyclerview.widget.SortedList$BatchedCallback: java.lang.Object getChangePayload(java.lang.Object,java.lang.Object)
 com.google.android.material.textfield.TextInputLayout: int getErrorAccessibilityLiveRegion()
@@ -6086,7 +6086,7 @@ androidx.appcompat.widget.SwitchCompat: int getCompoundPaddingLeft()
 androidx.recyclerview.widget.ItemTouchHelper: void startDrag(androidx.recyclerview.widget.RecyclerView$ViewHolder)
 androidx.preference.MultiSelectListPreferenceDialogFragmentCompat$1: void onClick(android.content.DialogInterface,int,boolean)
 androidx.recyclerview.widget.DiffUtil$Range: int oldSize()
-com.example.antidebug.DebuggerDetection$Companion: boolean nativePtraceCheck()
+com.example.raspsdk.DebuggerDetection$Companion: boolean nativePtraceCheck()
 kotlin.jvm.internal.Intrinsics: void checkReturnedValueIsNotNull(java.lang.Object,java.lang.String,java.lang.String)
 com.google.android.material.chip.Chip: float getChipCornerRadius()
 androidx.recyclerview.widget.ItemTouchHelper$SimpleCallback: int getMovementFlags(androidx.recyclerview.widget.RecyclerView,androidx.recyclerview.widget.RecyclerView$ViewHolder)
@@ -6199,7 +6199,7 @@ androidx.recyclerview.widget.DiffUtil$ItemCallback: DiffUtil$ItemCallback()
 com.google.android.material.textfield.TextInputLayout: void setEndIconContentDescription(java.lang.CharSequence)
 androidx.recyclerview.widget.LinearLayoutManager: android.view.View findFirstPartiallyOrCompletelyInvisibleChild()
 com.android.calculator.activities.MainActivity: void scientistModeSwitchButton(android.view.View)
-com.example.antidebug.SecurityReport: boolean getSuspiciousBehavior()
+com.example.raspsdk.SecurityReport: boolean getSuspiciousBehavior()
 androidx.recyclerview.widget.RecyclerView$LayoutManager: int getRowCountForAccessibility(androidx.recyclerview.widget.RecyclerView$Recycler,androidx.recyclerview.widget.RecyclerView$State)
 com.android.calculator.obfuscation.data.DataMasking$FormatPreservingEncryption: java.lang.String formatPhone(java.lang.String)
 androidx.preference.Preference: java.lang.StringBuilder getFilterableStringBuilder()
@@ -6218,7 +6218,7 @@ androidx.recyclerview.widget.ItemTouchHelper$ViewDropHandler: void prepareForDro
 androidx.recyclerview.widget.RecyclerView: void setItemViewCacheSize(int)
 com.android.calculator.activities.MainActivity: void multiplyButton(android.view.View)
 androidx.activity.ComponentActivity: void initializeViewTreeOwners()
-com.example.antidebug.AntiDebug: void init(android.content.Context)
+com.example.raspsdk.RASP: void init(android.content.Context)
 kotlin.jvm.internal.TypeIntrinsics: java.util.Map asMutableMap(java.lang.Object,java.lang.String)
 com.android.calculator.util.SelectiveTestingConfig$TestScenarios: com.android.calculator.util.SelectiveTestingConfig$TestingConfig emulatorOnly()
 androidx.recyclerview.widget.RecyclerView$SmoothScroller$Action: int getDy()
@@ -6352,7 +6352,7 @@ androidx.recyclerview.widget.LinearLayoutManager: boolean resolveIsInfinite()
 androidx.preference.SwitchPreference: SwitchPreference(android.content.Context,android.util.AttributeSet,int,int)
 kotlin.jvm.internal.TypeParameterReference: void setUpperBounds(java.util.List)
 androidx.appcompat.widget.Toolbar: void setSubtitleTextColor(int)
-com.example.antidebug.AntiDebug: void handleThreat(com.example.antidebug.ThreatType)
+com.example.raspsdk.RASP: void handleThreat(com.example.raspsdk.ThreatType)
 androidx.recyclerview.widget.StaggeredGridLayoutManager$LazySpanLookup$FullSpanItem$1: java.lang.Object createFromParcel(android.os.Parcel)
 androidx.preference.SeekBarPreference: void onSetInitialValue(java.lang.Object)
 androidx.core.view.MenuItemCompat$Api26Impl: java.lang.CharSequence getTooltipText(android.view.MenuItem)
@@ -6437,7 +6437,7 @@ com.google.android.material.textfield.TextInputLayout: void setEndIconDrawable(i
 com.android.calculator.obfuscation.ObfuscationManager: java.util.Map getObfuscationStatus()
 androidx.recyclerview.widget.GridLayoutManager: void assignSpans(androidx.recyclerview.widget.RecyclerView$Recycler,androidx.recyclerview.widget.RecyclerView$State,int,boolean)
 com.android.calculator.activities.MainActivity: kotlin.Unit onCreate$lambda$3(com.android.calculator.activities.MainActivity,java.lang.String)
-com.android.calculator.obfuscation.native.NativeObfuscator$NativeAntiDebug: byte[] addAntiTamperingChecks(byte[])
+com.android.calculator.obfuscation.native.NativeObfuscator$NativeRASP: byte[] addAntiTamperingChecks(byte[])
 kotlin.jvm.internal.TypeIntrinsics: java.lang.Throwable sanitizeStackTrace(java.lang.Throwable)
 androidx.preference.PreferenceManager: androidx.preference.PreferenceScreen getPreferenceScreen()
 androidx.recyclerview.widget.RecyclerView$LayoutManager: int getHeight()
@@ -6590,7 +6590,7 @@ androidx.recyclerview.widget.ChildHelper: int indexOfChild(android.view.View)
 androidx.slidingpanelayout.widget.SlidingPaneLayout: void setShadowResourceLeft(int)
 androidx.fragment.app.Fragment: void onViewCreated(android.view.View,android.os.Bundle)
 androidx.constraintlayout.widget.Barrier: int getMargin()
-com.example.antidebug.DebuggerDetection$Companion: boolean nativeSignalCheck()
+com.example.raspsdk.DebuggerDetection$Companion: boolean nativeSignalCheck()
 com.android.calculator.obfuscation.static.ControlFlowObfuscator: ControlFlowObfuscator()
 androidx.recyclerview.widget.RecyclerView$RecycledViewPool: void detachForPoolingContainer(androidx.recyclerview.widget.RecyclerView$Adapter,boolean)
 androidx.recyclerview.widget.RecyclerView$LayoutManager: int scrollHorizontallyBy(int,androidx.recyclerview.widget.RecyclerView$Recycler,androidx.recyclerview.widget.RecyclerView$State)
@@ -6618,7 +6618,7 @@ com.android.calculator.activities.MainActivity: void access$deleteElementFromHis
 com.google.android.material.textfield.TextInputLayout: int getEndIconMode()
 androidx.recyclerview.widget.LinearSmoothScroller: void onSeekTargetStep(int,int,androidx.recyclerview.widget.RecyclerView$State,androidx.recyclerview.widget.RecyclerView$SmoothScroller$Action)
 androidx.preference.Preference: boolean persistBoolean(boolean)
-com.android.calculator.obfuscation.native.NativeObfuscator$NativeAntiDebug: byte[] calculateChecksum(byte[])
+com.android.calculator.obfuscation.native.NativeObfuscator$NativeRASP: byte[] calculateChecksum(byte[])
 androidx.core.view.ViewCompat$Api21Impl: void setZ(android.view.View,float)
 com.android.calculator.obfuscation.data.DataMasking$DynamicMasking: DataMasking$DynamicMasking()
 androidx.preference.PreferenceFragmentCompat: androidx.preference.PreferenceScreen getPreferenceScreen()
@@ -6867,7 +6867,7 @@ androidx.recyclerview.widget.RecyclerView$ViewHolder: void setScrapContainer(and
 androidx.activity.ComponentActivity: void removeOnContextAvailableListener(androidx.activity.contextaware.OnContextAvailableListener)
 kotlin.jvm.internal.TypeIntrinsics: java.util.Iterator castToIterator(java.lang.Object)
 androidx.appcompat.view.menu.ListMenuItemView: void setIcon(android.graphics.drawable.Drawable)
-com.example.antidebug.SecurityReport: java.lang.String toString()
+com.example.raspsdk.SecurityReport: java.lang.String toString()
 kotlin.coroutines.jvm.internal.ContinuationImpl: kotlin.coroutines.Continuation intercepted()
 androidx.recyclerview.widget.RecyclerView$5: RecyclerView$5(androidx.recyclerview.widget.RecyclerView)
 androidx.preference.SeekBarPreference$SavedState$1: SeekBarPreference$SavedState$1()
@@ -6893,7 +6893,7 @@ androidx.recyclerview.widget.ItemTouchHelper: android.view.View findChildView(an
 com.google.android.material.button.MaterialButton: void setRippleColorResource(int)
 com.google.android.material.textfield.TextInputLayout: android.widget.ImageView$ScaleType getStartIconScaleType()
 androidx.cardview.widget.CardView: float getCardElevation()
-com.example.antidebug.SecurityReport: long getTimestamp()
+com.example.raspsdk.SecurityReport: long getTimestamp()
 androidx.recyclerview.widget.OrientationHelper: int getDecoratedEnd(android.view.View)
 androidx.recyclerview.widget.RecyclerView: void removeRecyclerListener(androidx.recyclerview.widget.RecyclerView$RecyclerListener)
 androidx.recyclerview.widget.RecyclerView: void setRecyclerListener(androidx.recyclerview.widget.RecyclerView$RecyclerListener)
@@ -6916,7 +6916,7 @@ kotlin.jvm.internal.ClassReference: void isOpen$annotations()
 com.android.calculator.obfuscation.data.DataMasking$FormatPreservingEncryption: java.lang.String formatSSN(java.lang.String)
 kotlin.jvm.internal.FunctionImpl: java.lang.Object invoke(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object)
 androidx.lifecycle.ReportFragment$LifecycleCallbacks: ReportFragment$LifecycleCallbacks()
-com.example.antidebug.ThreatType: ThreatType(java.lang.String,int)
+com.example.raspsdk.ThreatType: ThreatType(java.lang.String,int)
 androidx.recyclerview.widget.RecyclerView$Recycler: void invalidateDisplayListInt(androidx.recyclerview.widget.RecyclerView$ViewHolder)
 androidx.recyclerview.widget.ViewInfoStore: androidx.recyclerview.widget.RecyclerView$ViewHolder getFromOldChangeHolders(long)
 com.android.calculator.obfuscation.data.DataMasking$RedactionMasking: java.lang.String redactCreditCard(java.lang.String)
@@ -6973,7 +6973,7 @@ androidx.recyclerview.widget.StaggeredGridLayoutManager$Span: int getStartLine(i
 com.android.calculator.calculator.parser.NumberFormatter: java.util.List extractString(java.lang.String,java.lang.String)
 androidx.recyclerview.widget.RecyclerView: boolean scrollByInternal(int,int,android.view.MotionEvent,int)
 androidx.appcompat.widget.AppCompatMultiAutoCompleteTextView: android.content.res.ColorStateList getSupportCompoundDrawablesTintList()
-com.example.antidebug.SecurityReport: int hashCode()
+com.example.raspsdk.SecurityReport: int hashCode()
 androidx.recyclerview.widget.ChildHelper$Callback: void detachViewFromParent(int)
 androidx.window.core.SpecificationComputer$VerificationMode: androidx.window.core.SpecificationComputer$VerificationMode valueOf(java.lang.String)
 androidx.constraintlayout.widget.ConstraintLayout: boolean isRtl()
@@ -7458,7 +7458,7 @@ kotlin.jvm.internal.FunctionImpl: java.lang.Object invoke(java.lang.Object,java.
 androidx.preference.Preference: void setPersistent(boolean)
 androidx.appcompat.widget.LinearLayoutCompat: void setGravity(int)
 androidx.recyclerview.widget.ConcatAdapterController: void onViewRecycled(androidx.recyclerview.widget.RecyclerView$ViewHolder)
-com.example.antidebug.SecurityReport: long component7()
+com.example.raspsdk.SecurityReport: long component7()
 com.android.calculator.activities.SettingsActivity$SettingsFragment: SettingsActivity$SettingsFragment()
 androidx.constraintlayout.widget.ConstraintLayout: void setSelfDimensionBehaviour(androidx.constraintlayout.core.widgets.ConstraintWidgetContainer,int,int,int,int)
 androidx.recyclerview.widget.GridLayoutManager$SpanSizeLookup: void invalidateSpanGroupIndexCache()
@@ -7932,7 +7932,7 @@ kotlin.collections.BooleanIterator: java.lang.Object next()
 com.google.android.material.textfield.MaterialAutoCompleteTextView: void setSimpleItems(java.lang.String[])
 androidx.recyclerview.widget.RecyclerView$ViewFlinger: int computeScrollDuration(int,int)
 androidx.appcompat.widget.AppCompatAutoCompleteTextView: void setSupportCompoundDrawablesTintMode(android.graphics.PorterDuff$Mode)
-com.example.antidebug.TamperDetection$Companion: boolean nativeMemoryCheck()
+com.example.raspsdk.TamperDetection$Companion: boolean nativeMemoryCheck()
 androidx.activity.ComponentActivity: androidx.activity.result.ActivityResultLauncher registerForActivityResult(androidx.activity.result.contract.ActivityResultContract,androidx.activity.result.ActivityResultCallback)
 androidx.fragment.app.Fragment: boolean isAdded()
 androidx.preference.PreferenceRecyclerViewAccessibilityDelegate$1: PreferenceRecyclerViewAccessibilityDelegate$1(androidx.preference.PreferenceRecyclerViewAccessibilityDelegate)
@@ -8085,7 +8085,7 @@ com.google.android.material.button.MaterialButton: void setShapeAppearanceModel(
 androidx.core.widget.PopupWindowCompat$Api23Impl: boolean getOverlapAnchor(android.widget.PopupWindow)
 androidx.recyclerview.widget.LinearLayoutManager: LinearLayoutManager(android.content.Context,android.util.AttributeSet,int,int)
 androidx.preference.Preference: void onSetInitialValue(boolean,java.lang.Object)
-com.android.calculator.obfuscation.native.NativeObfuscator$NativeAntiDebug: byte[] generateAntiDebugCode()
+com.android.calculator.obfuscation.native.NativeObfuscator$NativeRASP: byte[] generateRASPCode()
 androidx.recyclerview.widget.AsyncListUtil$2: void log(java.lang.String,java.lang.Object[])
 kotlin.jvm.internal.ClassReference: void isInner$annotations()
 androidx.recyclerview.widget.ItemTouchHelper$RecoverAnimation: void onAnimationRepeat(android.animation.Animator)
@@ -8309,7 +8309,7 @@ androidx.core.view.WindowInsetsCompat$Impl20: WindowInsetsCompat$Impl20(androidx
 androidx.recyclerview.widget.DiffUtil$DiffResult: int convertOldPositionToNew(int)
 kotlin.jvm.internal.FloatCompanionObject: float getMIN_VALUE()
 androidx.recyclerview.widget.LinearLayoutManager: void onLayoutCompleted(androidx.recyclerview.widget.RecyclerView$State)
-com.android.calculator.obfuscation.ObfuscationManager$NativeObfuscation: byte[] addAntiDebugChecks(byte[])
+com.android.calculator.obfuscation.ObfuscationManager$NativeObfuscation: byte[] addRASPChecks(byte[])
 com.google.android.material.materialswitch.MaterialSwitch: void setTrackDecorationTintMode(android.graphics.PorterDuff$Mode)
 com.google.android.material.checkbox.MaterialCheckBox: android.graphics.PorterDuff$Mode getButtonIconTintMode()
 androidx.appcompat.app.AppCompatActivity: boolean onKeyDown(int,android.view.KeyEvent)
@@ -8332,7 +8332,7 @@ androidx.core.view.WindowInsetsCompat$Impl29: WindowInsetsCompat$Impl29(androidx
 com.android.calculator.obfuscation.runtime.ReflectionIndirection: java.lang.Object createInstance(java.lang.String,java.lang.Object[])
 androidx.startup.InitializationProvider: InitializationProvider()
 androidx.recyclerview.widget.RecyclerView$ViewHolder: boolean hasAnyOfTheFlags(int)
-com.example.antidebug.SecurityReport: boolean component5()
+com.example.raspsdk.SecurityReport: boolean component5()
 com.android.calculator.obfuscation.static.AdvancedObfuscator$DynamicCodeGenerator: boolean generateAntiTamperingCheck$lambda$2(long,java.security.SecureRandom)
 androidx.recyclerview.widget.AsyncListUtil$ViewCallback: void onDataRefresh()
 androidx.appcompat.widget.SwitchCompat: void setAllCaps(boolean)
@@ -8466,7 +8466,7 @@ androidx.lifecycle.ProcessLifecycleInitializer: ProcessLifecycleInitializer()
 androidx.recyclerview.widget.LinearLayoutManager$SavedState: void invalidateAnchor()
 androidx.preference.PreferenceFragmentCompat$ScrollToPreferenceObserver: PreferenceFragmentCompat$ScrollToPreferenceObserver(androidx.recyclerview.widget.RecyclerView$Adapter,androidx.recyclerview.widget.RecyclerView,androidx.preference.Preference,java.lang.String)
 kotlin.jvm.internal.CallableReference: java.lang.String getSignature()
-com.example.antidebug.SecurityReport: boolean component2()
+com.example.raspsdk.SecurityReport: boolean component2()
 androidx.recyclerview.widget.StaggeredGridLayoutManager: void updateAllRemainingSpans(int,int)
 com.android.calculator.activities.MainActivity: void openSettings(android.view.MenuItem)
 androidx.preference.internal.PreferenceImageView: PreferenceImageView(android.content.Context)
@@ -8484,7 +8484,7 @@ com.android.calculator.activities.MainActivity: boolean access$isStillTheSameCal
 androidx.fragment.app.Fragment: androidx.fragment.app.Fragment requireParentFragment()
 androidx.preference.PreferenceDialogFragmentCompat: void requestInputMethod(android.app.Dialog)
 kotlin.jvm.internal.KTypeBase: kotlin.reflect.KClassifier getClassifier()
-com.example.antidebug.SecurityReport: boolean getDebuggerDetected()
+com.example.raspsdk.SecurityReport: boolean getDebuggerDetected()
 kotlin.coroutines.jvm.internal.SuspendLambda: int getArity()
 androidx.recyclerview.widget.OrientationHelper$1: int getDecoratedMeasurement(android.view.View)
 androidx.core.view.WindowInsetsCompat$TypeImpl30: int toPlatformType(int)
@@ -8530,7 +8530,7 @@ com.android.calculator.obfuscation.static.AdvancedObfuscator$MethodObfuscator: k
 androidx.activity.ComponentActivity: void setContentView(android.view.View)
 androidx.fragment.app.DialogFragment: void dismissNow()
 com.google.android.material.textfield.TextInputLayout: android.graphics.drawable.Drawable getErrorIconDrawable()
-com.example.antidebug.HookDetection$Companion: boolean nativeFridaCheck()
+com.example.raspsdk.HookDetection$Companion: boolean nativeFridaCheck()
 androidx.constraintlayout.helper.widget.Flow: void setOrientation(int)
 kotlin.jvm.internal.Intrinsics: void throwIllegalArgument(java.lang.String)
 androidx.recyclerview.widget.RecyclerView$SavedState$1: androidx.recyclerview.widget.RecyclerView$SavedState createFromParcel(android.os.Parcel)
@@ -8778,7 +8778,7 @@ kotlin.jvm.internal.ClassReference: java.util.List getSealedSubclasses()
 androidx.recyclerview.widget.OpReorderer: void swapMoveAdd(java.util.List,int,androidx.recyclerview.widget.AdapterHelper$UpdateOp,int,androidx.recyclerview.widget.AdapterHelper$UpdateOp)
 com.android.calculator.activities.MainActivity$updateResultDisplay$1$7: MainActivity$updateResultDisplay$1$7(com.android.calculator.activities.MainActivity,kotlin.coroutines.Continuation)
 kotlin.jvm.internal.CollectionToArray: java.lang.Object[] toArray(java.util.Collection,java.lang.Object[])
-com.example.antidebug.HookDetection$Companion: boolean nativeInlineHookCheck()
+com.example.raspsdk.HookDetection$Companion: boolean nativeInlineHookCheck()
 com.android.calculator.activities.MainActivity$equalsButton$1$5: java.lang.Object invoke(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.Continuation)
 androidx.recyclerview.widget.ConcatAdapter$Config$StableIdMode: androidx.recyclerview.widget.ConcatAdapter$Config$StableIdMode valueOf(java.lang.String)
 com.android.calculator.activities.SettingsActivity: void onCreate(android.os.Bundle)
@@ -8917,7 +8917,7 @@ androidx.recyclerview.widget.RecyclerView$LayoutManager: void onInitializeAccess
 androidx.recyclerview.widget.RecyclerView$ViewHolder: boolean isRemoved()
 androidx.recyclerview.widget.StaggeredGridLayoutManager: boolean isAutoMeasureEnabled()
 androidx.recyclerview.widget.AsyncListUtil$ViewCallback: AsyncListUtil$ViewCallback()
-com.example.antidebug.SecurityReport: com.example.antidebug.SecurityReport copy(boolean,boolean,boolean,boolean,boolean,boolean,long)
+com.example.raspsdk.SecurityReport: com.example.raspsdk.SecurityReport copy(boolean,boolean,boolean,boolean,boolean,boolean,long)
 androidx.recyclerview.widget.LinearSnapHelper: android.view.View findSnapView(androidx.recyclerview.widget.RecyclerView$LayoutManager)
 androidx.preference.SeekBarPreference: void setAdjustable(boolean)
 androidx.constraintlayout.helper.widget.Flow: void setFirstHorizontalStyle(int)
@@ -9001,7 +9001,7 @@ androidx.preference.PreferenceDialogFragment: void onDialogClosed(boolean)
 kotlin.jvm.internal.Intrinsics: void needClassReification(java.lang.String)
 com.google.android.material.checkbox.MaterialCheckBox: void setButtonIconTintList(android.content.res.ColorStateList)
 com.google.android.material.floatingactionbutton.FloatingActionButton$BaseBehavior: FloatingActionButton$BaseBehavior(android.content.Context,android.util.AttributeSet)
-com.example.antidebug.SecurityReport: com.example.antidebug.SecurityReport copy$default(com.example.antidebug.SecurityReport,boolean,boolean,boolean,boolean,boolean,boolean,long,int,java.lang.Object)
+com.example.raspsdk.SecurityReport: com.example.raspsdk.SecurityReport copy$default(com.example.raspsdk.SecurityReport,boolean,boolean,boolean,boolean,boolean,boolean,long,int,java.lang.Object)
 androidx.activity.ComponentActivity: void addOnConfigurationChangedListener(androidx.core.util.Consumer)
 androidx.fragment.app.FragmentActivity: void onRequestPermissionsResult(int,java.lang.String[],int[])
 androidx.preference.PreferenceManager: androidx.preference.Preference findPreference(java.lang.CharSequence)
@@ -9162,7 +9162,7 @@ com.android.calculator.activities.MainActivity$setupUI$3: void beforeTextChanged
 com.sothree.slidinguppanel.SlidingUpPanelLayout: void setScrollableViewHelper(com.sothree.slidinguppanel.ScrollableViewHelper)
 androidx.recyclerview.widget.ConcatAdapterController: androidx.recyclerview.widget.ConcatAdapterController$WrapperAndLocalPosition findWrapperAndLocalPosition(int)
 kotlin.jvm.internal.TypeReference: java.lang.String toString()
-com.example.antidebug.ThreatType: com.example.antidebug.ThreatType valueOf(java.lang.String)
+com.example.raspsdk.ThreatType: com.example.raspsdk.ThreatType valueOf(java.lang.String)
 androidx.recyclerview.widget.OrientationHelper: OrientationHelper(androidx.recyclerview.widget.RecyclerView$LayoutManager,androidx.recyclerview.widget.OrientationHelper$1)
 androidx.recyclerview.widget.RecyclerView$LayoutManager: int getBaseline()
 androidx.appcompat.widget.AppCompatTextView: android.view.ActionMode$Callback getCustomSelectionActionModeCallback()
@@ -9477,10 +9477,10 @@ androidx.core.view.MenuItemCompat$Api26Impl: android.view.MenuItem setAlphabetic
 com.google.android.material.textfield.MaterialAutoCompleteTextView: void setRawInputType(int)
 androidx.recyclerview.widget.RecyclerView$Recycler: void onAdapterChanged(androidx.recyclerview.widget.RecyclerView$Adapter,androidx.recyclerview.widget.RecyclerView$Adapter,boolean)
 com.android.calculator.obfuscation.static.ResourceObfuscator$AssetEncryption: ResourceObfuscator$AssetEncryption()
-com.example.antidebug.AntiDebug: com.example.antidebug.SecurityReport performSecurityCheck()
+com.example.raspsdk.RASP: com.example.raspsdk.SecurityReport performSecurityCheck()
 androidx.preference.PreferenceDataStore: boolean getBoolean(java.lang.String,boolean)
 androidx.preference.PreferenceGroup$1: void run()
-com.example.antidebug.HookDetection$Companion: boolean nativeHookCheck()
+com.example.raspsdk.HookDetection$Companion: boolean nativeHookCheck()
 kotlin.jvm.internal.CallableReference: boolean isAbstract()
 androidx.recyclerview.widget.RecyclerView$RecycledViewPool: boolean willCreateInTime(int,long,long)
 androidx.recyclerview.widget.RecyclerView: androidx.recyclerview.widget.RecyclerView$EdgeEffectFactory getEdgeEffectFactory()
@@ -9671,7 +9671,7 @@ androidx.recyclerview.widget.RecyclerView$ViewHolder: void createPayloadsIfNeede
 androidx.recyclerview.widget.LinearLayoutManager: android.view.View findLastPartiallyOrCompletelyInvisibleChild()
 androidx.preference.Preference$OnPreferenceChangeInternalListener: void onPreferenceChange(androidx.preference.Preference)
 androidx.recyclerview.widget.GridLayoutManager: void measureChild(android.view.View,int,boolean)
-com.example.antidebug.AntiDebug: void init(android.content.Context,boolean)
+com.example.raspsdk.RASP: void init(android.content.Context,boolean)
 androidx.recyclerview.widget.RecyclerView$ItemAnimator$ItemHolderInfo: androidx.recyclerview.widget.RecyclerView$ItemAnimator$ItemHolderInfo setFrom(androidx.recyclerview.widget.RecyclerView$ViewHolder)
 androidx.appcompat.widget.SwitchCompat: void setEmojiCompatEnabled(boolean)
 androidx.recyclerview.widget.RecyclerView$LayoutManager: int getPaddingStart()
@@ -9924,7 +9924,7 @@ androidx.recyclerview.widget.RecyclerView$LayoutManager: int getItemCount()
 androidx.appcompat.widget.AppCompatAutoCompleteTextView: void setDropDownBackgroundResource(int)
 com.google.android.material.chip.Chip: void setChipStrokeColorResource(int)
 androidx.core.view.ViewCompat$Api21Impl: androidx.core.view.WindowInsetsCompat getRootWindowInsets(android.view.View)
-com.example.antidebug.DebuggerDetection$Companion: boolean nativeTimingCheck()
+com.example.raspsdk.DebuggerDetection$Companion: boolean nativeTimingCheck()
 com.google.android.material.drawable.DrawableUtils$OutlineCompatR: void setPath(android.graphics.Outline,android.graphics.Path)
 kotlin.jvm.internal.Reflection: java.lang.String renderLambdaToString(kotlin.jvm.internal.Lambda)
 androidx.recyclerview.widget.ConcatAdapter: void internalSetStateRestorationPolicy(androidx.recyclerview.widget.RecyclerView$Adapter$StateRestorationPolicy)
@@ -9956,3 +9956,4 @@ androidx.appcompat.widget.AppCompatAutoCompleteTextView: android.view.ActionMode
 kotlin.jvm.internal.CallableReference: java.lang.Object getBoundReceiver()
 androidx.recyclerview.widget.ViewTypeStorage$ViewTypeLookup: void dispose()
 androidx.preference.Preference: void onAttachedToHierarchy(androidx.preference.PreferenceManager,long)
+

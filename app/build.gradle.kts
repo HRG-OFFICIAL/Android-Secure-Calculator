@@ -1,4 +1,4 @@
-plugins {
+﻿plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlin)
     alias(libs.plugins.compose.compiler)
@@ -90,8 +90,8 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    // AntiDebugSDK dependency added only during protected builds
-    implementation(project(":anti-debug-sdk"))
+    // RASPSDK dependency added only during protected builds
+    implementation(project(":raspmodule"))
     implementation(libs.androidx.runtime)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -244,3 +244,4 @@ fun ByteArray.encodeBase64(): String {
 tasks.named("preBuild") {
     dependsOn("extractCertFingerprint", "encryptAssets")
 }
+

@@ -1,4 +1,4 @@
-package com.android.calculator.obfuscation.native
+﻿package com.android.calculator.obfuscation.native
 
 import android.content.Context
 import android.util.Base64
@@ -227,22 +227,22 @@ object NativeObfuscator {
     /**
      * Anti-debugging and anti-tampering
      */
-    object NativeAntiDebug {
+    object NativeRASP {
         
-        fun addAntiDebugChecks(libraryData: ByteArray): ByteArray {
+        fun addRASPChecks(libraryData: ByteArray): ByteArray {
             val protected = libraryData.copyOf()
             
             // Add anti-debugging code patterns
-            val antiDebugCode = generateAntiDebugCode()
-            val result = ByteArray(protected.size + antiDebugCode.size)
+            val RASPCode = generateRASPCode()
+            val result = ByteArray(protected.size + RASPCode.size)
             
             System.arraycopy(protected, 0, result, 0, protected.size)
-            System.arraycopy(antiDebugCode, 0, result, protected.size, antiDebugCode.size)
+            System.arraycopy(RASPCode, 0, result, protected.size, RASPCode.size)
             
             return result
         }
         
-        private fun generateAntiDebugCode(): ByteArray {
+        private fun generateRASPCode(): ByteArray {
             // Generate anti-debugging machine code
             val code = ByteArray(64)
             secureRandom.nextBytes(code)
@@ -471,10 +471,10 @@ object NativeObfuscator {
         obfuscatedData = SymbolStripper.obfuscateFunctionNames(obfuscatedData)
         
         // 3. Add anti-debugging checks
-        obfuscatedData = NativeAntiDebug.addAntiDebugChecks(obfuscatedData)
+        obfuscatedData = NativeRASP.addRASPChecks(obfuscatedData)
         
         // 4. Add anti-tampering checks
-        obfuscatedData = NativeAntiDebug.addAntiTamperingChecks(obfuscatedData)
+        obfuscatedData = NativeRASP.addAntiTamperingChecks(obfuscatedData)
         
         // 5. Apply native library obfuscation
         obfuscatedData = obfuscateNativeCode(obfuscatedData)
@@ -490,3 +490,4 @@ object NativeObfuscator {
         return obfuscatedPath
     }
 }
+

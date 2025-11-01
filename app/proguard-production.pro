@@ -1,4 +1,4 @@
-# OPTIMIZED R8 SHRINKING CONFIGURATION
+﻿# OPTIMIZED R8 SHRINKING CONFIGURATION
 # This configuration maximizes R8 shrinking while maintaining security
 
 # ===== CORE PROTECTIONS =====
@@ -13,15 +13,15 @@
     public void onConfigurationChanged(android.content.res.Configuration);
 }
 
-# Keep MINIMAL AntiDebug API surface (only what's actually used)
--keep class com.example.antidebug.AntiDebug {
+# Keep MINIMAL RASP API surface (only what's actually used)
+-keep class com.example.raspsdk.RASP {
     public static void init(android.content.Context, boolean);
-    public static com.example.antidebug.SecurityReport performSecurityCheck();
-    public static void handleThreat(com.example.antidebug.ThreatType);
+    public static com.example.raspsdk.SecurityReport performSecurityCheck();
+    public static void handleThreat(com.example.raspsdk.ThreatType);
 }
 
 # Keep only essential data classes
--keep class com.example.antidebug.SecurityReport { 
+-keep class com.example.raspsdk.SecurityReport { 
     public boolean debuggerDetected;
     public boolean rootDetected;
     public boolean emulatorDetected;
@@ -29,11 +29,11 @@
     public long timestamp;
 }
 
--keep class com.example.antidebug.ThreatType { 
-    public static com.example.antidebug.ThreatType DEBUGGER;
-    public static com.example.antidebug.ThreatType ROOT;
-    public static com.example.antidebug.ThreatType EMULATOR;
-    public static com.example.antidebug.ThreatType TAMPERING;
+-keep class com.example.raspsdk.ThreatType { 
+    public static com.example.raspsdk.ThreatType DEBUGGER;
+    public static com.example.raspsdk.ThreatType ROOT;
+    public static com.example.raspsdk.ThreatType EMULATOR;
+    public static com.example.raspsdk.ThreatType TAMPERING;
 }
 
 # ===== OPTIMIZED SHRINKING TECHNIQUES =====
@@ -89,8 +89,8 @@
 # DON'T keep all AndroidX classes (let R8 shrink them)  
 # -keep class androidx.** { *; }  # REMOVED
 
-# DON'T keep all AntiDebug classes (let R8 shrink unused ones)
-# -keep class com.example.antidebug.** { *; }  # REMOVED
+# DON'T keep all RASP classes (let R8 shrink unused ones)
+# -keep class com.example.raspsdk.** { *; }  # REMOVED
 
 # ===== FINAL OPTIMIZATIONS =====
 
@@ -107,3 +107,4 @@
 -printmapping mapping.txt
 -printseeds seeds.txt
 -printusage usage.txt
+

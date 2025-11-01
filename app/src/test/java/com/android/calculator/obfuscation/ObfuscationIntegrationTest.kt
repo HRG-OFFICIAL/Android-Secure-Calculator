@@ -1,4 +1,4 @@
-package com.android.calculator.obfuscation
+﻿package com.android.calculator.obfuscation
 
 import com.android.calculator.obfuscation.static.StringCrypto
 import com.android.calculator.obfuscation.data.DataMasking
@@ -68,13 +68,13 @@ class ObfuscationIntegrationTest {
     }
 
     @Test
-    fun testAntiDebugInitialization() {
-        // Test AntiDebug SDK can be accessed
+    fun testRASPInitialization() {
+        // Test RASP SDK can be accessed
         try {
-            val antiDebugClass = com.example.antidebug.AntiDebug::class.java
-            assertNotNull("AntiDebug class should be accessible", antiDebugClass)
+            val RASPClass = com.example.raspsdk.RASP::class.java
+            assertNotNull("RASP class should be accessible", RASPClass)
         } catch (e: Exception) {
-            fail("AntiDebug access failed: ${e.message}")
+            fail("RASP access failed: ${e.message}")
         }
     }
 
@@ -82,7 +82,7 @@ class ObfuscationIntegrationTest {
     fun testTamperDetectionConfiguration() {
         // Test tamper detection class can be accessed
         try {
-            val tamperDetectionClass = com.example.antidebug.TamperDetection::class.java
+            val tamperDetectionClass = com.example.raspsdk.TamperDetection::class.java
             assertNotNull("TamperDetection class should be accessible", tamperDetectionClass)
         } catch (e: Exception) {
             fail("Tamper detection access failed: ${e.message}")
@@ -193,3 +193,4 @@ class ObfuscationIntegrationTest {
         }
     }
 }
+

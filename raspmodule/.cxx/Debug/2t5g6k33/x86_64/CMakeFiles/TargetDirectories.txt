@@ -1,0 +1,4 @@
+﻿C:/Users/harsh/AndroidStudioProjects/Android_Calculator/raspmodule/.cxx/Debug/2t5g6k33/x86_64/CMakeFiles/rasp-native.dir
+C:/Users/harsh/AndroidStudioProjects/Android_Calculator/raspmodule/.cxx/Debug/2t5g6k33/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/harsh/AndroidStudioProjects/Android_Calculator/raspmodule/.cxx/Debug/2t5g6k33/x86_64/CMakeFiles/rebuild_cache.dir
+

@@ -1,4 +1,4 @@
-# Add project specific ProGuard rules here.
+﻿# Add project specific ProGuard rules here.
 # You can control the set of applied configuration files using the
 # proguardFiles setting in build.gradle.
 #
@@ -14,17 +14,17 @@
     public void onDestroy();
 }
 
-# Keep only essential AntiDebug API methods (minimal surface)
--keep class com.example.antidebug.AntiDebug {
+# Keep only essential RASP API methods (minimal surface)
+-keep class com.example.raspsdk.RASP {
     public static void init(android.content.Context);
     public static void init(android.content.Context, boolean);
-    public static com.example.antidebug.SecurityReport performSecurityCheck();
-    public static void handleThreat(com.example.antidebug.ThreatType);
+    public static com.example.raspsdk.SecurityReport performSecurityCheck();
+    public static void handleThreat(com.example.raspsdk.ThreatType);
 }
 
 # Keep essential data classes (but obfuscate everything else)
--keep class com.example.antidebug.SecurityReport { *; }
--keep class com.example.antidebug.ThreatType { *; }
+-keep class com.example.raspsdk.SecurityReport { *; }
+-keep class com.example.raspsdk.ThreatType { *; }
 
 # EVERYTHING ELSE GETS AGGRESSIVELY OBFUSCATED
 # No other -keep rules = maximum obfuscation
@@ -62,3 +62,4 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+

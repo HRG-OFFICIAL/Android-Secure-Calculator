@@ -1,4 +1,4 @@
-# Android Calculator with Advanced Security
+﻿# Android Calculator with Advanced Security
 
 This project is a comprehensive showcase of a multi-layered Android security framework, built into a simple, feature-rich calculator application.
 
@@ -122,10 +122,10 @@ The application uses aggressive obfuscation with the following features:
 - **String Encryption**: Critical strings encrypted
 - **Control Flow Obfuscation**: Complex control flow patterns
 
-## AntiDebug SDK
+## RASP SDK
 
 ### Overview
-The AntiDebug SDK provides comprehensive security protection through multiple detection mechanisms:
+The RASP SDK provides comprehensive security protection through multiple detection mechanisms:
 
 - **Debugger Detection**: Detects debugging tools and processes
 - **Root Detection**: Identifies rooted devices and privilege escalation
@@ -139,8 +139,8 @@ The SDK is automatically integrated into the aggressive build variant:
 
 ```kotlin
 // In MainActivity.kt
-AntiDebug.init(this, enableContinuousMonitoring = true)
-val securityReport = AntiDebug.performSecurityCheck()
+RASP.init(this, enableContinuousMonitoring = true)
+val securityReport = RASP.performSecurityCheck()
 
 if (securityReport.hasThreats()) {
     // Handle security threats
@@ -159,27 +159,27 @@ The SDK includes native C++ components for low-level security checks:
 
 ```
 app/                                        # Main Calculator application module
-├── src/main/java/com/android/calculator/
-│   ├── activities/
-│   │   └── MainActivity.kt                 # Main activity with security integration
-│   ├── util/
-│   │   ├── SelectiveTestingConfig.kt       # Testing configuration
-│   │   ├── StringCrypto.kt                 # String encryption utilities
-│   │   └── StringObfuscator.kt             # Obfuscation utilities
-│   └── ...
-├── proguard-optimized-shrinking.pro        # R8/ProGuard configuration
-└── build.gradle.kts                        # Build configuration
+â”œâ”€â”€ src/main/java/com/android/calculator/
+â”‚   â”œâ”€â”€ activities/
+â”‚   â”‚   â””â”€â”€ MainActivity.kt                 # Main activity with security integration
+â”‚   â”œâ”€â”€ util/
+â”‚   â”‚   â”œâ”€â”€ SelectiveTestingConfig.kt       # Testing configuration
+â”‚   â”‚   â”œâ”€â”€ StringCrypto.kt                 # String encryption utilities
+â”‚   â”‚   â””â”€â”€ StringObfuscator.kt             # Obfuscation utilities
+â”‚   â””â”€â”€ ...
+â”œâ”€â”€ proguard-optimized-shrinking.pro        # R8/ProGuard configuration
+â””â”€â”€ build.gradle.kts                        # Build configuration
 
-anti-debug-sdk/                             # The standalone security module (RASP SDK)
-├── src/main/java/com/example/antidebug/
-│   ├── AntiDebug.kt                        # Main SDK interface
-│   ├── DebuggerDetection.kt                # Debugger detection
-│   ├── RootDetection.kt                    # Root detection
-│   ├── EmulatorDetection.kt                # Emulator detection
-│   ├── TamperDetection.kt                  # Tamper detection
-│   └── ...
-└── src/main/cpp/
-    └── anti-debug-native.cpp               # Native security components
+raspmodule/                             # The standalone security module (RASP SDK)
+â”œâ”€â”€ src/main/java/com.example.raspsdk/
+â”‚   â”œâ”€â”€ RASP.kt                        # Main SDK interface
+â”‚   â”œâ”€â”€ DebuggerDetection.kt                # Debugger detection
+â”‚   â”œâ”€â”€ RootDetection.kt                    # Root detection
+â”‚   â”œâ”€â”€ EmulatorDetection.kt                # Emulator detection
+â”‚   â”œâ”€â”€ TamperDetection.kt                  # Tamper detection
+â”‚   â””â”€â”€ ...
+â””â”€â”€ src/main/cpp/
+    â””â”€â”€ rasp-native.cpp               # Native security components
 ```
 
 ## Security Analysis
@@ -216,3 +216,4 @@ We verified the effectiveness of the protection layers by decompiling the final 
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+

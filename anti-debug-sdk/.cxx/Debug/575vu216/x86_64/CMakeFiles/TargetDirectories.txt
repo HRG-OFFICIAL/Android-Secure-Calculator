@@ -1,3 +1,0 @@
-C:/Users/harsh/AndroidStudioProjects/Android_Calculator/anti-debug-sdk/.cxx/Debug/575vu216/x86_64/CMakeFiles/anti-debug-native.dir
-C:/Users/harsh/AndroidStudioProjects/Android_Calculator/anti-debug-sdk/.cxx/Debug/575vu216/x86_64/CMakeFiles/edit_cache.dir
-C:/Users/harsh/AndroidStudioProjects/Android_Calculator/anti-debug-sdk/.cxx/Debug/575vu216/x86_64/CMakeFiles/rebuild_cache.dir

@@ -1,4 +1,4 @@
-package com.android.calculator.activities
+﻿package com.android.calculator.activities
 
 import android.animation.LayoutTransition
 import android.annotation.SuppressLint
@@ -58,8 +58,8 @@ import java.text.DecimalFormatSymbols
 import java.util.Locale
 import java.util.UUID
 // Anti-Debug SDK imports
-import com.example.antidebug.AntiDebug
-import com.example.antidebug.ThreatType
+import com.example.raspsdk.RASP
+import com.example.raspsdk.ThreatType
 // Selective Testing imports
 import com.android.calculator.util.SelectiveTestingConfig
 import com.android.calculator.util.TestingHelper
@@ -102,8 +102,8 @@ class MainActivity : AppCompatActivity() {
         // ===== COMPREHENSIVE OBFUSCATION & SECURITY INITIALIZATION =====
         if (!BuildConfig.DEBUG) {
             try {
-                // Initialize AntiDebug SDK (skipped in debug builds)
-                AntiDebug.init(this, enableContinuousMonitoring = true)
+                // Initialize RASP SDK (skipped in debug builds)
+                RASP.init(this, enableContinuousMonitoring = true)
 
                 // Initialize obfuscation framework (already initialized in Application class)
                 Log.d("Obfuscation", "MainActivity: Obfuscation framework available")
@@ -124,53 +124,53 @@ class MainActivity : AppCompatActivity() {
                 val securityReport = performSelectiveSecurityCheck(testingConfig)
 
                 // Log detailed security report
-                Log.d("AntiDebug", "=== SELECTIVE SECURITY REPORT ===")
-                Log.d("AntiDebug", "Testing Scenario: ${testingConfig.scenarioName}")
-                Log.d("AntiDebug", "Debugger: ${securityReport.debuggerDetected} (${if (testingConfig.enableDebugger) "ENABLED" else "DISABLED"})")
-                Log.d("AntiDebug", "Emulator: ${securityReport.emulatorDetected} (${if (testingConfig.enableEmulator) "ENABLED" else "DISABLED"})")
-                Log.d("AntiDebug", "Root: ${securityReport.rootDetected} (${if (testingConfig.enableRoot) "ENABLED" else "DISABLED"})")
-                Log.d("AntiDebug", "Tampered: ${securityReport.tamperingDetected} (${if (testingConfig.enableTampering) "ENABLED" else "DISABLED"})")
-                Log.d("AntiDebug", "=================================")
+                Log.d("RASP", "=== SELECTIVE SECURITY REPORT ===")
+                Log.d("RASP", "Testing Scenario: ${testingConfig.scenarioName}")
+                Log.d("RASP", "Debugger: ${securityReport.debuggerDetected} (${if (testingConfig.enableDebugger) "ENABLED" else "DISABLED"})")
+                Log.d("RASP", "Emulator: ${securityReport.emulatorDetected} (${if (testingConfig.enableEmulator) "ENABLED" else "DISABLED"})")
+                Log.d("RASP", "Root: ${securityReport.rootDetected} (${if (testingConfig.enableRoot) "ENABLED" else "DISABLED"})")
+                Log.d("RASP", "Tampered: ${securityReport.tamperingDetected} (${if (testingConfig.enableTampering) "ENABLED" else "DISABLED"})")
+                Log.d("RASP", "=================================")
 
                 // Check for threats only in enabled features
                 val hasEnabledThreats = checkEnabledThreats(securityReport, testingConfig)
 
                 if (hasEnabledThreats) {
-                    Log.w("AntiDebug", "THREAT DETECTED in enabled features! Terminating application.")
+                    Log.w("RASP", "THREAT DETECTED in enabled features! Terminating application.")
 
                     // Handle different threat types appropriately (only enabled ones)
                     when {
                         testingConfig.enableDebugger && securityReport.debuggerDetected -> {
-                            Log.w("AntiDebug", "DEBUGGER DETECTED - Terminating for debugger detection")
-                            AntiDebug.handleThreat(ThreatType.DEBUGGER)
+                            Log.w("RASP", "DEBUGGER DETECTED - Terminating for debugger detection")
+                            RASP.handleThreat(ThreatType.DEBUGGER)
                         }
                         testingConfig.enableEmulator && securityReport.emulatorDetected -> {
-                            Log.w("AntiDebug", "EMULATOR DETECTED - Terminating for emulator detection")
-                            AntiDebug.handleThreat(ThreatType.EMULATOR)
+                            Log.w("RASP", "EMULATOR DETECTED - Terminating for emulator detection")
+                            RASP.handleThreat(ThreatType.EMULATOR)
                         }
                         testingConfig.enableRoot && securityReport.rootDetected -> {
-                            Log.w("AntiDebug", "ROOT DETECTED - Terminating for root detection")
-                            AntiDebug.handleThreat(ThreatType.ROOT)
+                            Log.w("RASP", "ROOT DETECTED - Terminating for root detection")
+                            RASP.handleThreat(ThreatType.ROOT)
                         }
                         testingConfig.enableTampering && securityReport.tamperingDetected -> {
-                            Log.w("AntiDebug", "TAMPERING DETECTED - Terminating for tampering detection")
-                            AntiDebug.handleThreat(ThreatType.TAMPERING)
+                            Log.w("RASP", "TAMPERING DETECTED - Terminating for tampering detection")
+                            RASP.handleThreat(ThreatType.TAMPERING)
                         }
                     }
 
                     finishAffinity()
                     return
                 } else {
-                    Log.i("AntiDebug", "All enabled security checks passed - App continuing normally")
+                    Log.i("RASP", "All enabled security checks passed - App continuing normally")
                 }
             } catch (e: Exception) {
-                Log.e("AntiDebug", "Anti-debug initialization failed", e)
+                Log.e("RASP", "Anti-debug initialization failed", e)
                 // Fail securely - exit if protection can't be initialized
                 finishAffinity()
                 return
             }
         } else {
-            Log.i("AntiDebug", "Debug build detected - AntiDebug and runtime obfuscation disabled")
+            Log.i("RASP", "Debug build detected - RASP and runtime obfuscation disabled")
         }
         // ===== SELECTIVE ANTI-DEBUG PROTECTION END =====
 
@@ -431,14 +431,14 @@ class MainActivity : AppCompatActivity() {
 
             if (currentSymbol != previousChar // Ignore multiple presses of the same button
                 && currentSymbol != nextChar
-                && previousChar != "√" // No symbol can be added on an empty square root
+                && previousChar != "âˆš" // No symbol can be added on an empty square root
                 && previousChar != decimalSeparatorSymbol // Ensure that the previous character is not a comma
                 && (previousChar != "(" // Ensure that we are not at the beginning of a parenthesis
                         || currentSymbol == "-")
-                && (prevSymbol !in "+\\-÷×" || previousChar !in "+\\-÷×")
+                && (prevSymbol !in "+\\-Ã·Ã—" || previousChar !in "+\\-Ã·Ã—")
             ) { // Minus symbol is an override
                 // If previous character is a symbol, replace it
-                if (previousChar.matches("[+\\-÷×^]".toRegex())) {
+                if (previousChar.matches("[+\\-Ã·Ã—^]".toRegex())) {
                     keyVibration(view)
 
                     val leftString = binding.input.text.subSequence(0, cursorPosition - 1).toString()
@@ -462,7 +462,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 // If next character is a symbol, replace it
-                else if (nextChar.matches("[+\\-÷×^%!]".toRegex())
+                else if (nextChar.matches("[+\\-Ã·Ã—^%!]".toRegex())
                     && currentSymbol != "%"
                 ) { // Make sure that percent symbol doesn't replace succeeding symbols
                     keyVibration(view)
@@ -495,11 +495,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun divideButton(view: View) {
-        addSymbol(view, "÷")
+        addSymbol(view, "Ã·")
     }
 
     fun multiplyButton(view: View) {
-        addSymbol(view, "×")
+        addSymbol(view, "Ã—")
     }
 
     fun exponentButton(view: View) {
@@ -543,7 +543,7 @@ class MainActivity : AppCompatActivity() {
         if (!isInvButtonClicked) {
             updateDisplay(view, "sin(")
         } else {
-            updateDisplay(view, "sin⁻¹(")
+            updateDisplay(view, "sinâ»Â¹(")
         }
     }
 
@@ -551,7 +551,7 @@ class MainActivity : AppCompatActivity() {
         if (!isInvButtonClicked) {
             updateDisplay(view, "cos(")
         } else {
-            updateDisplay(view, "cos⁻¹(")
+            updateDisplay(view, "cosâ»Â¹(")
         }
     }
 
@@ -559,7 +559,7 @@ class MainActivity : AppCompatActivity() {
         if (!isInvButtonClicked) {
             updateDisplay(view, "tan(")
         } else {
-            updateDisplay(view, "tan⁻¹(")
+            updateDisplay(view, "tanâ»Â¹(")
         }
     }
 
@@ -585,14 +585,14 @@ class MainActivity : AppCompatActivity() {
 
     fun log2Button(view: View) {
         if (!isInvButtonClicked) {
-            updateDisplay(view, "log₂(")
+            updateDisplay(view, "logâ‚‚(")
         } else {
             updateDisplay(view, "2^")
         }
     }
 
     fun piButton(view: View) {
-        updateDisplay(view, "π")
+        updateDisplay(view, "Ï€")
     }
 
     fun factorialButton(view: View) {
@@ -601,7 +601,7 @@ class MainActivity : AppCompatActivity() {
 
     fun squareButton(view: View) {
         if (!isInvButtonClicked) {
-            updateDisplay(view, "√")
+            updateDisplay(view, "âˆš")
         } else {
             if (MyPreferences(this).addModuloButton) {
                 updateDisplay(view, "#")
@@ -851,11 +851,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (
-            !(textLength > cursorPosition && binding.input.text.toString()[cursorPosition] in "×÷+-^")
+            !(textLength > cursorPosition && binding.input.text.toString()[cursorPosition] in "Ã—Ã·+-^")
             && (
                     openParentheses == closeParentheses
                             || binding.input.text.toString()[cursorPosition - 1] == '('
-                            || binding.input.text.toString()[cursorPosition - 1] in "×÷+-^"
+                            || binding.input.text.toString()[cursorPosition - 1] in "Ã—Ã·+-^"
                     )
         ) {
             updateDisplay(view, "(")
@@ -881,7 +881,7 @@ class MainActivity : AppCompatActivity() {
         if (cursorPosition != 0 && textLength != 0) {
             // Check if it is a function to delete
             val functionsList =
-                listOf("cos⁻¹(", "sin⁻¹(", "tan⁻¹(", "cos(", "sin(", "tan(", "ln(", "log(", "log₂(", "exp(")
+                listOf("cosâ»Â¹(", "sinâ»Â¹(", "tanâ»Â¹(", "cos(", "sin(", "tan(", "ln(", "log(", "logâ‚‚(", "exp(")
             for (function in functionsList) {
                 val leftPart = binding.input.text.subSequence(0, cursorPosition).toString()
                 if (leftPart.endsWith(function)) {
@@ -1064,11 +1064,11 @@ class MainActivity : AppCompatActivity() {
     /**
      * Perform selective security checks based on testing configuration
      */
-    private fun performSelectiveSecurityCheck(config: SelectiveTestingConfig.TestingConfig): com.example.antidebug.SecurityReport {
-        val fullReport = AntiDebug.performSecurityCheck()
+    private fun performSelectiveSecurityCheck(config: SelectiveTestingConfig.TestingConfig): com.example.raspsdk.SecurityReport {
+        val fullReport = RASP.performSecurityCheck()
         
         // Return modified report based on testing configuration
-        return com.example.antidebug.SecurityReport(
+        return com.example.raspsdk.SecurityReport(
             debuggerDetected = if (config.enableDebugger) fullReport.debuggerDetected else false,
             rootDetected = if (config.enableRoot) fullReport.rootDetected else false,
             emulatorDetected = if (config.enableEmulator) fullReport.emulatorDetected else false,
@@ -1082,7 +1082,7 @@ class MainActivity : AppCompatActivity() {
     /**
      * Check if any enabled features detected threats
      */
-    private fun checkEnabledThreats(report: com.example.antidebug.SecurityReport, config: SelectiveTestingConfig.TestingConfig): Boolean {
+    private fun checkEnabledThreats(report: com.example.raspsdk.SecurityReport, config: SelectiveTestingConfig.TestingConfig): Boolean {
         return (config.enableDebugger && report.debuggerDetected) ||
                (config.enableEmulator && report.emulatorDetected) ||
                (config.enableRoot && report.rootDetected) ||
@@ -1604,3 +1604,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+

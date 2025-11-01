@@ -1,7 +1,7 @@
-package com.android.calculator.util
+﻿package com.android.calculator.util
 
 /**
- * Selective Testing Configuration for AntiDebug Features
+ * Selective Testing Configuration for RASP Features
  * 
  * This class allows you to enable/disable individual security checks
  * for testing and demonstration purposes.
@@ -299,3 +299,4 @@ object TestingHelper {
         return SelectiveTestingConfig.currentConfig
     }
 }
+

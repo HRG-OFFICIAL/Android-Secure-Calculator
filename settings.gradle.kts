@@ -1,4 +1,4 @@
-pluginManagement {
+﻿pluginManagement {
     repositories {
         google()
         mavenCentral()
@@ -19,4 +19,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Android Calculator"
 include(":app")
-include(":anti-debug-sdk")  // Added only during protected builds
+include(":raspmodule")  // Added only during protected builds
+

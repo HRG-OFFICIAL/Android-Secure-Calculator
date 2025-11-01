@@ -1,4 +1,4 @@
-_COROUTINE.ArtificialStackFrames:
+﻿_COROUTINE.ArtificialStackFrames:
     public final java.lang.StackTraceElement coroutineCreation()
 _COROUTINE._BOUNDARY:
     public void <init>()
@@ -10987,23 +10987,23 @@ com.android.calculator.databinding.SettingsActivityBinding
 com.android.calculator.security.CertificateInfo
 com.android.calculator.services.MyTileService:
     public static final int $stable
-com.example.antidebug.AntiDebug:
+com.example.raspsdk.RASP:
     public static final void cleanup()
-    public static final void configureResponse(com.example.antidebug.ResponseHandler$ResponseType)
-    public static final com.example.antidebug.DataProtection getDataProtection()
+    public static final void configureResponse(com.example.raspsdk.ResponseHandler$ResponseType)
+    public static final com.example.raspsdk.DataProtection getDataProtection()
     public static final void stopMonitoring()
-com.example.antidebug.BehaviorReport
-com.example.antidebug.BehavioralDetection:
+com.example.raspsdk.BehaviorReport
+com.example.raspsdk.BehavioralDetection:
     private static final long MONITORING_INTERVAL
     private static final long NORMAL_EXECUTION_THRESHOLD
     private static final long SUSPICIOUS_VARIANCE_THRESHOLD
     private static final java.lang.String TAG
-    public final com.example.antidebug.BehaviorReport performAdvancedBehavioralAnalysis()
+    public final com.example.raspsdk.BehaviorReport performAdvancedBehavioralAnalysis()
     public final void resetBehavioralState()
-com.example.antidebug.BuildConfig
-com.example.antidebug.ControlFlowObfuscator
-com.example.antidebug.DataProtection$SecureMemory
-com.example.antidebug.DataProtection:
+com.example.raspsdk.BuildConfig
+com.example.raspsdk.ControlFlowObfuscator
+com.example.raspsdk.DataProtection$SecureMemory
+com.example.raspsdk.DataProtection:
     private static final java.lang.String ANDROID_KEYSTORE
     private static final int GCM_IV_LENGTH
     private static final int GCM_TAG_LENGTH
@@ -11016,21 +11016,21 @@ com.example.antidebug.DataProtection:
     public final boolean clearSecureData()
     public final java.lang.String createChecksum(java.lang.String)
     private static final java.lang.CharSequence createChecksum$lambda$1(byte)
-    public final com.example.antidebug.DataProtection$SecureMemory createSecureMemory(java.lang.String)
-    public static synthetic com.example.antidebug.DataProtection$SecureMemory createSecureMemory$default(com.example.antidebug.DataProtection,java.lang.String,int,java.lang.Object)
-    public final java.lang.String decryptData(com.example.antidebug.EncryptedData)
+    public final com.example.raspsdk.DataProtection$SecureMemory createSecureMemory(java.lang.String)
+    public static synthetic com.example.raspsdk.DataProtection$SecureMemory createSecureMemory$default(com.example.raspsdk.DataProtection,java.lang.String,int,java.lang.Object)
+    public final java.lang.String decryptData(com.example.raspsdk.EncryptedData)
     public final java.lang.String deobfuscateString(byte[])
-    public final com.example.antidebug.EncryptedData encryptData(java.lang.String)
+    public final com.example.raspsdk.EncryptedData encryptData(java.lang.String)
     public final byte[] generateSalt(int)
-    public static synthetic byte[] generateSalt$default(com.example.antidebug.DataProtection,int,int,java.lang.Object)
+    public static synthetic byte[] generateSalt$default(com.example.raspsdk.DataProtection,int,int,java.lang.Object)
     private final void generateSecretKey()
     public final java.util.Map getConfiguration()
     public final boolean getSecureBoolean(java.lang.String,boolean)
-    public static synthetic boolean getSecureBoolean$default(com.example.antidebug.DataProtection,java.lang.String,boolean,int,java.lang.Object)
+    public static synthetic boolean getSecureBoolean$default(com.example.raspsdk.DataProtection,java.lang.String,boolean,int,java.lang.Object)
     public final int getSecureInt(java.lang.String,int)
-    public static synthetic int getSecureInt$default(com.example.antidebug.DataProtection,java.lang.String,int,int,java.lang.Object)
+    public static synthetic int getSecureInt$default(com.example.raspsdk.DataProtection,java.lang.String,int,int,java.lang.Object)
     public final java.lang.String getSecureValue(java.lang.String,java.lang.String)
-    public static synthetic java.lang.String getSecureValue$default(com.example.antidebug.DataProtection,java.lang.String,java.lang.String,int,java.lang.Object)
+    public static synthetic java.lang.String getSecureValue$default(com.example.raspsdk.DataProtection,java.lang.String,java.lang.String,int,java.lang.Object)
     public final boolean isKeystoreCompromised()
     public final byte[] obfuscateString(java.lang.String)
     public final boolean storeConfiguration(java.util.Map)
@@ -11038,75 +11038,75 @@ com.example.antidebug.DataProtection:
     public final boolean storeSecureInt(java.lang.String,int)
     public final boolean storeSecureValue(java.lang.String,java.lang.String)
     public final boolean verifyChecksum(java.lang.String,java.lang.String)
-com.example.antidebug.DebuggerDetection$Companion:
+com.example.raspsdk.DebuggerDetection$Companion:
     public final native boolean nativeDebuggerCheck()
-com.example.antidebug.DebuggerDetection:
+com.example.raspsdk.DebuggerDetection:
     private static final java.lang.String TAG
     private long lastCheckTime
     public final boolean checkBreakpointInstructions()
     public final boolean checkDebuggerEnvironment()
     public final boolean performAdvancedTimingCheck()
-com.example.antidebug.EmulatorDetection:
+com.example.raspsdk.EmulatorDetection:
     private static final java.lang.String TAG
     public final java.lang.String getEmulatorType()
     public final boolean performAdvancedEmulatorCheck()
-com.example.antidebug.EncryptedData
-com.example.antidebug.HookDetection:
+com.example.raspsdk.EncryptedData
+com.example.raspsdk.HookDetection:
     private static final java.lang.String TAG
-    public final com.example.antidebug.HookReport performAdvancedHookCheck()
-com.example.antidebug.HookReport
-com.example.antidebug.NativeObfuscator$Companion
-com.example.antidebug.NativeObfuscator
-com.example.antidebug.ObfuscatedAntiDebug
-com.example.antidebug.ObfuscatedStringManager
-com.example.antidebug.R$anim
-com.example.antidebug.R$animator
-com.example.antidebug.R$attr
-com.example.antidebug.R$bool
-com.example.antidebug.R$color
-com.example.antidebug.R$dimen
-com.example.antidebug.R$drawable
-com.example.antidebug.R$id
-com.example.antidebug.R$integer
-com.example.antidebug.R$interpolator
-com.example.antidebug.R$layout
-com.example.antidebug.R$plurals
-com.example.antidebug.R$string
-com.example.antidebug.R$style
-com.example.antidebug.R$styleable
-com.example.antidebug.R
-com.example.antidebug.ReflectionIndirection
-com.example.antidebug.ResponseConfig
-com.example.antidebug.ResponseHandler$ResponseType:
+    public final com.example.raspsdk.HookReport performAdvancedHookCheck()
+com.example.raspsdk.HookReport
+com.example.raspsdk.NativeObfuscator$Companion
+com.example.raspsdk.NativeObfuscator
+com.example.raspsdk.ObfuscatedRASP
+com.example.raspsdk.ObfuscatedStringManager
+com.example.raspsdk.R$anim
+com.example.raspsdk.R$animator
+com.example.raspsdk.R$attr
+com.example.raspsdk.R$bool
+com.example.raspsdk.R$color
+com.example.raspsdk.R$dimen
+com.example.raspsdk.R$drawable
+com.example.raspsdk.R$id
+com.example.raspsdk.R$integer
+com.example.raspsdk.R$interpolator
+com.example.raspsdk.R$layout
+com.example.raspsdk.R$plurals
+com.example.raspsdk.R$string
+com.example.raspsdk.R$style
+com.example.raspsdk.R$styleable
+com.example.raspsdk.R
+com.example.raspsdk.ReflectionIndirection
+com.example.raspsdk.ResponseConfig
+com.example.raspsdk.ResponseHandler$ResponseType:
     public static kotlin.enums.EnumEntries getEntries()
-com.example.antidebug.ResponseHandler:
+com.example.raspsdk.ResponseHandler:
     private static final java.lang.String TAG
-    public final com.example.antidebug.ResponseConfig getResponseConfig()
+    public final com.example.raspsdk.ResponseConfig getResponseConfig()
     public final void reset()
     public final void setRandomizedTrigger(boolean)
     public final void setResponseCallback(kotlin.jvm.functions.Function2)
-    public final void setResponseType(com.example.antidebug.ResponseHandler$ResponseType)
-com.example.antidebug.RootDetection$Companion:
+    public final void setResponseType(com.example.raspsdk.ResponseHandler$ResponseType)
+com.example.raspsdk.RootDetection$Companion:
     public final native boolean nativePropertyCheck()
-com.example.antidebug.RootDetection:
+com.example.raspsdk.RootDetection:
     private static final java.lang.String TAG
     public final boolean checkRootEnvironment()
     public final boolean performAdvancedRootCheck()
-com.example.antidebug.RuntimeAntiTampering
-com.example.antidebug.TamperDetection$Companion:
+com.example.raspsdk.RuntimeAntiTampering
+com.example.raspsdk.TamperDetection$Companion:
     public final native boolean nativeIntegrityCheck()
-com.example.antidebug.TamperDetection:
+com.example.raspsdk.TamperDetection:
     private static final java.lang.String APK_CHECKSUM_KEY
     private static final java.lang.String DEX_CHECKSUM_KEY
     private static final java.lang.String ENCRYPTION_KEY
     private static final java.lang.String PREFS_NAME
     private static final java.lang.String TAG
     private final java.lang.String encryptString(java.lang.String)
-    public final com.example.antidebug.TamperReport getTamperReport()
+    public final com.example.raspsdk.TamperReport getTamperReport()
     public final boolean performAdvancedTamperCheck()
     public final void storeChecksum(java.lang.String,boolean)
-    public static synthetic void storeChecksum$default(com.example.antidebug.TamperDetection,java.lang.String,boolean,int,java.lang.Object)
-com.example.antidebug.TamperReport
+    public static synthetic void storeChecksum$default(com.example.raspsdk.TamperDetection,java.lang.String,boolean,int,java.lang.Object)
+com.example.raspsdk.TamperReport
 com.google.android.material.R$anim
 com.google.android.material.R$animator:
     public static final int design_appbar_state_list_animator
@@ -36311,196 +36311,196 @@ com.android.calculator.util.SelectiveTestingConfig$TestingConfig$$InternalSynthe
 com.android.calculator.util.SelectiveTestingConfig$TestingConfig$$InternalSyntheticBackport$1$e34333958b590a1d8e6d6ec63fda0973fa5098ee796d3dac72f0529539dca0ca$3
 com.android.calculator.util.SelectiveTestingConfig$TestingConfig:
     static void <clinit>()
-com.example.antidebug.AntiDebug$$InternalSyntheticNonNull$161$3c412edf5bc2fec53900437b258d1952cfda9aa870646b132febca5ea542a0d8$0
-com.example.antidebug.AntiDebug$startContinuousMonitoring$1:
+com.example.raspsdk.RASP$$InternalSyntheticNonNull$161$3c412edf5bc2fec53900437b258d1952cfda9aa870646b132febca5ea542a0d8$0
+com.example.raspsdk.RASP$startContinuousMonitoring$1:
     public final java.lang.Object invoke(kotlinx.coroutines.CoroutineScope,kotlin.coroutines.Continuation)
-com.example.antidebug.AntiDebug:
-    public static final com.example.antidebug.AntiDebug INSTANCE
-    public static com.example.antidebug.DataProtection dataProtection
-com.example.antidebug.BehavioralDetection$$InternalSyntheticNonNull$18$641c54c696de570de3c1401ddb27c456718af3e5bf35e6ddcf1d84ddd5725982$0
-com.example.antidebug.BehavioralDetection$Companion
-com.example.antidebug.BehavioralDetection$isSuspiciousBehavior$checks$1:
+com.example.raspsdk.RASP:
+    public static final com.example.raspsdk.RASP INSTANCE
+    public static com.example.raspsdk.DataProtection dataProtection
+com.example.raspsdk.BehavioralDetection$$InternalSyntheticNonNull$18$641c54c696de570de3c1401ddb27c456718af3e5bf35e6ddcf1d84ddd5725982$0
+com.example.raspsdk.BehavioralDetection$Companion
+com.example.raspsdk.BehavioralDetection$isSuspiciousBehavior$checks$1:
     public final java.lang.Boolean invoke()
-com.example.antidebug.BehavioralDetection$isSuspiciousBehavior$checks$2:
+com.example.raspsdk.BehavioralDetection$isSuspiciousBehavior$checks$2:
     public final java.lang.Boolean invoke()
-com.example.antidebug.BehavioralDetection$isSuspiciousBehavior$checks$3:
+com.example.raspsdk.BehavioralDetection$isSuspiciousBehavior$checks$3:
     public final java.lang.Boolean invoke()
-com.example.antidebug.BehavioralDetection$isSuspiciousBehavior$checks$4:
+com.example.raspsdk.BehavioralDetection$isSuspiciousBehavior$checks$4:
     public final java.lang.Boolean invoke()
-com.example.antidebug.BehavioralDetection$isSuspiciousBehavior$checks$5:
+com.example.raspsdk.BehavioralDetection$isSuspiciousBehavior$checks$5:
     public final java.lang.Boolean invoke()
-com.example.antidebug.BehavioralDetection$isSuspiciousBehavior$checks$6:
+com.example.raspsdk.BehavioralDetection$isSuspiciousBehavior$checks$6:
     public final java.lang.Boolean invoke()
-com.example.antidebug.BehavioralDetection$isSuspiciousBehavior$checks$7:
+com.example.raspsdk.BehavioralDetection$isSuspiciousBehavior$checks$7:
     public final java.lang.Boolean invoke()
-com.example.antidebug.BehavioralDetection:
-    public static final com.example.antidebug.BehavioralDetection$Companion Companion
+com.example.raspsdk.BehavioralDetection:
+    public static final com.example.raspsdk.BehavioralDetection$Companion Companion
     public final android.content.Context context
     public final java.util.List timingSamples
     public static boolean isSuspiciousBehavior()
-com.example.antidebug.DataProtection$Companion
-com.example.antidebug.DataProtection
-com.example.antidebug.DebuggerDetection$$InternalSyntheticNonNull$18$385799a9e6854e5cb6ee5f51a110a409baf90015ee9e18606a8c5e88fff3b2da$0
-com.example.antidebug.DebuggerDetection$isDebuggerAttached$methods$10:
+com.example.raspsdk.DataProtection$Companion
+com.example.raspsdk.DataProtection
+com.example.raspsdk.DebuggerDetection$$InternalSyntheticNonNull$18$385799a9e6854e5cb6ee5f51a110a409baf90015ee9e18606a8c5e88fff3b2da$0
+com.example.raspsdk.DebuggerDetection$isDebuggerAttached$methods$10:
     public final java.lang.Boolean invoke()
-com.example.antidebug.DebuggerDetection$isDebuggerAttached$methods$1:
+com.example.raspsdk.DebuggerDetection$isDebuggerAttached$methods$1:
     public final java.lang.Boolean invoke()
-com.example.antidebug.DebuggerDetection$isDebuggerAttached$methods$2:
+com.example.raspsdk.DebuggerDetection$isDebuggerAttached$methods$2:
     public final java.lang.Boolean invoke()
-com.example.antidebug.DebuggerDetection$isDebuggerAttached$methods$3:
+com.example.raspsdk.DebuggerDetection$isDebuggerAttached$methods$3:
     public final java.lang.Boolean invoke()
-com.example.antidebug.DebuggerDetection$isDebuggerAttached$methods$4:
+com.example.raspsdk.DebuggerDetection$isDebuggerAttached$methods$4:
     public final java.lang.Boolean invoke()
-com.example.antidebug.DebuggerDetection$isDebuggerAttached$methods$5:
+com.example.raspsdk.DebuggerDetection$isDebuggerAttached$methods$5:
     public final java.lang.Boolean invoke()
-com.example.antidebug.DebuggerDetection$isDebuggerAttached$methods$6:
+com.example.raspsdk.DebuggerDetection$isDebuggerAttached$methods$6:
     public final java.lang.Boolean invoke()
-com.example.antidebug.DebuggerDetection$isDebuggerAttached$methods$7:
+com.example.raspsdk.DebuggerDetection$isDebuggerAttached$methods$7:
     public final java.lang.Boolean invoke()
-com.example.antidebug.DebuggerDetection$isDebuggerAttached$methods$8:
+com.example.raspsdk.DebuggerDetection$isDebuggerAttached$methods$8:
     public final java.lang.Boolean invoke()
-com.example.antidebug.DebuggerDetection$isDebuggerAttached$methods$9:
+com.example.raspsdk.DebuggerDetection$isDebuggerAttached$methods$9:
     public final java.lang.Boolean invoke()
-com.example.antidebug.DebuggerDetection:
+com.example.raspsdk.DebuggerDetection:
     public final android.content.Context context
     public final int randomDelay
     public static boolean isDebuggerAttached()
-com.example.antidebug.EmulatorDetection$$InternalSyntheticNonNull$18$fc308c43fcb42906596b4ccd0b962d1fd6bb185ff84eda8706c66d4ac489b903$0
-com.example.antidebug.EmulatorDetection$Companion
-com.example.antidebug.EmulatorDetection$isEmulator$checks$10:
+com.example.raspsdk.EmulatorDetection$$InternalSyntheticNonNull$18$fc308c43fcb42906596b4ccd0b962d1fd6bb185ff84eda8706c66d4ac489b903$0
+com.example.raspsdk.EmulatorDetection$Companion
+com.example.raspsdk.EmulatorDetection$isEmulator$checks$10:
     public final java.lang.Boolean invoke()
-com.example.antidebug.EmulatorDetection$isEmulator$checks$11:
+com.example.raspsdk.EmulatorDetection$isEmulator$checks$11:
     public final java.lang.Boolean invoke()
-com.example.antidebug.EmulatorDetection$isEmulator$checks$12:
+com.example.raspsdk.EmulatorDetection$isEmulator$checks$12:
     public final java.lang.Boolean invoke()
-com.example.antidebug.EmulatorDetection$isEmulator$checks$1:
+com.example.raspsdk.EmulatorDetection$isEmulator$checks$1:
     public final java.lang.Boolean invoke()
-com.example.antidebug.EmulatorDetection$isEmulator$checks$2:
+com.example.raspsdk.EmulatorDetection$isEmulator$checks$2:
     public final java.lang.Boolean invoke()
-com.example.antidebug.EmulatorDetection$isEmulator$checks$3:
+com.example.raspsdk.EmulatorDetection$isEmulator$checks$3:
     public final java.lang.Boolean invoke()
-com.example.antidebug.EmulatorDetection$isEmulator$checks$4:
+com.example.raspsdk.EmulatorDetection$isEmulator$checks$4:
     public final java.lang.Boolean invoke()
-com.example.antidebug.EmulatorDetection$isEmulator$checks$5:
+com.example.raspsdk.EmulatorDetection$isEmulator$checks$5:
     public final java.lang.Boolean invoke()
-com.example.antidebug.EmulatorDetection$isEmulator$checks$6:
+com.example.raspsdk.EmulatorDetection$isEmulator$checks$6:
     public final java.lang.Boolean invoke()
-com.example.antidebug.EmulatorDetection$isEmulator$checks$7:
+com.example.raspsdk.EmulatorDetection$isEmulator$checks$7:
     public final java.lang.Boolean invoke()
-com.example.antidebug.EmulatorDetection$isEmulator$checks$8:
+com.example.raspsdk.EmulatorDetection$isEmulator$checks$8:
     public final java.lang.Boolean invoke()
-com.example.antidebug.EmulatorDetection$isEmulator$checks$9:
+com.example.raspsdk.EmulatorDetection$isEmulator$checks$9:
     public final java.lang.Boolean invoke()
-com.example.antidebug.EmulatorDetection:
-    public static final com.example.antidebug.EmulatorDetection$Companion Companion
+com.example.raspsdk.EmulatorDetection:
+    public static final com.example.raspsdk.EmulatorDetection$Companion Companion
     public static boolean isEmulator()
-com.example.antidebug.HookDetection$$InternalSyntheticNonNull$18$c8add147f440f6142d8f776fcd912e3a7ef7cb4345dbedabbf12c91c51217fb6$0
-com.example.antidebug.HookDetection$areHooksDetected$checks$10:
+com.example.raspsdk.HookDetection$$InternalSyntheticNonNull$18$c8add147f440f6142d8f776fcd912e3a7ef7cb4345dbedabbf12c91c51217fb6$0
+com.example.raspsdk.HookDetection$areHooksDetected$checks$10:
     public final java.lang.Boolean invoke()
-com.example.antidebug.HookDetection$areHooksDetected$checks$1:
+com.example.raspsdk.HookDetection$areHooksDetected$checks$1:
     public final java.lang.Boolean invoke()
-com.example.antidebug.HookDetection$areHooksDetected$checks$2:
+com.example.raspsdk.HookDetection$areHooksDetected$checks$2:
     public final java.lang.Boolean invoke()
-com.example.antidebug.HookDetection$areHooksDetected$checks$3:
+com.example.raspsdk.HookDetection$areHooksDetected$checks$3:
     public final java.lang.Boolean invoke()
-com.example.antidebug.HookDetection$areHooksDetected$checks$4:
+com.example.raspsdk.HookDetection$areHooksDetected$checks$4:
     public final java.lang.Boolean invoke()
-com.example.antidebug.HookDetection$areHooksDetected$checks$5:
+com.example.raspsdk.HookDetection$areHooksDetected$checks$5:
     public final java.lang.Boolean invoke()
-com.example.antidebug.HookDetection$areHooksDetected$checks$6:
+com.example.raspsdk.HookDetection$areHooksDetected$checks$6:
     public final java.lang.Boolean invoke()
-com.example.antidebug.HookDetection$areHooksDetected$checks$7:
+com.example.raspsdk.HookDetection$areHooksDetected$checks$7:
     public final java.lang.Boolean invoke()
-com.example.antidebug.HookDetection$areHooksDetected$checks$8:
+com.example.raspsdk.HookDetection$areHooksDetected$checks$8:
     public final java.lang.Boolean invoke()
-com.example.antidebug.HookDetection$areHooksDetected$checks$9:
+com.example.raspsdk.HookDetection$areHooksDetected$checks$9:
     public final java.lang.Boolean invoke()
-com.example.antidebug.HookDetection:
+com.example.raspsdk.HookDetection:
     public static boolean areHooksDetected()
-com.example.antidebug.ResponseHandler$Companion
-com.example.antidebug.ResponseHandler$ResponseType:
+com.example.raspsdk.ResponseHandler$Companion
+com.example.raspsdk.ResponseHandler$ResponseType:
     public static final synthetic kotlin.enums.EnumEntries $ENTRIES
-    public static final enum com.example.antidebug.ResponseHandler$ResponseType CLEAR_DATA
-    public static final enum com.example.antidebug.ResponseHandler$ResponseType CORRUPT_DATA
-    public static final enum com.example.antidebug.ResponseHandler$ResponseType CRASH_APP
-    public static final enum com.example.antidebug.ResponseHandler$ResponseType DELAYED_EXIT
-    public static final enum com.example.antidebug.ResponseHandler$ResponseType DISABLE_FEATURES
-    public static final enum com.example.antidebug.ResponseHandler$ResponseType FAKE_SCREEN
-    public static final enum com.example.antidebug.ResponseHandler$ResponseType IMMEDIATE_EXIT
-    public static final enum com.example.antidebug.ResponseHandler$ResponseType KILL_PROCESS
-    public static final enum com.example.antidebug.ResponseHandler$ResponseType LOG_ONLY
-    public static final enum com.example.antidebug.ResponseHandler$ResponseType RANDOM_BEHAVIOR
-    public static final enum com.example.antidebug.ResponseHandler$ResponseType RESTART_APP
-com.example.antidebug.ResponseHandler$WhenMappings:
+    public static final enum com.example.raspsdk.ResponseHandler$ResponseType CLEAR_DATA
+    public static final enum com.example.raspsdk.ResponseHandler$ResponseType CORRUPT_DATA
+    public static final enum com.example.raspsdk.ResponseHandler$ResponseType CRASH_APP
+    public static final enum com.example.raspsdk.ResponseHandler$ResponseType DELAYED_EXIT
+    public static final enum com.example.raspsdk.ResponseHandler$ResponseType DISABLE_FEATURES
+    public static final enum com.example.raspsdk.ResponseHandler$ResponseType FAKE_SCREEN
+    public static final enum com.example.raspsdk.ResponseHandler$ResponseType IMMEDIATE_EXIT
+    public static final enum com.example.raspsdk.ResponseHandler$ResponseType KILL_PROCESS
+    public static final enum com.example.raspsdk.ResponseHandler$ResponseType LOG_ONLY
+    public static final enum com.example.raspsdk.ResponseHandler$ResponseType RANDOM_BEHAVIOR
+    public static final enum com.example.raspsdk.ResponseHandler$ResponseType RESTART_APP
+com.example.raspsdk.ResponseHandler$WhenMappings:
     public static final synthetic int[] $EnumSwitchMapping$0
-com.example.antidebug.ResponseHandler:
-    public static final com.example.antidebug.ResponseHandler$Companion Companion
+com.example.raspsdk.ResponseHandler:
+    public static final com.example.raspsdk.ResponseHandler$Companion Companion
     public static final kotlin.ranges.IntRange LONG_DELAY_RANGE
     public boolean randomizedTrigger
     public kotlin.jvm.functions.Function2 responseCallback
-    public static void handleKillProcess(com.example.antidebug.ThreatType)
+    public static void handleKillProcess(com.example.raspsdk.ThreatType)
     public static void handleThreat()
-com.example.antidebug.RootDetection$$InternalSyntheticNonNull$18$f27e62f2f4fa21b192058c03d102a992669e659171fc8bb387f0539d70d8a666$0
-com.example.antidebug.RootDetection$isDeviceRooted$checks$10:
+com.example.raspsdk.RootDetection$$InternalSyntheticNonNull$18$f27e62f2f4fa21b192058c03d102a992669e659171fc8bb387f0539d70d8a666$0
+com.example.raspsdk.RootDetection$isDeviceRooted$checks$10:
     public final java.lang.Boolean invoke()
-com.example.antidebug.RootDetection$isDeviceRooted$checks$11:
+com.example.raspsdk.RootDetection$isDeviceRooted$checks$11:
     public final java.lang.Boolean invoke()
-com.example.antidebug.RootDetection$isDeviceRooted$checks$12:
+com.example.raspsdk.RootDetection$isDeviceRooted$checks$12:
     public final java.lang.Boolean invoke()
-com.example.antidebug.RootDetection$isDeviceRooted$checks$1:
+com.example.raspsdk.RootDetection$isDeviceRooted$checks$1:
     public final java.lang.Boolean invoke()
-com.example.antidebug.RootDetection$isDeviceRooted$checks$2:
+com.example.raspsdk.RootDetection$isDeviceRooted$checks$2:
     public final java.lang.Boolean invoke()
-com.example.antidebug.RootDetection$isDeviceRooted$checks$3:
+com.example.raspsdk.RootDetection$isDeviceRooted$checks$3:
     public final java.lang.Boolean invoke()
-com.example.antidebug.RootDetection$isDeviceRooted$checks$4:
+com.example.raspsdk.RootDetection$isDeviceRooted$checks$4:
     public final java.lang.Boolean invoke()
-com.example.antidebug.RootDetection$isDeviceRooted$checks$5:
+com.example.raspsdk.RootDetection$isDeviceRooted$checks$5:
     public final java.lang.Boolean invoke()
-com.example.antidebug.RootDetection$isDeviceRooted$checks$6:
+com.example.raspsdk.RootDetection$isDeviceRooted$checks$6:
     public final java.lang.Boolean invoke()
-com.example.antidebug.RootDetection$isDeviceRooted$checks$7:
+com.example.raspsdk.RootDetection$isDeviceRooted$checks$7:
     public final java.lang.Boolean invoke()
-com.example.antidebug.RootDetection$isDeviceRooted$checks$8:
+com.example.raspsdk.RootDetection$isDeviceRooted$checks$8:
     public final java.lang.Boolean invoke()
-com.example.antidebug.RootDetection$isDeviceRooted$checks$9:
+com.example.raspsdk.RootDetection$isDeviceRooted$checks$9:
     public final java.lang.Boolean invoke()
-com.example.antidebug.RootDetection:
+com.example.raspsdk.RootDetection:
     public static boolean isDeviceRooted()
-com.example.antidebug.SecurityReport$$InternalSyntheticBackport$1$089cc3449a3253b0b5f526f515d8b074ff2934ee770fcd80500b87742ee9d878$0
-com.example.antidebug.SecurityReport$$InternalSyntheticBackport$1$089cc3449a3253b0b5f526f515d8b074ff2934ee770fcd80500b87742ee9d878$1
-com.example.antidebug.SecurityReport$$InternalSyntheticBackport$1$089cc3449a3253b0b5f526f515d8b074ff2934ee770fcd80500b87742ee9d878$2
-com.example.antidebug.SecurityReport$$InternalSyntheticBackport$1$089cc3449a3253b0b5f526f515d8b074ff2934ee770fcd80500b87742ee9d878$3
-com.example.antidebug.SecurityReport$$InternalSyntheticBackport$1$089cc3449a3253b0b5f526f515d8b074ff2934ee770fcd80500b87742ee9d878$4
-com.example.antidebug.SecurityReport$$InternalSyntheticBackport$1$089cc3449a3253b0b5f526f515d8b074ff2934ee770fcd80500b87742ee9d878$5
-com.example.antidebug.SecurityReport$$InternalSyntheticBackport$1$089cc3449a3253b0b5f526f515d8b074ff2934ee770fcd80500b87742ee9d878$6
-com.example.antidebug.SecurityReport$$InternalSyntheticNonNull$18$5e1330f373ee66bfab382438845c49fe7ccb5d1513343be39e9ac1852e11828c$0
-com.example.antidebug.TamperDetection$$InternalSyntheticNonNull$18$0da450613a9f93c9db37de937b21d06f64ee7feaa52216f7ec14c17d844d2574$0
-com.example.antidebug.TamperDetection$Companion:
+com.example.raspsdk.SecurityReport$$InternalSyntheticBackport$1$089cc3449a3253b0b5f526f515d8b074ff2934ee770fcd80500b87742ee9d878$0
+com.example.raspsdk.SecurityReport$$InternalSyntheticBackport$1$089cc3449a3253b0b5f526f515d8b074ff2934ee770fcd80500b87742ee9d878$1
+com.example.raspsdk.SecurityReport$$InternalSyntheticBackport$1$089cc3449a3253b0b5f526f515d8b074ff2934ee770fcd80500b87742ee9d878$2
+com.example.raspsdk.SecurityReport$$InternalSyntheticBackport$1$089cc3449a3253b0b5f526f515d8b074ff2934ee770fcd80500b87742ee9d878$3
+com.example.raspsdk.SecurityReport$$InternalSyntheticBackport$1$089cc3449a3253b0b5f526f515d8b074ff2934ee770fcd80500b87742ee9d878$4
+com.example.raspsdk.SecurityReport$$InternalSyntheticBackport$1$089cc3449a3253b0b5f526f515d8b074ff2934ee770fcd80500b87742ee9d878$5
+com.example.raspsdk.SecurityReport$$InternalSyntheticBackport$1$089cc3449a3253b0b5f526f515d8b074ff2934ee770fcd80500b87742ee9d878$6
+com.example.raspsdk.SecurityReport$$InternalSyntheticNonNull$18$5e1330f373ee66bfab382438845c49fe7ccb5d1513343be39e9ac1852e11828c$0
+com.example.raspsdk.TamperDetection$$InternalSyntheticNonNull$18$0da450613a9f93c9db37de937b21d06f64ee7feaa52216f7ec14c17d844d2574$0
+com.example.raspsdk.TamperDetection$Companion:
     public static void initializeFingerprints()
-com.example.antidebug.TamperDetection$isAppTampered$checks$10:
+com.example.raspsdk.TamperDetection$isAppTampered$checks$10:
     public final java.lang.Boolean invoke()
-com.example.antidebug.TamperDetection$isAppTampered$checks$11:
+com.example.raspsdk.TamperDetection$isAppTampered$checks$11:
     public final java.lang.Boolean invoke()
-com.example.antidebug.TamperDetection$isAppTampered$checks$1:
+com.example.raspsdk.TamperDetection$isAppTampered$checks$1:
     public final java.lang.Boolean invoke()
-com.example.antidebug.TamperDetection$isAppTampered$checks$2:
+com.example.raspsdk.TamperDetection$isAppTampered$checks$2:
     public final java.lang.Boolean invoke()
-com.example.antidebug.TamperDetection$isAppTampered$checks$3:
+com.example.raspsdk.TamperDetection$isAppTampered$checks$3:
     public final java.lang.Boolean invoke()
-com.example.antidebug.TamperDetection$isAppTampered$checks$4:
+com.example.raspsdk.TamperDetection$isAppTampered$checks$4:
     public final java.lang.Boolean invoke()
-com.example.antidebug.TamperDetection$isAppTampered$checks$5:
+com.example.raspsdk.TamperDetection$isAppTampered$checks$5:
     public final java.lang.Boolean invoke()
-com.example.antidebug.TamperDetection$isAppTampered$checks$6:
+com.example.raspsdk.TamperDetection$isAppTampered$checks$6:
     public final java.lang.Boolean invoke()
-com.example.antidebug.TamperDetection$isAppTampered$checks$7:
+com.example.raspsdk.TamperDetection$isAppTampered$checks$7:
     public final java.lang.Boolean invoke()
-com.example.antidebug.TamperDetection$isAppTampered$checks$8:
+com.example.raspsdk.TamperDetection$isAppTampered$checks$8:
     public final java.lang.Boolean invoke()
-com.example.antidebug.TamperDetection$isAppTampered$checks$9:
+com.example.raspsdk.TamperDetection$isAppTampered$checks$9:
     public final java.lang.Boolean invoke()
-com.example.antidebug.TamperDetection:
+com.example.raspsdk.TamperDetection:
     public static final byte[][] BREAKPOINT_PATTERNS
     public static boolean isAppTampered()
 com.google.android.material.R$animator
@@ -41940,3 +41940,4 @@ kotlinx.coroutines.selects.SelectImplementation
 kotlinx.coroutines.selects.SelectInstance
 kotlinx.coroutines.selects.TrySelectDetailedResult$EnumUnboxingLocalUtility
 kotlinx.coroutines.selects.TrySelectDetailedResult
+
