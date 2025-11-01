@@ -1,27 +1,38 @@
-# Android Calculator with Security Features
+# Android Calculator with Advanced Security
 
-A modern, feature-rich calculator application for Android devices with comprehensive security protection and anti-debugging capabilities.
+This project is a comprehensive showcase of a multi-layered Android security framework, built into a simple, feature-rich calculator application.
+
+The primary purpose is **not** the calculator itself, but to demonstrate an **integrated, open-source Obfuscation and Runtime Anti-Analysis (RASP) SDK** that is wired directly into an application's source code.
+
+This project serves as a practical, hands-on implementation of the concepts discussed in our research paper on mobile application security.
+
+[![Watch the Project Demo](docs/screenshot.jpg)](https://drive.google.com/file/d/1WSiw9EyuAqa0Xjdt3qPYAF2MHCjfNicv/view?usp=drive_link)
 
 ## Features
 
-### Calculator Features
-- **Basic Arithmetic**: Addition, subtraction, multiplication, and division
-- **Scientific Functions**: Trigonometric functions, logarithms, exponentials, and more
-- **Multiple Themes**: Light, dark, and AMOLED themes with Material Design 3 support
-- **Calculation History**: Keep track of previous calculations with persistent storage
-- **Expression Parsing**: Custom-built mathematical expression parser for accurate results
-- **Responsive Design**: Optimized for both portrait and landscape orientations
-- **Precision Control**: Configurable decimal precision and scientific notation
-- **Intuitive UI**: Clean, modern interface with haptic feedback support
+## Calculator (Host App) Features
+* **Basic Arithmetic**: Addition, subtraction, multiplication, division
+* **Scientific Functions**: Trig functions, logarithms, exponentials
+* **Multiple Themes**: Light, dark, and AMOLED with Material Design 3
+* **Calculation History**: Persistent storage of previous calculations
+* **Custom Expression Parser**: Built-in parser using `BigDecimal` for precision
+* **Responsive Design**: Optimized for portrait and landscape
 
-### Security Features
-- **AntiDebug Protection**: Detects and prevents debugging attempts
-- **Root Detection**: Identifies and blocks rooted devices
-- **Emulator Detection**: Prevents execution on emulated environments
-- **Tamper Detection**: Verifies APK integrity and detects modifications
-- **Code Obfuscation**: Maximum obfuscation with single-letter meaningless names
-- **Selective Testing**: Individual security feature testing capabilities
-- **Continuous Monitoring**: Background security monitoring
+### Runtime Anti-Analysis (RASP)
+
+* **Debugger Detection:** Actively detects attached debuggers (Java/JDWP, Native/Ptrace) and checks for debugging flags (`TracerPid`).
+* **Root Detection:** Scans for `su` binaries, root-management apps (Magisk), and insecure system properties.
+* **Emulator Detection:** Identifies virtual environments by checking hardware properties, sensors, and QEMU artifacts.
+* **Tamper Detection:** Verifies the APK's runtime signature and file integrity (DEX checksums) to detect repackaging.
+* **Hook Detection:** Scans for artifacts from common hooking frameworks like Frida and Xposed.
+* **Behavioral Analysis:** Monitors for suspicious patterns, like execution timing anomalies, that indicate analysis.
+
+### Static & Dynamic Obfuscation
+
+* **Code Obfuscation:** Implements aggressive identifier renaming (classes, methods, fields) and package hierarchy flattening.
+* **String Encryption:** Encrypts critical strings at build-time and decrypts them only at the moment of use.
+* **Control Flow Obfuscation:** Modifies method logic to resist static analysis.
+* **Native Code Protection:** Uses a JNI layer for low-level, high-performance security checks (e.g., process monitoring, ptrace).
 
 ## Technical Details
 
@@ -32,27 +43,13 @@ A modern, feature-rich calculator application for Android devices with comprehen
 - **Target SDK**: API 34 (Android 14)
 - **Build System**: Gradle with Kotlin DSL
 
-### Security Implementation
-- **AntiDebug SDK**: Custom security library with native components
-- **R8/ProGuard**: Aggressive code shrinking and obfuscation
-- **Native Protection**: JNI layer for low-level security checks
-- **Reflection Obfuscation**: Advanced obfuscation techniques
-- **String Encryption**: Critical strings encrypted at build time
-
-### Key Components
-- **Custom Calculator Engine**: Built-in mathematical expression evaluator using BigDecimal for precision
-- **Theme System**: Dynamic theming with support for system themes and custom color schemes
-- **History Management**: JSON-based calculation history with configurable storage limits
-- **Preference System**: Comprehensive settings with automatic migration support
-- **Security Framework**: Modular security detection and response system
-
 ## Building the Application
 
 ### Prerequisites
-- Android Studio Arctic Fox or later
+- Android Studio (Iguana or later)
 - JDK 21 or later
 - Android SDK API 21-34
-- NDK (for native security components)
+- Android NDK (for native C++ components)
 
 ### Build Commands
 
@@ -92,29 +89,28 @@ A modern, feature-rich calculator application for Android devices with comprehen
 
 ### Selective Testing Mode
 
-The application supports selective testing of individual security features for demonstration purposes.
+A key feature of this project is the **Selective Testing Configuration**, which allows you to enable or disable specific security checks for demonstration purposes.
 
 #### Configuration
-Edit `app/src/main/java/com/android/calculator/util/SelectiveTestingConfig.kt`:
+**Location:** `app/src/main/java/com/android/calculator/util/SelectiveTestingConfig.kt`:
+
+Simply change the `currentConfig` variable to one of the predefined test scenarios:
 
 ```kotlin
 // Default: All features enabled (production mode)
 val currentConfig: TestingConfig = TestScenarios.allFeatures()
 
+// --- OR ---
+
 // Individual testing scenarios:
-val currentConfig: TestingConfig = TestScenarios.debuggerOnly()    // Test debugger only
-val currentConfig: TestingConfig = TestScenarios.emulatorOnly()    // Test emulator only
-val currentConfig: TestingConfig = TestScenarios.rootOnly()        // Test root only
-val currentConfig: TestingConfig = TestScenarios.tamperingOnly()   // Test tampering only
+val currentConfig: TestingConfig = TestScenarios.debuggerOnly()   // Test only debugger detection
+val currentConfig: TestingConfig = TestScenarios.emulatorOnly()   // Test only emulator detection
+val currentConfig: TestingConfig = TestScenarios.rootOnly()       // Test only root detection
+val currentConfig: TestingConfig = TestScenarios.tamperingOnly()  // Test only tampering detection
+val currentConfig: TestingConfig = TestScenarios.noFeatures()     // All security features disabled
 ```
 
-#### Testing Scenarios
-- **allFeatures()**: All security features enabled (production)
-- **debuggerOnly()**: Only debugger detection enabled
-- **emulatorOnly()**: Only emulator detection enabled
-- **rootOnly()**: Only root detection enabled
-- **tamperingOnly()**: Only tampering detection enabled
-- **noFeatures()**: All security features disabled (development)
+After changing the config, rebuild the app and try the corresponding attack (e.g., attach a debugger, run on an emulator) to see the RASP module in action.
 
 ### Obfuscation Configuration
 
@@ -162,50 +158,43 @@ The SDK includes native C++ components for low-level security checks:
 ## Project Structure
 
 ```
-app/
+app/                                        # Main Calculator application module
 ├── src/main/java/com/android/calculator/
 │   ├── activities/
-│   │   └── MainActivity.kt              # Main activity with security integration
+│   │   └── MainActivity.kt                 # Main activity with security integration
 │   ├── util/
-│   │   ├── SelectiveTestingConfig.kt    # Testing configuration
-│   │   ├── StringCrypto.kt             # String encryption utilities
-│   │   └── StringObfuscator.kt         # Obfuscation utilities
+│   │   ├── SelectiveTestingConfig.kt       # Testing configuration
+│   │   ├── StringCrypto.kt                 # String encryption utilities
+│   │   └── StringObfuscator.kt             # Obfuscation utilities
 │   └── ...
-├── proguard-optimized-shrinking.pro    # R8/ProGuard configuration
-└── build.gradle.kts                    # Build configuration
+├── proguard-optimized-shrinking.pro        # R8/ProGuard configuration
+└── build.gradle.kts                        # Build configuration
 
-anti-debug-sdk/
+anti-debug-sdk/                             # The standalone security module (RASP SDK)
 ├── src/main/java/com/example/antidebug/
-│   ├── AntiDebug.kt                    # Main SDK interface
-│   ├── DebuggerDetection.kt            # Debugger detection
-│   ├── RootDetection.kt                # Root detection
-│   ├── EmulatorDetection.kt            # Emulator detection
-│   ├── TamperDetection.kt              # Tamper detection
+│   ├── AntiDebug.kt                        # Main SDK interface
+│   ├── DebuggerDetection.kt                # Debugger detection
+│   ├── RootDetection.kt                    # Root detection
+│   ├── EmulatorDetection.kt                # Emulator detection
+│   ├── TamperDetection.kt                  # Tamper detection
 │   └── ...
 └── src/main/cpp/
-    └── anti-debug-native.cpp           # Native security components
+    └── anti-debug-native.cpp               # Native security components
 ```
 
 ## Security Analysis
 
-### Obfuscation Effectiveness
-- **Class Names**: 100% obfuscated to single letters
-- **Method Names**: 95% obfuscated (framework methods preserved)
-- **Field Names**: 100% obfuscated to single letters
-- **Package Structure**: Flattened to single level
-- **String Constants**: Encrypted and obfuscated
+We verified the effectiveness of the protection layers by decompiling the final `aggressiveRelease` APK with **JADX**.
 
-### R8 Shrinking
-- **Code Reduction**: ~60% of unused code removed
-- **Resource Shrinking**: Unused resources eliminated
-- **Dead Code Elimination**: Unreachable code removed
-- **Optimization**: Multiple optimization passes applied
-
-### APK Analysis
-- **Final Size**: ~2.8 MB (optimized)
-- **Security Features**: All enabled by default
-- **Obfuscation Level**: Maximum
-- **Shrinking**: R8 working optimally
+| Metric | Status |
+| :--- | :--- |
+| **Class Names** | 100% Obfuscated (e.g., `a`, `b`, `c`) |
+| **Method Names** | \~95% Obfuscated (framework/SDK methods preserved) |
+| **Field Names** | 100% Obfuscated |
+| **Package Structure** | Flattened to single level |
+| **String Constants** | Encrypted (runtime decryption) |
+| **R8 Code Reduction** | \~60% (Unused code & resources removed) |
+| **RASP Checks** | Active & wired in `MainActivity.kt` |
 
 ## Troubleshooting
 
